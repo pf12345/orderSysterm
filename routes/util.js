@@ -1,26 +1,30 @@
 var moment = require('moment');
+var hotel = require('./hotel');
 
 util = {
   getRightDate: function(dateVal) {
-    var _date = new Date(1900, 0, 0, 0, 0, dateVal * 24 * 60 * 60);
-    return moment(_date).format('YYYY-MM-DD HH:mm')
+    return moment(dateVal).format('YYYY-MM-DD HH:mm')
   },
   getRightDateHour: function(dateVal) {
-    var _date = new Date(1900, 0, 0, 0, 0, dateVal * 24 * 60 * 60);
-    return moment(_date).hour()
-  },
-  getgRightDateTime: function(date) {
-    return new Date(1900, 0, 0, 0, 0, date * 24 * 60 * 60).getTime();
+    return moment(dateVal).hour()
   },
   //获取时间间隔
   getDiffDate: function(start, end, type) {
-    var _start = moment(this.getgRightDateTime(start));
-    var _end = moment(this.getgRightDateTime(end));
-    return _start.diff(_end, type, true);
-  },
-  //获取间夜数
-  getRoomNights: function() {
+    var _start = moment(start);
+    var _end = moment(end);
+    var _diff = _start.diff(_end, type, true);
 
+    return Math.ceil(Math.abs(_diff));
+  },
+  //获取酒店简称
+  getHotelShortName: function(_hotel) {
+    var __hotel = '';
+    hotel.forEach(function(h) {
+      if(_hotel.indexOf(h.name) != -1) {
+        __hotel = h.name;
+      }
+    })
+    return __hotel;
   }
 }
 

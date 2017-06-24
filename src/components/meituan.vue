@@ -3,26 +3,16 @@
     <div class="top">
       <Row>
         <Col span="12">
-          <h3>网络平台数据-携程</h3>
+          <h3>网络平台数据-美团</h3>
         </Col>
         <Col span="12">
           <div class="export">
-            <Upload action="http://127.0.0.1:8033/exportOrderXC" :show-upload-list="false" :on-success="handleSuccess">
-                <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
-            </Upload>
+            <Button type="ghost" icon="ios-cloud-upload-outline">同步数据</Button>
           </div>
         </Col>
     </Row>
     </div>
     <Table :height="tableHeight" :columns="columns" :data="data"></Table>
-    <Modal
-        v-model="showModal"
-        title="导入数据预览(请确认数据是否正确)"
-        @on-ok="ok"
-        width="700"
-        @on-cancel="cancel">
-        <Table :columns="columns" :data="previewData"></Table>
-    </Modal>
   </div>
 </template>
 <style media="screen" scoped>
@@ -44,7 +34,6 @@
     export default {
         data () {
             return {
-                showModal: false,
                 tableHeight: '',
                 columns: [
                   {
@@ -123,7 +112,7 @@
         },
         created() {
           let _this = this;
-          axios.get('http://127.0.0.1:8033/getOrderListXC')
+          axios.get('http://127.0.0.1:8033/getOrderListMEITUAN')
           .then(function (response) {
             let _data = response.data.data;
             _this.data =  _data;
@@ -131,36 +120,6 @@
           .catch(function (error) {
             console.log(error);
           });
-        },
-        methods: {
-            ok () {
-                let _this = this;
-                axios.post('http://127.0.0.1:8033/saveOrderXC', {
-                  data: this.exportData
-                })
-                .then(function (response) {
-                  let _data = response.data.data;
-                  _this.data =  _this.data.concat(_data);
-                  _this.$Message.info('导入成功');
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            },
-            cancel () {
-                // console.log('点击了取消');
-                this.$Message.info('点击了取消');
-            },
-            handleSuccess(response) {
-              let _previewData = [];
-              if(response.result == 'TRUE') {
-                  this.exportData = response.data;
-                  _previewData = response.data;
-                  this.previewData = _previewData;
-                  this.$Message.info('数据读取成功');
-              }
-              this.showModal = true;
-            }
         },
         watch: {
           'data'() {
