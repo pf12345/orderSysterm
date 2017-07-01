@@ -14,10 +14,10 @@ var config = require('./../../config/config.json');
 var url = config.dbInfo.url;
 var util = require('./../util');
 
-TUNIU = {
+TONGCHENG = {
 
-  //保存途牛订单数据入数据库
-  saveOrderTUNIU: function(req, res) {
+  //保存同程订单数据入数据库
+  saveOrderTONGCHENG: function(req, res) {
     var item = req.body.data;
     var saveDatas = []; //保存入数据库数组
     if(item) {
@@ -44,7 +44,7 @@ TUNIU = {
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");
-      var collection = db.collection('ordersystermTUNIU');
+      var collection = db.collection('ordersystermTONGCHENG');
       // Insert some documents
       if(item) {
         if(saveDatas && saveDatas.length) {
@@ -71,14 +71,14 @@ TUNIU = {
     });
   },
 
-  getOrderListTUNIUFromDB: function(cb, queryStr, page, limit) {
+  getOrderListTONGCHENGFromDB: function(cb, queryStr, page, limit) {
     queryStr = queryStr || {};
     page = page || 1;
     limit = limit || 10000;
 
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
-      var collection = db.collection('ordersystermTUNIU');
+      var collection = db.collection('ordersystermTONGCHENG');
       var cursor = collection.find(queryStr);
       cursor.count(function(err, count) {
         cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
@@ -92,8 +92,8 @@ TUNIU = {
     });
   },
 
-  //获取途牛订单数据列表
-  getOrderListTUNIU: function(req, res) {
+  //获取同程订单数据列表
+  getOrderListTONGCHENG: function(req, res) {
     var listFilterKey = req.query.listFilterKey || 'order_date';
     var listFilterStartTime = (req.query.listFilterStartTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 00:00:00';
     var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
@@ -101,8 +101,7 @@ TUNIU = {
     var page = Number(req.query.page) || 1;
     var queryStr = {};
     queryStr[listFilterKey] = {$gte: listFilterStartTime, $lte: listFilterEndTime} //{"order_date":{$lt:50}}
-
-    this.getOrderListTUNIUFromDB(function(docs, count) {
+    this.getOrderListTONGCHENGFromDB(function(docs, count) {
       res.send({
         result: 'TRUE',
         data: docs,
@@ -113,11 +112,11 @@ TUNIU = {
   },
 
   //获取数据
-getOrderDetailTUNIU: function(req, res) {
+getOrderDetailTONGCHENG: function(req, res) {
   var item_id = req.body._id;
   MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
-    var collection = db.collection('ordersystermTUNIU');
+    var collection = db.collection('ordersystermTONGCHENG');
     var o_id = new mongo.ObjectID(item_id);
     collection.findOne({
       "_id": o_id
@@ -132,4 +131,4 @@ getOrderDetailTUNIU: function(req, res) {
 }
 }
 
-module.exports = TUNIU;
+module.exports = TONGCHENG;

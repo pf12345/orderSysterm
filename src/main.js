@@ -19,18 +19,23 @@ router.afterEach((to, from, next) => {
     iView.LoadingBar.finish();
 });
 
-let AJAXDOMAIN = 'http://127.0.0.1:8033/';
+let AJAXDOMAIN = 'http://127.0.0.1:8033';
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   template: '<App/>',
   components: { App },
+  data: function() {
+    return {
+      serverUrl: AJAXDOMAIN
+    }
+  },
   methods: {
     ajaxPost({funName, params}, succ, err) {
       let _this = this;
       this.$Loading.start();
-      axios.post(AJAXDOMAIN + funName, params)
+      axios.post(AJAXDOMAIN + '/' + funName, params)
       .then(function (response) {
         _this.$Loading.finish();
         if(succ && typeof succ === 'function') {
@@ -38,21 +43,27 @@ new Vue({
         }
       })
       .catch(function (error) {
-        console.log(AJAXDOMAIN + funName);
         _this.$Loading.error();
         if(err && typeof err === 'function') {
           err(error);
         }
       });
     },
-    ajaxGet({funName}, succ, err) {
+    ajaxGet({funName, params}, succ, err) {
       let _this = this;
+      let url = AJAXDOMAIN + '/' +funName;
+      if(params) {
+        url += '?'
+        for(let key in params) {
+          url += (key + '=' + params[key] + '&')
+        }
+      }
       this.$Loading.start();
-      axios.get(AJAXDOMAIN + funName)
+      axios.get(url)
       .then(function (response) {
         _this.$Loading.finish();
         if(succ && typeof succ === 'function') {
-          succ(response.data.data);
+          succ(response.data.data, response.data);
         }
       })
       .catch(function (error) {
@@ -61,6 +72,12 @@ new Vue({
           err(error);
         }
       });
+    },
+    getLocalDate(date) {
+      if(date) {
+        return new Date(date).toLocaleDateString().replace(/\//ig, '-')
+      }
+      return new Date().toLocaleDateString().replace(/\//ig, '-')
     }
   }
 })

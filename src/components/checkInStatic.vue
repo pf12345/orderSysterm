@@ -1,7 +1,18 @@
 <template>
   <div class="warp">
+    <div class="top">
+      <h2>入住数据分析</h2>
+    </div>
+
+    <div class="item">
+      <Date-picker v-model="advanceDaysStart" type="date" placeholder="开始时间" style="width: 200px;display:inline-block"></Date-picker>
+      <Date-picker v-model="advanceDaysEnd" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+      <Button type="info" @click="find">查询</Button>
+    </div>
+
     <div class="item">
       <h3>提前预定天数统计</h3>
+
       <div id="advanceDays" style="width: 800px;height:500px;margin-top: 20px;"></div>
     </div>
 
@@ -22,22 +33,35 @@
 import echarts from 'echarts'
 import axios from 'axios'
 export default {
-
+  data() {
+    return {
+      advanceDaysStart: this.$root.getLocalDate(),
+      advanceDaysEnd: this.$root.getLocalDate()
+    }
+  },
   mounted() {
-    let _this = this;
-    axios.get('http://127.0.0.1:8033/getAdvanceDaysStatic')
-    .then(function (response) {
-      _this.advanceDays(response.data);
-      _this.stayDays(response.data);
-      _this.hourStatic(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    this.post();
   },
   methods: {
+    find() {
+      this.post();
+    },
+    post() {
+      let _this = this;
+      this.$root.ajaxPost({
+          funName: 'getAdvanceDaysStatic',
+          params: {
+              start: this.$root.getLocalDate(this.advanceDaysStart),
+              end: this.$root.getLocalDate(this.advanceDaysEnd)
+          }
+      }, function (res) {
+        _this.advanceDays(res);
+        _this.stayDays(res);
+        _this.hourStatic(res);
+      })
+    },
     advanceDays(response) {
-      var advanceDays = response.data.advanceDays;
+      var advanceDays = response.advanceDays;
       var xAxisData = [];
       var percentDays = [];
       var _advanceDays = [];
@@ -117,7 +141,7 @@ export default {
       myChart.setOption(option);
     },
     stayDays(response) {
-      var stayDays = response.data.stayDays;
+      var stayDays = response.stayDays;
       var xAxisData = [];
       var percentDays = [];
       var _stayDays = [];
@@ -193,7 +217,7 @@ export default {
       myChart.setOption(option);
     },
     hourStatic(response) {
-      var hourStatic = response.data.hourStatic;
+      var hourStatic = response.hourStatic;
       var xAxisData = [];
       var percentDays = [];
       var _hourStatic = [];
@@ -272,7 +296,7 @@ export default {
 
 <style lang="css" scoped>
   .item {
-    margin: 20px 0;
+    margin: 20px;
   }
   .warp {
     height: 100%;

@@ -3,7 +3,7 @@
     <div class="top">
       <Row>
         <Col span="12">
-          <h3>网络平台数据-美团</h3>
+          <h3>网络平台数据-同程</h3>
         </Col>
         <Col span="12">
           <div class="export">
@@ -95,11 +95,10 @@
         </Form-item>
     </Form>
       </div>
-
     </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title" class="detailTitle">美团订单详情 </span>
+      <span slot="title" class="detailTitle">同程订单详情 </span>
       <div slot="content" class="addContent">
         <div class="item">
           <h4>订单号</h4>
@@ -166,8 +165,8 @@
     display: inline-block;
   }
   .item {
-    margin: 0 0 20px 10px;
-  }
+   margin: 0 0 20px 10px;
+ }
   .addContent {
     padding: 20px 20px 20px 10px;
     position: absolute;
@@ -189,15 +188,15 @@
                 tableHeight: '',
                 showAdd: false,
                 listFilterKey: 'order_date',
-                listFilterStartTime: this.$root.getLocalDate(),
-                listFilterEndTime: this.$root.getLocalDate(),
+                listFilterStartTime: new Date().toLocaleDateString().replace(/\//ig, '-'),
+                listFilterEndTime: new Date().toLocaleDateString().replace(/\//ig, '-'),
                 limit: 20,
                 page: 1,
                 total: 0,
                 detail: {},
                 formItem: {
-                    platform: '美团',
-                    platform_en: 'meituan',
+                    platform: '同程',
+                    platform_en: 'tongcheng',
                     order_number: '',
                     hotel: '',
                     hotel_short_name: '',
@@ -298,12 +297,12 @@
                     },
                     {
                         title: '间数',
-                        width: 80,
+                        width: 120,
                         key: 'room_number'
                     },
                     {
                         title: '晚数',
-                        width: 80,
+                        width: 120,
                         key: 'stay_days'
                     },
                     {
@@ -319,7 +318,7 @@
                     {
                         title: '结算金额',
                         width: 200,
-                        key: 'money_js'
+                        key: 'settlement'
                     },
                     {
                         title: '酒店预定号',
@@ -343,7 +342,7 @@
           listFilter() {
             let _this = this;
             this.$root.ajaxGet({
-              funName: 'getOrderListMEITUAN',
+              funName: 'getOrderListTONGCHENG',
               params: {
                 listFilterKey: this.listFilterKey,
                 limit: this.limit,
@@ -374,13 +373,13 @@
                   this.formItem.check_out_date = this.$root.getLocalDate(this.formItem.check_out_date) + ' 00:00:00';
                   this.formItem.order_date = this.$root.getLocalDate(this.formItem.order_date_day).split(' ')[0] + ' ' + new Date(this.formItem.order_date_time).toTimeString().split(' ')[0];
                   this.$root.ajaxPost({
-                    funName:'saveOrderMEITUAN',
+                    funName:'saveOrderTONGCHENG',
                     params: {
                       data: this.formItem
                     }
                   }, function(res) {
                     _this.listFilter();
-                    _this.$Message.info('成功添加！');
+                    _this.$Message.info('新建成功！');
                     _this.showAdd = false;
                   })
                 } else {
@@ -392,26 +391,26 @@
               this.showAdd = false;
             },
             gotoDetail(item) {
-              let _this = this;
-              this.$root.ajaxPost({
-                funName:'getOrderDetailMEITUAN',
-                params: {
-                  _id: item._id
-                }
-              }, function(res) {
-                let detail = res;
-                _this.detail = detail;
-                _this.showDetail = true;
-              })
-            },
-            closeDetail() {
-              this.showDetail = false;
-            }
+             let _this = this;
+             this.$root.ajaxPost({
+               funName:'getOrderDetailTONGCHENG',
+               params: {
+                 _id: item._id
+               }
+             }, function(res) {
+               let detail = res;
+               _this.detail = detail;
+               _this.showDetail = true;
+             })
+           },
+           closeDetail() {
+             this.showDetail = false;
+           }
         },
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight - 180;
+              this.tableHeight = window.innerHeight;
             }
           }
         },

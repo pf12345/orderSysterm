@@ -12,7 +12,10 @@
         </Col>
     </Row>
     </div>
-    <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
+    <div class="warp_content">
+      <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
+
+    </div>
 
     <left-page :show="showAdd" @on-close="close">
       <span slot="title">新建重大销售策略调整记录单</span>
@@ -58,11 +61,6 @@
     top: 10px;
     line-height: 1;
     display: inline-block;
-  }
-  .top {
-    height: 50px;
-    line-height: 50px;
-    position: relative;
   }
   .addContent {
     padding: 20px 20px 20px 10px;
