@@ -20,7 +20,7 @@ TUNIU = {
   saveOrderTUNIU: function(req, res) {
     var item = req.body.data;
     var saveDatas = []; //保存入数据库数组
-    if(item) {
+    if (item) {
       item.hotel_short_name = util.getHotelShortName(item.hotel);
       item.advance_days = util.getDiffDate(item.check_in_date, item.order_date, 'days');
       item.notice_hour = util.getRightDateHour(item.order_date);
@@ -29,16 +29,18 @@ TUNIU = {
       //在redis里面去查找订单号
       redisHander.getValue('order_numbers', function(res) {
         var order_numbers = [];
-        if(!res) {
+        if (!res) {
           order_numbers = [];
-        }else{
+        } else {
           order_numbers = JSON.parse(res.value)
         }
-        if(order_numbers.indexOf(item.order_number) == -1) {
+        if (order_numbers.indexOf(item.order_number) == -1) {
           saveDatas.push(item);
           order_numbers.push(item.order_number);
         }
-        redisHander.setValue('order_numbers', {value: JSON.stringify(order_numbers)});
+        redisHander.setValue('order_numbers', {
+          value: JSON.stringify(order_numbers)
+        });
       })
     }
     MongoClient.connect(url, function(err, db) {
@@ -46,8 +48,8 @@ TUNIU = {
       // console.log("Connected correctly to server");
       var collection = db.collection('ordersystermTUNIU');
       // Insert some documents
-      if(item) {
-        if(saveDatas && saveDatas.length) {
+      if (item) {
+        if (saveDatas && saveDatas.length) {
           collection.insertMany([item], function(err, result) {
             assert.equal(err, null);
             db.close();
@@ -56,13 +58,13 @@ TUNIU = {
               data: item
             });
           });
-        }else{
+        } else {
           res.send({
             result: 'TRUE',
             data: []
           });
         }
-      }else{
+      } else {
         res.send({
           result: 'FALSE',
           data: []
@@ -100,7 +102,10 @@ TUNIU = {
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
     var queryStr = {};
-    queryStr[listFilterKey] = {$gte: listFilterStartTime, $lte: listFilterEndTime} //{"order_date":{$lt:50}}
+    queryStr[listFilterKey] = {
+      $gte: listFilterStartTime,
+      $lte: listFilterEndTime
+    } //{"order_date":{$lt:50}}
 
     this.getOrderListTUNIUFromDB(function(docs, count) {
       res.send({
@@ -113,23 +118,71 @@ TUNIU = {
   },
 
   //获取数据
-getOrderDetailTUNIU: function(req, res) {
-  var item_id = req.body._id;
-  MongoClient.connect(url, function(err, db) {
-    assert.equal(null, err);
-    var collection = db.collection('ordersystermTUNIU');
-    var o_id = new mongo.ObjectID(item_id);
-    collection.findOne({
-      "_id": o_id
-    }, function(err, result) {
-      db.close();
-      res.send({
-        result: 'TRUE',
-        data: result
+  getOrderDetailTUNIU: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermTUNIU');
+      var o_id = new mongo.ObjectID(item_id);
+      collection.findOne({
+        "_id": o_id
+      }, function(err, result) {
+        db.close();
+        res.send({
+          result: 'TRUE',
+          data: result
+        });
       });
     });
-  });
-}
+  },
+  //修改
+  updateOrderTUNIUItem: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermTUNIU');
+      var o_id = new mongo.ObjectID(item_id);
+      // Update document where a is 2, set b equal to 1
+      var _set = {};
+      for(var key in req.body) {
+        if(key != '_id') {
+          _set[key] = req.body[key];
+        }
+      }
+
+      collection.updateOne({
+        "_id": o_id
+      }, {
+          $set: _set
+        }, function(err, result) {
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: result
+          });
+        });
+    })
+  },
+
+  //删除
+  deleteOrderTUNIUitem: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermTUNIU');
+      var o_id = new mongo.ObjectID(item_id);
+      // Update document where a is 2, set b equal to 1
+      collection.deleteOne({
+        "_id": o_id
+      }, {}, function(err, result) {
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: result
+          });
+        });
+    })
+  }
 }
 
 module.exports = TUNIU;

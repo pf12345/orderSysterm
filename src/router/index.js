@@ -15,6 +15,7 @@ import EveryDayOrderStatic from '@/components/everyDayOrderStatic'
 import EveryDayRoomNightsStatic from '@/components/everyDayRoomNightsStatic'
 import CheckOutDataStatic from '@/components/checkOutDataStatic'
 import CheckOutDataChannelStatic from '@/components/checkOutDataChannelStatic'
+import LossOrderStatic from '@/components/LossOrderStatic'
 
 Vue.use(Router)
 
@@ -128,6 +129,14 @@ export default new Router({
       name: 'checkOutDataChannelStatic',
       components: {
         content: CheckOutDataChannelStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/lossOrderStatic',
+      name: 'lossOrderStatic',
+      components: {
+        content: LossOrderStatic,
         left: Menu
       }
     }

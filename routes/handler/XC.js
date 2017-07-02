@@ -255,19 +255,43 @@ XC = {
   //修改结算金额
   updateOrderXCItem: function(req, res) {
     var item_id = req.body._id;
-    var settlementAmount = req.body.settlementAmount;
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       var collection = db.collection('ordersystermXC');
       var o_id = new mongo.ObjectID(item_id);
       // Update document where a is 2, set b equal to 1
+      var _set = {};
+      for(var key in req.body) {
+        if(key != '_id') {
+          _set[key] = req.body[key];
+        }
+      }
+
       collection.updateOne({
         "_id": o_id
       }, {
-          $set: {
-            settlement: settlementAmount
-          }
+          $set: _set
         }, function(err, result) {
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: result
+          });
+        });
+    })
+  },
+
+  //删除
+  deleteOrderXCitem: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermXC');
+      var o_id = new mongo.ObjectID(item_id);
+      // Update document where a is 2, set b equal to 1
+      collection.deleteOne({
+        "_id": o_id
+      }, {}, function(err, result) {
           db.close();
           res.send({
             result: 'TRUE',

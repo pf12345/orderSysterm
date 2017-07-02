@@ -35,6 +35,68 @@
       </div>
     </div>
 
+    <left-page :show="showEdit" @on-close="closeEdit">
+      <span slot="title">编辑订单</span>
+      <div slot="content" class="addContent">
+        <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
+        <Form-item label="订单号" prop="order_number">
+            <Input v-model="editFormItem.order_number" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="酒店名称" prop="hotel">
+            <Input v-model="editFormItem.hotel" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="房型名称" prop="room_type">
+            <Input v-model="editFormItem.room_type" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="预定日期">
+            <Row>
+                <Col span="11">
+                  <Form-item>
+                      <Date-picker type="date" placeholder="选择日期" v-model="editFormItem.order_date_day"></Date-picker>
+                  </Form-item>
+
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                  <Form-item>
+                        <Time-picker type="time" placeholder="选择时间" v-model="editFormItem.order_date_time"></Time-picker>
+                    </Form-item>
+
+                </Col>
+            </Row>
+        </Form-item>
+        <Form-item label="入住日期">
+            <Date-picker type="date" placeholder="选择日期" v-model="editFormItem.check_in_date"></Date-picker>
+        </Form-item>
+        <Form-item label="离店日期">
+            <Date-picker type="date" placeholder="选择日期" v-model="editFormItem.check_out_date"></Date-picker>
+        </Form-item>
+        <Form-item label="间数" prop="room_number">
+            <Input v-model="editFormItem.room_number" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="晚数" prop="stay_days">
+            <Input v-model="editFormItem.stay_days" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="入住人姓名" prop="custom_name">
+            <Input v-model="editFormItem.custom_name" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="应收金额" prop="money">
+            <Input v-model="editFormItem.money" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="结算金额" prop="settlement">
+            <Input v-model="editFormItem.settlement" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="酒店预定号" prop="hotel_confirm_number">
+            <Input v-model="editFormItem.hotel_confirm_number" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item>
+            <Button type="primary" @click="submitEdit('editFormItem')">提交</Button>
+            <Button type="ghost" style="margin-left: 8px" @click="cancelEdit">取消</Button>
+        </Form-item>
+    </Form>
+      </div>
+    </left-page>
+
     <left-page :show="showAdd" @on-close="close">
       <span slot="title">新建订单</span>
       <div slot="content" class="addContent">
@@ -98,7 +160,10 @@
     </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title" class="detailTitle">途牛订单详情 </span>
+      <span slot="title" class="detailTitle">途牛订单详情
+        <span><a @click="editItem">编辑</a>
+        <a @click="deleteItem" style="margin: 0 10px;">删除</a></span>
+      </span>
       <div slot="content" class="addContent">
         <div class="item">
           <h4>订单号</h4>
@@ -176,6 +241,15 @@
     bottom: 0;
     overflow: auto;
   }
+  .detailTitle {
+    position: relative;
+    display: inline-block;
+    width: 550px;
+  }
+  .detailTitle span {
+    position: absolute;
+    right: 10px;
+  }
 </style>
 <script>
     import axios from 'axios'
@@ -185,6 +259,7 @@
             return {
                 showModal: false,
                 showDetail: false,
+                showEdit: false,
                 tableHeight: '',
                 showAdd: false,
                 listFilterKey: 'order_date',
@@ -194,6 +269,36 @@
                 page: 1,
                 total: 0,
                 detail: {},
+                editFormItem: {},
+                ruleEditValidate: {
+                  order_number: [
+                    { required: true, message: '订单号不能为空', trigger: 'change' }
+                  ],
+                  hotel: [
+                    { required: true, message: '酒店不能为空', trigger: 'change' }
+                  ],
+                  room_type: [
+                    { required: true, message: '房型不能为空', trigger: 'change' }
+                  ],
+                  room_number: [
+                    { required: true, message: '间数不能为空', trigger: 'change' }
+                  ],
+                  stay_days: [
+                    { required: true, message: '晚数不能为空', trigger: 'change' }
+                  ],
+                  custom_name: [
+                    { required: true, message: '入住人不能为空', trigger: 'change' }
+                  ],
+                  money: [
+                    { required: true, message: '应收金额不能为空', trigger: 'change' }
+                  ],
+                  settlement: [
+                    { required: true, message: '结算不能为空', trigger: 'change' }
+                  ],
+                  hotel_confirm_number: [
+                    { required: true, message: '酒店预订号不能为空', trigger: 'change' }
+                  ]
+                },
                 formItem: {
                     platform: '途牛',
                     platform_en: 'tuniu',
@@ -358,6 +463,55 @@
           changePage(value) {
             this.page = value;
             this.listFilter();
+          },
+          editItem() {
+            this.editFormItem = Object.assign({},this.detail);
+            this.editFormItem.order_date_day = this.editFormItem.order_date.split(' ')[0];
+            this.editFormItem.order_date_time = this.editFormItem.order_date.split(' ')[1];
+            this.showEdit = true;
+            this.showDetail = false;
+          },
+          cancelEdit() {
+            this.showEdit = false;
+          },
+          submitEdit(name) {
+            this.$refs[name].validate((valid) => {
+              if (valid) {
+                let _this = this;
+                this.$root.ajaxPost({
+                  funName: 'updateOrderTUNIUItem',
+                  params: _this.editFormItem
+                }, function(res) {
+                  _this.$Message.info('修改成功');
+                  _this.showEdit = false;
+                  _this.gotoDetail(_this.detail);
+                  _this.listFilter();
+                })
+              } else {
+                this.$Message.error('请输入相关数据!');
+              }
+            })
+          },
+          deleteItem() {
+            let _this = this;
+            this.$Modal.confirm({
+              title: '确认信息',
+              content: '确认删除此数据？',
+              onOk() {
+                _this.$root.ajaxPost({
+                  funName: 'deleteOrderTUNIUitem',
+                  params: {
+                    _id: _this.detail._id
+                  }
+                }, function(res) {
+                  _this.showDetail = false;
+                  _this.listFilter();
+                })
+              }
+            });
+          },
+          closeEdit() {
+            this.showEdit = false;
           },
             show_add() {
               this.showAdd = true;

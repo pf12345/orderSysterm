@@ -88,6 +88,9 @@
               case '2-6':
                 window.location.href = '/#/checkOutDataChannelStatic';
                 break;
+              case '2-8':
+                window.location.href = '/#/lossOrderStatic'
+                break;
               case '4-1':
                 window.location.href = '/#/drjgjkjlb';
                 break;

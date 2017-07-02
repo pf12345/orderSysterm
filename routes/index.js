@@ -46,6 +46,9 @@ router.post('/getOrderDetailXC', function(req, res) {
 router.post('/updateOrderXCItem', function(req, res) {
   XC.updateOrderXCItem(req, res);
 })
+router.post('/deleteOrderXCitem', function(req, res) {
+  XC.deleteOrderXCitem(req, res);
+})
 
 
 
@@ -53,12 +56,17 @@ router.post('/updateOrderXCItem', function(req, res) {
 router.post('/saveOrderTUNIU', function(req, res) {
   TUNIU.saveOrderTUNIU(req, res);
 })
-//获取途牛订单数据列表
 router.get('/getOrderListTUNIU', function(req, res) {
   TUNIU.getOrderListTUNIU(req, res)
 })
 router.post('/getOrderDetailTUNIU', function(req, res) {
   TUNIU.getOrderDetailTUNIU(req, res);
+})
+router.post('/updateOrderTUNIUItem', function(req, res) {
+  TUNIU.updateOrderTUNIUItem(req, res);
+})
+router.post('/deleteOrderTUNIUitem', function(req, res) {
+  TUNIU.deleteOrderTUNIUitem(req, res);
 })
 
 //保存去哪儿订单数据入数据库
@@ -71,8 +79,14 @@ router.get('/getOrderListQUNAER', function(req, res) {
 router.post('/getOrderDetailQUNAER', function(req, res) {
   QUNAER.getOrderDetailQUNAER(req, res);
 })
+router.post('/updateOrderQUNAERItem', function(req, res) {
+  QUNAER.updateOrderQUNAERItem(req, res);
+})
+router.post('/deleteOrderQUNAERitem', function(req, res) {
+  QUNAER.deleteOrderQUNAERitem(req, res);
+})
 
-//保存去哪儿订单数据入数据库
+//保存同程订单数据入数据库
 router.post('/saveOrderTONGCHENG', function(req, res) {
   TONGCHENG.saveOrderTONGCHENG(req, res);
 })
@@ -81,6 +95,12 @@ router.get('/getOrderListTONGCHENG', function(req, res) {
 })
 router.post('/getOrderDetailTONGCHENG', function(req, res) {
   TONGCHENG.getOrderDetailTONGCHENG(req, res);
+})
+router.post('/updateOrderTONGCHENGItem', function(req, res) {
+  TONGCHENG.updateOrderTONGCHENGItem(req, res);
+})
+router.post('/deleteOrderTONGCHENGitem', function(req, res) {
+  TONGCHENG.deleteOrderTONGCHENGitem(req, res);
 })
 
 //获取美团数据
@@ -95,6 +115,12 @@ router.get('/getOrderListMEITUAN', function(req, res) {
 })
 router.post('/getOrderDetailMEITUAN', function(req, res) {
   MEITUAN.getOrderDetailMEITUAN(req, res);
+})
+router.post('/updateOrderMEITUANItem', function(req, res) {
+  MEITUAN.updateOrderMEITUANItem(req, res);
+})
+router.post('/deleteOrderMEITUANitem', function(req, res) {
+  MEITUAN.deleteOrderMEITUANitem(req, res);
 })
 
 
@@ -113,6 +139,9 @@ router.post('/getHotelCheckoutStatic', function(req, res) {
 })
 router.post('/getCheckoutDataChannelStatic', function(req, res) {
   STATIC.getCheckoutDataChannelStatic(req, res);
+})
+router.post('/getLossStatic', function(req, res) {
+  STATIC.getLossStatic(req, res);
 })
 
 //重大销售策略调整记录表 路由

@@ -278,6 +278,55 @@ MEITUAN = {
        });
      });
    });
+ },
+
+ //修改
+ updateOrderMEITUANItem: function(req, res) {
+   var item_id = req.body._id;
+   MongoClient.connect(dburl, function(err, db) {
+     assert.equal(null, err);
+     var collection = db.collection('ordersystermMEITUAN');
+     var o_id = new mongo.ObjectID(item_id);
+     // Update document where a is 2, set b equal to 1
+     var _set = {};
+     for(var key in req.body) {
+       if(key != '_id') {
+         _set[key] = req.body[key];
+       }
+     }
+
+     collection.updateOne({
+       "_id": o_id
+     }, {
+         $set: _set
+       }, function(err, result) {
+         db.close();
+         res.send({
+           result: 'TRUE',
+           data: result
+         });
+       });
+   })
+ },
+
+ //删除
+ deleteOrderMEITUANitem: function(req, res) {
+   var item_id = req.body._id;
+   MongoClient.connect(dburl, function(err, db) {
+     assert.equal(null, err);
+     var collection = db.collection('ordersystermMEITUAN');
+     var o_id = new mongo.ObjectID(item_id);
+     // Update document where a is 2, set b equal to 1
+     collection.deleteOne({
+       "_id": o_id
+     }, {}, function(err, result) {
+         db.close();
+         res.send({
+           result: 'TRUE',
+           data: result
+         });
+       });
+   })
  }
 }
 

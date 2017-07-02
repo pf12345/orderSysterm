@@ -16,9 +16,13 @@ var hotel = require('./../hotel');
 STATIC = {
   //提前预定天数统计
   getStaticData: function(req, res) {
-    var start = req.body.start + ' 00:00:00', end = req.body.end + ' 23:59:59';
+    var start = req.body.start + ' 00:00:00',
+      end = req.body.end + ' 23:59:59';
     var queryStr = {};
-    queryStr.check_in_date = {$gte: start,$lte: end} //{"order_date":{$lt:50}}
+    queryStr.check_in_date = {
+      $gte: start,
+      $lte: end
+    } //{"order_date":{$lt:50}}
     XC.getOrderListXCFromDB(function(XCdocs) {
       MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
@@ -70,7 +74,10 @@ STATIC = {
     var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
     var queryStr = {};
-    queryStr.order_date = {$gte: startTime,$lte: endTime} //{"order_date":{$lt:50}}
+    queryStr.order_date = {
+      $gte: startTime,
+      $lte: endTime
+    } //{"order_date":{$lt:50}}
     XC.getOrderListXCFromDB(function(XCdocs) {
       MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
@@ -107,7 +114,10 @@ STATIC = {
     var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
     var queryStr = {};
-    queryStr.order_date = {$gte: startTime,$lte: endTime} //{"order_date":{$lt:50}}
+    queryStr.order_date = {
+      $gte: startTime,
+      $lte: endTime
+    } //{"order_date":{$lt:50}}
     XC.getOrderListXCFromDB(function(XCdocs) {
       MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
@@ -145,7 +155,10 @@ STATIC = {
     var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
     var queryStr = {};
-    queryStr.order_date = {$gte: startTime,$lte: endTime} //{"order_date":{$lt:50}}
+    queryStr.order_date = {
+      $gte: startTime,
+      $lte: endTime
+    } //{"order_date":{$lt:50}}
     XC.getOrderListXCFromDB(function(XCdocs) {
       MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
@@ -218,7 +231,10 @@ STATIC = {
     var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
     var queryStr = {};
-    queryStr.order_date = {$gte: startTime,$lte: endTime} //{"order_date":{$lt:50}}
+    queryStr.order_date = {
+      $gte: startTime,
+      $lte: endTime
+    } //{"order_date":{$lt:50}}
     var _hotel_arr = _.extend([], hotel);
     var _hotel_arr_names = [];
     hotel.forEach(function(_hotel) {
@@ -291,10 +307,10 @@ STATIC = {
         _hotel_arr.forEach(function(_hotel, _index) {
           setTotalData(_hotel, 'xc');
           setTotalData(_hotel, 'mt');
-          if(_index < _hotel_arr.length - 1) {
+          if (_index < _hotel_arr.length - 1) {
             _hotel.total.order_number_percent = Math.round(_hotel.total.order_number / total_row.total.order_number * 100);
             _hotel.total.room_nights_percent = Math.round(_hotel.total.room_nights / total_row.total.room_nights * 100);
-          }else {
+          } else {
             _hotel.total.order_number_percent = 100;
             _hotel.total.room_nights_percent = 100;
           }
@@ -304,6 +320,36 @@ STATIC = {
           data: _hotel_arr
         })
       }, queryStr)
+    }, queryStr)
+  },
+  //亏损订单明细表
+  getLossStatic: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr = {
+      'order_date': {
+        $gte: startTime,
+        $lte: endTime
+      }
+    }
+
+    XC.getOrderListXCFromDB(function(docs, count) {
+      var _docs = [];
+      if(docs) {
+        _docs = docs.filter(function(_doc) {
+          if(_doc.money < _doc.settlement) {
+            return true;
+          }
+          return false;
+        })
+      }
+      res.send({
+        result: 'TRUE',
+        data: _docs,
+        count: _docs.length
+      });
     }, queryStr)
   }
 }
