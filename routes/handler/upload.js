@@ -17,7 +17,7 @@ var UPLOAD = {
           })
         } else {
           var save_path = folder ? '/uploadImage/' + folder + '/' + files.file[0].originalFilename : '/uploadImage/' + files.file[0].originalFilename;
-          fs.writeFile(path.resolve(__dirname, '../../') + '/static' + save_path, data, function(err) {
+          fs.writeFile(path.resolve(__dirname, '../../') + '/dist' + save_path, data, function(err) {
             try {
               fs.unlinkSync(files.file[0].path);
             } catch (e) {

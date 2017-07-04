@@ -24,14 +24,14 @@ app.use(session({
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'static'));
+app.set('views', path.join(__dirname, 'dist'));
 app.set('view engine', 'ejs');
 var partials = require('express-partials');
 app.set('x-powered-by', false);
 app.use(partials());
 
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/static/images/favicon.ico'));
+app.use(favicon(__dirname + '/dist/images/favicon.ico'));
 app.use(compression());
 app.use(bodyParser.json({
   limit: '150mb'
@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 
 var sessionConfig = require(__dirname + '/config/session.json');

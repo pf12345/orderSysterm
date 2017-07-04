@@ -15,12 +15,10 @@ var CSDJLB = require('./handler/csdjlb')
 var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 
-router.get('/', function(req, res) {
-  res.render('templates/index', {
-    layout: '../static/templates/layout.ejs',
-    err: '系统错误'
-  });
-});
+/* GET home page. */
+router.get('/', function (req, res) {
+    res.render('../dist/templates/index.ejs')
+})
 
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
 router.post('/exportOrderXC', function(req, res) {

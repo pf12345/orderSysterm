@@ -78,6 +78,41 @@ devMiddleware.waitUntilValid(() => {
   }
   _resolve()
 })
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+var sessionConfig = require('../server_config/session.json');
+var redisConfig = require('../server_config/redis.json');
+//设置session使用 redis 或是临时文件
+if (sessionConfig && sessionConfig.store && sessionConfig.store === 'redis') {
+  console.log('---session store in redis---');
+  app.use(session({
+    secret: sessionConfig.secret,
+    store: new RedisStore({
+      host: redisConfig.ip,
+      port: redisConfig.port,
+      ttl: redisConfig.ttl
+    }),
+    cookie: {maxAge: sessionConfig.maxAge,secure: false},
+    resave: false,
+    saveUninitialized: true
+  }));
+} else {//tmp file
+  console.log('---session store in tmp_file---');
+  app.use(session({
+    secret: sessionConfig.secret,
+    cookie: {maxAge: sessionConfig.maxAge,secure: false},
+    resave: false,
+    saveUninitialized: true
+  }));
+}
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '150mb'}));
+app.use(bodyParser.urlencoded({limit: '150mb', extended: false }));
+
+
+var queryRoutes = require('../routes/query');
+app.use('/query', queryRoutes);
+
 
 var server = app.listen(port)
 
