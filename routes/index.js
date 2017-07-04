@@ -143,6 +143,12 @@ router.post('/getCheckoutDataChannelStatic', function(req, res) {
 router.post('/getLossStatic', function(req, res) {
   STATIC.getLossStatic(req, res);
 })
+router.get('/getYesterdayAndTodaydiff', function(req, res) {
+  STATIC.getYesterdayAndTodaydiff(req, res);
+})
+router.get('/getYearToTodayRoomNights', function(req, res) {
+  STATIC.getYearToTodayRoomNights(req, res);
+})
 
 //重大销售策略调整记录表 路由
 router.post('/saveZdxscltzjlItem', function(req, res) {

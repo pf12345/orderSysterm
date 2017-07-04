@@ -115,13 +115,40 @@ export default {
       }, function(res) {
         _this.initData(res);
       })
+      this.$root.ajaxGet({
+        funName: 'getYesterdayAndTodaydiff'
+      }, function(res) {
+        _this.initData(res);
+      })
+
+      this.$root.ajaxGet({
+        funName: 'getYearToTodayRoomNights'
+      }, function(res) {
+        _this.initData(res);
+      })
+
+
     },
     initData(data) {
-      data.forEach(function(_data, _index) {
-        _data.index = _index + 1;
-        _data.hotel = _data.name;
-      })
-      this.data = data;
+
+      if(!this.data.length) {
+        data.forEach(function(_data, _index) {
+          _data.index = _index + 1;
+          _data.hotel = _data.name;
+        })
+        this.data = data;
+      }else{
+        var _data_arr = [];
+        this.data.forEach(function(_data) {
+          data.forEach(function(r_data, _index) {
+            if(_data.name == r_data.name) {
+              _data = Object.assign(_data, r_data);
+              _data_arr.push(_data);
+            }
+          })
+        })
+        this.data = _data_arr;
+      }
     },
     filterTimeChange(value) {
       this.filterTime = value;

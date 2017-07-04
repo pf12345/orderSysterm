@@ -19,7 +19,7 @@
                     </template>
                     <Menu-item name="2-1">每日新订订单量</Menu-item>
                     <Menu-item name="2-2">每日新订订单间夜</Menu-item>
-                    <Menu-item name="2-3">每日入住间夜</Menu-item>
+                    <!-- <Menu-item name="2-3">每日入住间夜</Menu-item> -->
                     <Menu-item name="2-4">入住数据分析</Menu-item>
                     <Menu-item name="2-5">离店数据汇总</Menu-item>
                     <Menu-item name="2-6">离店数据渠道占比分析</Menu-item>

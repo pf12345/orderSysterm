@@ -14,6 +14,16 @@ var MEITUAN = require('./meituan');
 var hotel = require('./../hotel');
 
 STATIC = {
+  getAllOrderListFromDB: function(queryStr, cb) {
+    XC.getOrderListXCFromDB(function(XCdocs) {
+      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
+        var docs = XCdocs.concat(MTdocs);
+        if(cb && typeof cb === 'function') {
+          cb(docs);
+        }
+      }, queryStr)
+    }, queryStr)
+  },
   //提前预定天数统计
   getStaticData: function(req, res) {
     var start = req.body.start + ' 00:00:00',
@@ -23,51 +33,49 @@ STATIC = {
       $gte: start,
       $lte: end
     } //{"order_date":{$lt:50}}
-    XC.getOrderListXCFromDB(function(XCdocs) {
-      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
-        var docs = XCdocs.concat(MTdocs);
-        //提前预定天数统计
-        var _advanceDaysArr = [];
-        for (var i = 0; i < 60; i++) {
-          _advanceDaysArr[i] = 0;
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      //提前预定天数统计
+      var _advanceDaysArr = [];
+      for (var i = 0; i < 60; i++) {
+        _advanceDaysArr[i] = 0;
+      }
+
+      //连住天数统计
+      var _stayDaysArr = [];
+      for (var i = 0; i < 6; i++) {
+        _stayDaysArr[i] = 0;
+      }
+
+      //24小时统计
+      var _hoursArr = [];
+      for (var i = 0; i < 24; i++) {
+        _hoursArr[i] = 0;
+      }
+
+
+      docs.forEach(function(doc) {
+        if (doc.advance_days) {
+          _advanceDaysArr[doc.advance_days] += 1;
         }
-
-        //连住天数统计
-        var _stayDaysArr = [];
-        for (var i = 0; i < 6; i++) {
-          _stayDaysArr[i] = 0;
+        if (doc.stay_days) {
+          _stayDaysArr[doc.stay_days] += 1;
         }
-
-        //24小时统计
-        var _hoursArr = [];
-        for (var i = 0; i < 24; i++) {
-          _hoursArr[i] = 0;
+        if (doc.notice_hour) {
+          _hoursArr[doc.notice_hour] += 1;
         }
+      })
 
-
-        docs.forEach(function(doc) {
-          if (doc.advance_days) {
-            _advanceDaysArr[doc.advance_days] += 1;
-          }
-          if (doc.stay_days) {
-            _stayDaysArr[doc.stay_days] += 1;
-          }
-          if (doc.notice_hour) {
-            _hoursArr[doc.notice_hour] += 1;
-          }
-        })
-
-        res.send({
-          result: 'TRUE',
-          data: {
-            advanceDays: _advanceDaysArr,
-            stayDays: _stayDaysArr,
-            hourStatic: _hoursArr
-          }
-        })
-      }, queryStr)
-    }, queryStr)
+      res.send({
+        result: 'TRUE',
+        data: {
+          advanceDays: _advanceDaysArr,
+          stayDays: _stayDaysArr,
+          hourStatic: _hoursArr
+        }
+      })
+    })
   },
+
   //获取某年某月 每天各酒店订单数据
   getHotelDaysStatic: function(req, res) {
     var time = req.body.time;
@@ -78,35 +86,32 @@ STATIC = {
       $gte: startTime,
       $lte: endTime
     } //{"order_date":{$lt:50}}
-    XC.getOrderListXCFromDB(function(XCdocs) {
-      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
-        var docs = XCdocs.concat(MTdocs);
-        var daysArr = util.getDates(time);
-        var _hotel_arr = _.extend([], hotel);
-        _hotel_arr.forEach(function(_hotel) {
-          _hotel.data = {};
-          daysArr.forEach(function(day) {
-            _hotel.data[day] = {
-              weekday: util.getWeekDay(day),
-              value: 0
-            };
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        for (var key in _hotel.data) {
+          docs.forEach(function(doc) {
+            if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += 1;
+            }
           })
-        })
-        _hotel_arr.forEach(function(_hotel) {
-          for (var key in _hotel.data) {
-            docs.forEach(function(doc) {
-              if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
-                _hotel.data[key].value += 1;
-              }
-            })
-          }
-        })
-        res.send({
-          result: 'TRUE',
-          data: _hotel_arr
-        })
-      }, queryStr)
-    }, queryStr)
+        }
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
   },
   //获取某年某月 每天各酒店订单间夜数据
   getHotelDaysRoomNightStatic: function(req, res) {
@@ -118,36 +123,147 @@ STATIC = {
       $gte: startTime,
       $lte: endTime
     } //{"order_date":{$lt:50}}
-    XC.getOrderListXCFromDB(function(XCdocs) {
-      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
-        var docs = XCdocs.concat(MTdocs);
-        var daysArr = util.getDates(time);
-        var _hotel_arr = _.extend([], hotel);
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        for (var key in _hotel.data) {
+          docs.forEach(function(doc) {
+            if (moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += (doc.room_nights || 0);
+            }
+          })
+        }
+
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
+  },
+  //获取本年到目前为止间夜数
+  getYearToTodayRoomNights: function(req, res) {
+    var startTime = moment().add(-1, 'days').format('YYYY') + '-1-1 00:00:00',
+      endTime = moment().format('YYYY-M-D') + ' 23:59:59';
+      var queryStr = {};
+      queryStr.order_date = {
+        $gte: startTime,
+        $lte: endTime
+      } //{"order_date":{$lt:50}}
+      this.getAllOrderListFromDB(queryStr, function(docs) {
+        var _hotel_arr = [];
+        hotel.forEach(function(_hotel) {
+          _hotel_arr.push(_.extend({}, _hotel))
+        })
+        var otherStrObject = {
+          roomNightsTotalYear: 0 //年累计间夜
+        };
+
+        var totalRow = _.extend({
+          name: '总计'
+        }, otherStrObject);
+
         _hotel_arr.forEach(function(_hotel) {
-          _hotel.data = {};
-          daysArr.forEach(function(day) {
-            _hotel.data[day] = {
-              weekday: util.getWeekDay(day),
-              value: 0
-            };
+          _.extend(_hotel, otherStrObject)
+          docs.forEach(function(doc) {
+            if (doc.hotel_short_name === _hotel.name) {
+              _hotel.roomNightsTotalYear += Number(doc.room_nights || 0);
+              totalRow.roomNightsTotalYear += Number(doc.room_nights || 0);
+            }
           })
         })
-        _hotel_arr.forEach(function(_hotel) {
-          for (var key in _hotel.data) {
-            docs.forEach(function(doc) {
-              if (moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
-                _hotel.data[key].value += doc.room_nights;
-              }
-            })
-          }
 
-        })
+        _hotel_arr.push(totalRow);
+
         res.send({
           result: 'TRUE',
           data: _hotel_arr
         })
-      }, queryStr)
-    }, queryStr)
+      })
+  },
+  //获取昨日总间夜数、毛利、间夜数对比、毛利对比数据
+  getYesterdayAndTodaydiff: function(req, res) {
+    var startTime = moment().add(-1, 'days').format('YYYY-M-D') + ' 00:00:00',
+      endTime = moment().format('YYYY-M-D') + ' 23:59:59';
+      var queryStr = {};
+      queryStr.order_date = {
+        $gte: startTime,
+        $lte: endTime
+      } //{"order_date":{$lt:50}}
+      this.getAllOrderListFromDB(queryStr, function(docs) {
+        var _hotel_arr = [];
+        hotel.forEach(function(_hotel) {
+          _hotel_arr.push(_.extend({}, _hotel))
+        })
+        var otherStrObject = {
+          roomNightsToday: 0, //今日总计间夜数
+          grossProfitToday: 0, //今日总计毛利金额
+          todayDate: moment().format('YYYY-M-DD'),
+          yesterdayDate: moment().add(-1, 'days').format('YYYY-M-DD'),
+          roomNightsYesterday: 0, //昨日总计间夜数
+          grossProfitYesterday: 0, //昨日总计毛利金额
+          roomNightsToYesAdd: 0, //间夜数对比昨日增加
+          grossProfitToYesAdd: 0, //毛利金额对比昨日增加
+          roomNightsAddPercent: 0, //间夜数+%
+          grossProfitAddPercent: 0, //毛利金额+%
+        };
+        var totalRow = _.extend({
+          name: '总计'
+        }, otherStrObject);
+        var left = new Date(moment().add(-1, 'days').format('YYYY-M-DD') + ' 00:00:00').getTime(),
+          middle = new Date(moment().add(-1, 'days').format('YYYY-M-DD') + ' 23:59:59').getTime(),
+          right = new Date(moment().format('YYYY-M-DD') + ' 23:59:59').getTime();
+        _hotel_arr.forEach(function(_hotel) {
+          _.extend(_hotel, otherStrObject)
+          docs.forEach(function(doc) {
+            if (doc.hotel_short_name === _hotel.name) {
+              //昨天
+              if(left < new Date(doc.order_date).getTime() && new Date(doc.order_date).getTime() <= middle) {
+                _hotel.roomNightsYesterday += Number(doc.room_nights || 0);
+                _hotel.grossProfitYesterday += Number(doc.money - doc.settlement);
+
+                totalRow.roomNightsYesterday += Number(doc.room_nights || 0);
+                totalRow.grossProfitYesterday += Number(doc.money - doc.settlement);
+              } else if(middle < new Date(doc.order_date).getTime() && new Date(doc.order_date).getTime() <= right) {
+                _hotel.roomNightsToday += Number(doc.room_nights || 0);
+                _hotel.grossProfitToday += Number(doc.money - doc.settlement);
+
+                totalRow.roomNightsToday += Number(doc.room_nights || 0);
+                totalRow.grossProfitToday += Number(doc.money - doc.settlement);
+              }
+            }
+          })
+        })
+
+        _hotel_arr.forEach(function(_hotel) {
+          _hotel.roomNightsToYesAdd = Number(_hotel.roomNightsToday - _hotel.roomNightsYesterday);
+          _hotel.grossProfitToYesAdd = Number(_hotel.grossProfitToday - _hotel.grossProfitYesterday);
+          _hotel.roomNightsAddPercent = _hotel.roomNightsYesterday ? Math.round(_hotel.roomNightsToYesAdd / _hotel.roomNightsYesterday * 100) : 0;
+          _hotel.grossProfitAddPercent = _hotel.grossProfitYesterday ? Math.round(_hotel.grossProfitToYesAdd / _hotel.grossProfitYesterday * 100) : 0;
+        })
+
+        totalRow.roomNightsToYesAdd = Number(totalRow.roomNightsToday - totalRow.roomNightsYesterday);
+        totalRow.grossProfitToYesAdd = Number(totalRow.grossProfitToday - totalRow.grossProfitYesterday);
+        totalRow.roomNightsAddPercent = totalRow.roomNightsYesterday ? Math.round(totalRow.roomNightsToYesAdd / totalRow.roomNightsYesterday * 100) : 0;
+        totalRow.grossProfitAddPercent = totalRow.grossProfitYesterday ? Math.round(totalRow.grossProfitToYesAdd / totalRow.grossProfitYesterday * 100) : 0;
+
+        _hotel_arr.push(totalRow);
+
+        res.send({
+          result: 'TRUE',
+          data: _hotel_arr
+        })
+      })
   },
   //获取某年某月 每天各酒店离店数据
   getHotelCheckoutStatic: function(req, res) {
@@ -159,71 +275,64 @@ STATIC = {
       $gte: startTime,
       $lte: endTime
     } //{"order_date":{$lt:50}}
-    XC.getOrderListXCFromDB(function(XCdocs) {
-      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
-        var docs = XCdocs.concat(MTdocs);
-        var _hotel_arr = _.extend([], hotel);
-        var otherStrObject = {
-          roomNights: 0, //间夜数
-          totalAmount: 0, //总金额
-          totalAmountPercent: 0, //总金额%
-          totalSettlement: 0, //结算总额
-          grossProfit: 0, //毛利金额
-          grossProfitPercent: 0, //毛利金额%
-          grossProfitAvg: 0, //间均毛利
-          grossProfitRate: 0, //毛利率%
-          roomNightsYesterday: 0, //昨日总计间夜数
-          grossProfitYesterday: 0, //昨日总计毛利金额
-          roomNightsToYesAdd: 0, //间夜数对比昨日增加
-          grossProfitToYesAdd: 0, //毛利金额对比昨日增加
-          roomNightsAddPercent: 0, //间夜数+%
-          grossProfitAddPercent: 0, //毛利金额+%
-          roomNightsTotalYear: 0 //年累计间夜
-        };
-        var totalRow = _.extend({
-          name: '总计'
-        }, otherStrObject);
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var _hotel_arr = [];
+      hotel.forEach(function(_hotel) {
+        _hotel_arr.push(_.extend({}, _hotel))
+      })
+      var otherStrObject = {
+        roomNights: 0, //间夜数
+        totalAmount: 0, //总金额
+        totalAmountPercent: 0, //总金额%
+        totalSettlement: 0, //结算总额
+        grossProfit: 0, //毛利金额
+        grossProfitPercent: 0, //毛利金额%
+        grossProfitAvg: 0, //间均毛利
+        grossProfitRate: 0, //毛利率%
+      };
+      var totalRow = _.extend({
+        name: '总计'
+      }, otherStrObject);
 
-        totalRow.totalAmountPercent = 100;
-        totalRow.grossProfitPercent = 100;
+      totalRow.totalAmountPercent = 100;
+      totalRow.grossProfitPercent = 100;
 
-        _hotel_arr.forEach(function(_hotel) {
-          _.extend(_hotel, otherStrObject)
-          docs.forEach(function(doc) {
-            if (doc.hotel_short_name === _hotel.name) {
-              _hotel.roomNights += Number(doc.room_nights);
-              _hotel.totalAmount += Number(doc.money);
-              _hotel.totalSettlement += Number(doc.settlement);
-              _hotel.grossProfit += Number(doc.money - doc.settlement);
+      _hotel_arr.forEach(function(_hotel) {
+        _.extend(_hotel, otherStrObject)
+        docs.forEach(function(doc) {
+          if (doc.hotel_short_name === _hotel.name) {
+            _hotel.roomNights += Number(doc.room_nights || 0);
+            _hotel.totalAmount += Number(doc.money);
+            _hotel.totalSettlement += Number(doc.settlement);
+            _hotel.grossProfit += Number(doc.money - doc.settlement);
 
-              totalRow.roomNights += Number(doc.room_nights);
-              totalRow.totalAmount += Number(doc.money);
-              totalRow.totalSettlement += Number(doc.settlement);
-              totalRow.grossProfit += Number(doc.money - doc.settlement);
-            }
-          })
+            totalRow.roomNights += Number(doc.room_nights || 0);
+            totalRow.totalAmount += Number(doc.money);
+            totalRow.totalSettlement += Number(doc.settlement);
+            totalRow.grossProfit += Number(doc.money - doc.settlement);
+          }
         })
+      })
 
-        _hotel_arr.forEach(function(_hotel) {
-          _hotel.totalAmountPercent = totalRow.totalAmount ? Math.round(_hotel.totalAmount / totalRow.totalAmount * 100) : 0;
-          _hotel.grossProfitPercent = totalRow.grossProfit ? Math.round(_hotel.grossProfit / totalRow.grossProfit * 100) : 0;
-          _hotel.grossProfitAvg = _hotel.roomNights ? Math.round(_hotel.grossProfit / _hotel.roomNights) : 0;
-          _hotel.grossProfitRate = _hotel.totalAmount ? Math.round(_hotel.grossProfit / _hotel.totalAmount * 100) : 0;
-          totalRow.grossProfitRate += _hotel.grossProfitRate;
-          totalRow.grossProfitAvg += _hotel.grossProfitAvg;
-        })
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.totalAmountPercent = totalRow.totalAmount ? Math.round(_hotel.totalAmount / totalRow.totalAmount * 100) : 0;
+        _hotel.grossProfitPercent = totalRow.grossProfit ? Math.round(_hotel.grossProfit / totalRow.grossProfit * 100) : 0;
+        _hotel.grossProfitAvg = _hotel.roomNights ? Math.round(_hotel.grossProfit / _hotel.roomNights) : 0;
+        _hotel.grossProfitRate = _hotel.totalAmount ? Math.round(_hotel.grossProfit / _hotel.totalAmount * 100) : 0;
+        totalRow.grossProfitRate += _hotel.grossProfitRate;
+        totalRow.grossProfitAvg += _hotel.grossProfitAvg;
+      })
 
-        totalRow.grossProfitRate = Math.round(totalRow.grossProfitRate / _hotel_arr.length);
-        totalRow.grossProfitAvg = Math.round(totalRow.grossProfitAvg / _hotel_arr.length);
+      totalRow.grossProfitRate = Math.round(totalRow.grossProfitRate / _hotel_arr.length);
+      totalRow.grossProfitAvg = Math.round(totalRow.grossProfitAvg / _hotel_arr.length);
 
-        _hotel_arr.push(totalRow);
+      _hotel_arr.push(totalRow);
 
-        res.send({
-          result: 'TRUE',
-          data: _hotel_arr
-        })
-      }, queryStr)
-    }, queryStr)
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
   },
   //获取离店渠道统计
   getCheckoutDataChannelStatic: function(req, res) {
@@ -235,7 +344,10 @@ STATIC = {
       $gte: startTime,
       $lte: endTime
     } //{"order_date":{$lt:50}}
-    var _hotel_arr = _.extend([], hotel);
+    var _hotel_arr = [];
+    hotel.forEach(function(_hotel) {
+      _hotel_arr.push(_.extend({}, _hotel))
+    })
     var _hotel_arr_names = [];
     hotel.forEach(function(_hotel) {
       _hotel_arr_names.push(_hotel.name);
@@ -279,8 +391,8 @@ STATIC = {
           if (doc.hotel_short_name == _hotel.name) {
             _hotel[type].order_number += 1;
             _hotel.total.order_number += 1;
-            _hotel[type].room_nights += doc.room_nights;
-            _hotel.total.room_nights += doc.room_nights;
+            _hotel[type].room_nights += (doc.room_nights || 0);
+            _hotel.total.room_nights += (doc.room_nights || 0);
           }
         })
       })
@@ -288,16 +400,16 @@ STATIC = {
         if (_hotel_arr_names.indexOf(doc.hotel_short_name) != -1) {
           total_row[type].order_number += 1;
           total_row.total.order_number += 1;
-          total_row[type].room_nights += doc.room_nights;
-          total_row.total.room_nights += doc.room_nights;
+          total_row[type].room_nights += (doc.room_nights || 0);
+          total_row.total.room_nights += (doc.room_nights || 0);
         }
       })
     }
 
     //计算总计数据
     var setTotalData = function(_hotel, type) {
-      _hotel[type].order_number_percent = Math.round(_hotel[type].order_number / _hotel.total.order_number * 100);
-      _hotel[type].room_nights_percent = Math.round(_hotel[type].room_nights / _hotel.total.room_nights * 100);
+      _hotel[type].order_number_percent = _hotel.total.order_number ? Math.round(_hotel[type].order_number / _hotel.total.order_number * 100) : 0;
+      _hotel[type].room_nights_percent = _hotel.total.room_nights ? Math.round(_hotel[type].room_nights / _hotel.total.room_nights * 100) : 0;
     }
 
     XC.getOrderListXCFromDB(function(XCdocs) {
@@ -308,8 +420,8 @@ STATIC = {
           setTotalData(_hotel, 'xc');
           setTotalData(_hotel, 'mt');
           if (_index < _hotel_arr.length - 1) {
-            _hotel.total.order_number_percent = Math.round(_hotel.total.order_number / total_row.total.order_number * 100);
-            _hotel.total.room_nights_percent = Math.round(_hotel.total.room_nights / total_row.total.room_nights * 100);
+            _hotel.total.order_number_percent = total_row.total.order_number ? Math.round(_hotel.total.order_number / total_row.total.order_number * 100) : 0;
+            _hotel.total.room_nights_percent = total_row.total.room_nights ? Math.round(_hotel.total.room_nights / total_row.total.room_nights * 100) : 0;
           } else {
             _hotel.total.order_number_percent = 100;
             _hotel.total.room_nights_percent = 100;
@@ -334,8 +446,7 @@ STATIC = {
         $lte: endTime
       }
     }
-
-    XC.getOrderListXCFromDB(function(docs, count) {
+    this.getAllOrderListFromDB(queryStr, function(docs) {
       var _docs = [];
       if(docs) {
         _docs = docs.filter(function(_doc) {
@@ -350,7 +461,7 @@ STATIC = {
         data: _docs,
         count: _docs.length
       });
-    }, queryStr)
+    })
   }
 }
 

@@ -267,6 +267,10 @@ XC = {
         }
       }
 
+      if(_set.hotel) {
+        _set.hotel_short_name = util.getHotelShortName(_set.hotel);
+      }
+
       collection.updateOne({
         "_id": o_id
       }, {

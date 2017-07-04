@@ -25,6 +25,7 @@ TUNIU = {
       item.advance_days = util.getDiffDate(item.check_in_date, item.order_date, 'days');
       item.notice_hour = util.getRightDateHour(item.order_date);
       item.nights = item.stay_days;
+      item.room_nights = item.room_number * item.stay_days;
 
       //在redis里面去查找订单号
       redisHander.getValue('order_numbers', function(res) {
@@ -148,6 +149,10 @@ TUNIU = {
         if(key != '_id') {
           _set[key] = req.body[key];
         }
+      }
+
+      if(_set.hotel) {
+        _set.hotel_short_name = util.getHotelShortName(_set.hotel);
       }
 
       collection.updateOne({

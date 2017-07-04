@@ -300,7 +300,7 @@
                     { required: true, message: '酒店预订号不能为空', trigger: 'change' }
                   ]
                 },
-                formItem: {
+                defaultItem: {
                     platform: '美团',
                     platform_en: 'meituan',
                     order_number: '',
@@ -321,6 +321,7 @@
                     hotel_confirm_number: '',
                     notice_hour: ''
                 },
+                formItem: Object.assign({}, this.defaultItem),
                 ruleValidate: {
                   order_number: [
                     { required: true, message: '订单号不能为空', trigger: 'change' }
@@ -536,6 +537,7 @@
                     _this.listFilter();
                     _this.$Message.info('成功添加！');
                     _this.showAdd = false;
+                    _this.formItem = Object.assign({}, this.defaultItem);
                   })
                 } else {
                   this.$Message.error('请输入相关数据!');
