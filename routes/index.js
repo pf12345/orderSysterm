@@ -21,7 +21,6 @@ router.get('/', function (req, res) {
     if(!req.session.user) {
       res.redirect('/login');
     }else {
-      console.log(req.session.user);
       res.render('templates/index', {
         user: JSON.stringify({
           name: req.session.user.name,
