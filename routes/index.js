@@ -14,10 +14,57 @@ var ZDXSCLTZJL = require('./handler/zdxscltzjl')
 var CSDJLB = require('./handler/csdjlb')
 var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
+var USER = require('./handler/user')
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('../dist/templates/index.ejs')
+    if(!req.session.user) {
+      res.redirect('/login');
+    }else {
+      res.render('templates/index')
+    }
+})
+
+router.get('/login', function(req, res) {
+  res.render('templates/login')
+})
+
+router.get('/test', function(req, res) {
+  console.log(req.session.user);
+  res.send('test')
+})
+
+router.get('/addUser', function(req, res) {
+  USER.addUser(req, res);
+})
+router.post('/loginSystem', function(req, res) {
+
+  var name = req.body.name;
+  var pwd = req.body.pwd;
+  if(!name || !pwd) {
+    res.send({
+      result: 'FALSE',
+      data: null,
+      message: '用户名或密码错误'
+    })
+    return false;
+  }
+  USER.loginSystem(name, function(result) {
+    if(result && result.pwd == pwd) {
+        req.session.user = result;
+        res.send({
+          result: 'TRUE',
+          data: result,
+          message: '登录成功'
+        });
+    }else {
+      res.send({
+        result: 'FALSE',
+        data: null,
+        message: '用户名与密码不匹配'
+      });
+    }
+  });
 })
 
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
@@ -32,6 +79,7 @@ router.post('/saveOrderXC', function(req, res) {
 
 //获取携程订单数据列表
 router.get('/getOrderListXC', function(req, res) {
+  console.log(req.session.user);
   XC.getOrderListXC(req, res)
 })
 

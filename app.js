@@ -12,15 +12,15 @@ var config = require('./config/config.json');
 
 var app = express();
 
-app.use(session({
-    secret: 'foo',
-    store: new MongoStore({
-      host: '127.0.0.1',
-      port: '27017',
-      url: config.dbInfo.url,
-      db: config.dbInfo.db
-    })
-}));
+// app.use(session({
+//     secret: 'foo',
+//     store: new MongoStore({
+//       host: '127.0.0.1',
+//       port: '27017',
+//       url: config.dbInfo.url,
+//       db: config.dbInfo.db
+//     })
+// }));
 
 
 // view engine setup
@@ -40,10 +40,10 @@ app.use(bodyParser.urlencoded({
   limit: '150mb',
   extended: false
 }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
+app.use(cookieParser('some secret'));
 var sessionConfig = require(__dirname + '/config/session.json');
 var redisConfig = require(__dirname + '/config/redis.json');
 //设置session使用 redis 或是临时文件
@@ -80,11 +80,12 @@ var routes = require('./routes/index');
 
 //允许跨域
 app.use('*',function(req, res, next) {
+  //如果设置此项，req.session将无法保存数据
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-  res.header("Content-Type", "application/json;charset=utf-8");
+  // res.header("Content-Type", "application/json;charset=utf-8");
   next();
 });
 

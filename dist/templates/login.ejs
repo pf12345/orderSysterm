@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ordersysterm</title>
+    <link rel="stylesheet" type="text/css" href="/libs/css/iview.css">
+    <script type="text/javascript" src="libs/js/vue.min.js"></script>
+    <script type="text/javascript" src="/libs/js/iview.min.js"></script>
+    <script src="/libs/js/jquery.js"></script>
+</head>
+<body>
+<div id="app">
+  <div class="login">
+    <div>
+      <div class="ivu-input-wrapper ivu-input-type ivu-input-group ivu-input-group-with-prepend">
+        <div class="ivu-input-group-prepend">
+          <i data-v-10e8027e="" class="ivu-icon ivu-icon-ios-person-outline"></i>
+        </div>
+        <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
+         <input type="text" placeholder="用户名" class="ivu-input" v-model="formInline.user">
+       </div>
+    </div>
+    <br>
+    <div>
+      <div class="ivu-input-wrapper ivu-input-type ivu-input-group ivu-input-group-with-prepend">
+        <div class="ivu-input-group-prepend">
+          <i data-v-10e8027e="" class="ivu-icon ivu-icon-ios-locked-outline"></i>
+        </div>
+        <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
+         <input type="password" placeholder="密码" class="ivu-input" v-model="formInline.password">
+       </div>
+    </div>
+    <br>
+    <div style="text-align: center;margin-top: 20px;">
+      <button type="button" class="ivu-btn ivu-btn-info" @click="handleSubmit('formInline')" style="width: 300px;"><span>登录</span></button>
+    </div>
+  </div>
+</div>
+<style media="screen">
+  .login {
+    width: 300px;
+    margin: auto;
+    margin-top: 150px;
+  }
+</style>
+<script>
+    new Vue({
+        el: '#app',
+        data () {
+            return {
+                formInline: {
+                    user: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            handleSubmit(name) {
+                let _this = this;
+                if(!this.formInline.user || !this.formInline.password) {
+                  _this.$Message.error('请输入用户名或密码!');
+                  return false;
+                }
+                $.ajax({
+                  url:'/loginSystem',
+                  type: 'POST',
+                  data: {
+                    name: this.formInline.user,
+                    pwd: this.formInline.password
+                  },
+                  dataType: 'json',
+                  success:function(result){
+                    if(result.result == 'TRUE') {
+                      _this.$Message.success('登录成功!');
+                      window.location.href = '/';
+                    }else {
+                      _this.$Message.error(result.message);
+                    }
+                  }
+                });
+            }
+        }
+    })
+  </script>
+</body>
+</html>

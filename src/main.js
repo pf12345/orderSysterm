@@ -19,6 +19,7 @@ router.afterEach((to, from, next) => {
   iView.LoadingBar.finish();
 });
 
+// let AJAXDOMAIN = 'http://127.0.0.1:8033';
 let AJAXDOMAIN = '';
 /* eslint-disable no-new */
 new Vue({

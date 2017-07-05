@@ -25,6 +25,7 @@
   }
 </style>
 <script>
+    import axios from 'axios'
     export default {
         data () {
             return {
@@ -38,16 +39,33 @@
                     ],
                     password: [
                         { required: true, message: '请填写密码', trigger: 'blur' },
-                        { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+                        // { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
                     ]
                 }
             }
         },
         methods: {
             handleSubmit(name) {
+                let _this = this;
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.$Message.success('提交成功!');
+                      axios.post('http://127.0.0.1:8033/loginSystem', {
+                        name: this.formInline.user,
+                        pwd: this.formInline.password
+                      })
+                        .then(function(response) {
+                          console.log(response);
+                          if(response.data.result == 'TRUE') {
+                            _this.$Message.success('登录成功!');
+                            window.location.href = '/';
+                          }else {
+                            _this.$Message.error(response.data.message);
+                          }
+
+                        })
+                        .catch(function(error) {
+                          _this.$Message.error('登录失败!');
+                        });
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
