@@ -52,7 +52,6 @@ new Vue({
           _this.$Loading.finish();
           // _this.msg();
           if (succ && typeof succ === 'function') {
-            console.log(response);
             if(response.data.result == 'TRUE') {
               succ(response.data.data, response.data);
             }else {

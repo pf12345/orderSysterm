@@ -305,6 +305,7 @@
               this.showAdd = !value;
             },
             submitAdd(name) {
+              var _this = this;
               this.$refs[name].validate((valid) => {
                 if (valid) {
                   this.$root.ajaxPost({

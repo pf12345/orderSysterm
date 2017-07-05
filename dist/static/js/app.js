@@ -1951,6 +1951,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.showAdd = !value;
     },
     submitAdd(name) {
+      var _this = this;
       this.$refs[name].validate(valid => {
         if (valid) {
           this.$root.ajaxPost({
@@ -5454,7 +5455,6 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
         _this.$Loading.finish();
         // _this.msg();
         if (succ && typeof succ === 'function') {
-          console.log(response);
           if (response.data.result == 'TRUE') {
             succ(response.data.data, response.data);
           } else {
