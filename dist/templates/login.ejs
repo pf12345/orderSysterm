@@ -56,7 +56,7 @@
         },
         methods: {
             handleSubmit(name) {
-                let _this = this;
+                var _this = this;
                 if(!this.formInline.user || !this.formInline.password) {
                   _this.$Message.error('请输入用户名或密码!');
                   return false;
