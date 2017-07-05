@@ -30,7 +30,6 @@ router.get('/login', function(req, res) {
 })
 
 router.get('/test', function(req, res) {
-  console.log(req.session.user);
   res.send('test')
 })
 
@@ -79,7 +78,6 @@ router.post('/saveOrderXC', function(req, res) {
 
 //获取携程订单数据列表
 router.get('/getOrderListXC', function(req, res) {
-  console.log(req.session.user);
   XC.getOrderListXC(req, res)
 })
 
