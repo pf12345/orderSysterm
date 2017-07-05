@@ -32,7 +32,8 @@ new Vue({
   data: function() {
     return {
       serverUrl: AJAXDOMAIN,
-      msg: null
+      msg: null,
+      user: window.user || {}
     }
   },
   methods: {
@@ -51,7 +52,16 @@ new Vue({
           _this.$Loading.finish();
           // _this.msg();
           if (succ && typeof succ === 'function') {
-            succ(response.data.data, response.data);
+            console.log(response);
+            if(response.data.result == 'TRUE') {
+              succ(response.data.data, response.data);
+            }else {
+              if(response.data.message) {
+                _this.$Message.error(response.data.message);
+              }else {
+                _this.$Message.error('数据错误，请刷新重试');
+              }
+            }
           }
         })
         .catch(function(error) {
@@ -59,6 +69,8 @@ new Vue({
           // _this.msg();
           if (err && typeof err === 'function') {
             err(error);
+          } else {
+            _this.$Message.error('数据错误，请刷新重试');
           }
         });
     },
@@ -84,7 +96,15 @@ new Vue({
           _this.$Loading.finish();
           // _this.msg();
           if (succ && typeof succ === 'function') {
-            succ(response.data.data, response.data);
+            if(response.data.result == 'TRUE') {
+              succ(response.data.data, response.data);
+            }else {
+              if(response.data.message) {
+                _this.$Message.error(response.data.message);
+              }else {
+                _this.$Message.error('数据错误，请刷新重试');
+              }
+            }
           }
         })
         .catch(function(error) {
@@ -92,6 +112,8 @@ new Vue({
           // _this.msg();
           if (err && typeof err === 'function') {
             err(error);
+          } else {
+            _this.$Message.error('数据错误，请刷新重试');
           }
         });
     },

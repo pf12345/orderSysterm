@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Menu :theme="theme3" width="240px" @on-select="selectItem">
-                <Submenu name="1">
+                <Submenu name="1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('数据录入') != -1">
                     <template slot="title">
                         <Icon type="ios-cloud-upload-outline"></Icon>
                         数据录入
@@ -17,17 +17,17 @@
                         <Icon type="ios-pulse"></Icon>
                         统计分析
                     </template>
-                    <Menu-item name="2-1">每日新订订单量</Menu-item>
-                    <Menu-item name="2-2">每日新订订单间夜</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('每日新订订单量') != -1" name="2-1">每日新订订单量</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('每日新订订单间夜') != -1" name="2-2">每日新订订单间夜</Menu-item>
                     <!-- <Menu-item name="2-3">每日入住间夜</Menu-item> -->
-                    <Menu-item name="2-4">入住数据分析</Menu-item>
-                    <Menu-item name="2-5">离店数据汇总</Menu-item>
-                    <Menu-item name="2-6">离店数据渠道占比分析</Menu-item>
-                    <Menu-item name="2-7">离店数据明细</Menu-item>
-                    <Menu-item name="2-8">亏损订单明细</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('入住数据分析') != -1" name="2-4">入住数据分析</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据汇总') != -1" name="2-5">离店数据汇总</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据渠道占比分析') != -1" name="2-6">离店数据渠道占比分析</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('亏损订单明细') != -1" name="2-8">亏损订单明细</Menu-item>
                 </Submenu>
 
-                <Submenu name="4">
+                <Submenu name="4" v-if="!user.jurisdictions || user.jurisdictions.indexOf('数据监控及记录保存') != -1">
                   <template slot="title">
                       <Icon type="tshirt-outline"></Icon>
                       数据监控及记录保存
@@ -37,14 +37,18 @@
                   <Menu-item name="4-3">测试单记录表</Menu-item>
                 </Submenu>
 
-                <Submenu name="5">
+                <Submenu name="5" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店账单比对') != -1">
                   <template slot="title">
-                      <Icon type="tshirt-outline"></Icon>
+                      <Icon type="shuffle"></Icon>
                       酒店账单比对
                   </template>
                   <Menu-item name="5-1">酒店数据管理</Menu-item>
                   <Menu-item name="5-2">数据对比</Menu-item>
                 </Submenu>
+                <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1">
+                    <Icon type="person-stalker"></Icon>
+                    账号管理
+                </Menu-item>
             </Menu>
   </div>
 </template>
@@ -52,7 +56,8 @@
     export default {
         data () {
             return {
-                theme3: 'light'
+                theme3: 'light',
+                user: window.user || {}
             }
         },
         methods: {
@@ -99,6 +104,9 @@
                 break;
               case '4-3':
                 window.location.href = '/#/csdjlb';
+                break;
+              case '6-1':
+                window.location.href = '/#/accountManagement';
                 break;
               default:
                 break;

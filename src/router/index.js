@@ -17,6 +17,8 @@ import CheckOutDataStatic from '@/components/checkOutDataStatic'
 import CheckOutDataChannelStatic from '@/components/checkOutDataChannelStatic'
 import LossOrderStatic from '@/components/LossOrderStatic'
 
+import AccountManagement from '@/components/accountManagement'
+
 Vue.use(Router)
 
 export default new Router({
@@ -137,6 +139,14 @@ export default new Router({
       name: 'lossOrderStatic',
       components: {
         content: LossOrderStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/accountManagement',
+      name: 'accountManagement',
+      components: {
+        content: AccountManagement,
         left: Menu
       }
     }

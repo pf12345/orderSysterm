@@ -21,23 +21,34 @@ router.get('/', function (req, res) {
     if(!req.session.user) {
       res.redirect('/login');
     }else {
-      res.render('templates/index')
+      console.log(req.session.user);
+      res.render('templates/index', {
+        user: JSON.stringify({
+          name: req.session.user.name,
+          jurisdictions: req.session.user.jurisdictions
+        })
+      })
     }
 })
-
 router.get('/login', function(req, res) {
+  req.session.user = null;
   res.render('templates/login')
 })
 
-router.get('/test', function(req, res) {
-  res.send('test')
-})
 
-router.get('/addUser', function(req, res) {
+router.post('/addUser', function(req, res) {
   USER.addUser(req, res);
 })
+router.get('/getUserList', function(req, res) {
+  USER.getUserList(req, res);
+})
+router.post('/deleteUserItem', function(req, res) {
+  USER.deleteUserItem(req, res);
+})
+router.post('/updateUserItem', function(req, res) {
+  USER.updateUserItem(req, res);
+})
 router.post('/loginSystem', function(req, res) {
-
   var name = req.body.name;
   var pwd = req.body.pwd;
   if(!name || !pwd) {

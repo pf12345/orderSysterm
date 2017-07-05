@@ -6,10 +6,15 @@
     <link rel="stylesheet" href="/static/css/app.css">
   </head>
   <body>
+    <input type="hidden" id="user" value="<%=user%>">
     <div id="app"></div>
+    <script>
+      var user = JSON.parse(document.getElementById('user').value) || {}
+    </script>
     <script type=text/javascript src=/static/js/manifest.js></script>
     <script type=text/javascript src=/static/js/vendor.js></script>
     <script src="/static/js/app.js"></script>
+
     <!-- built files will be auto injected -->
   </body>
 </html>
