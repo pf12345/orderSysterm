@@ -32,3 +32,13 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ./mongorestore -h 127.0.0.1:27017 -d carSchool -o /data/dump
 
 ```
+
+## shell命令
+
+```bash
+
+发布：
+>chmod +x ./deploy.sh
+>./deploy.sh
+
+```
