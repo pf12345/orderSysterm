@@ -19,3 +19,9 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## mongodb命令
+
+``` bash
+备份：  ./mongodump -h 127.0.0.1:27017 -d carSchool -o /data/dump
+```
