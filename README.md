@@ -23,5 +23,12 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ## mongodb命令
 
 ``` bash
-备份：  ./mongodump -h 127.0.0.1:27017 -d carSchool -o /data/dump
+备份：  
+
+./mongodump -h 127.0.0.1:27017 -d carSchool -o /data/dump
+
+恢复：
+
+./mongorestore -h 127.0.0.1:27017 -d carSchool -o /data/dump
+
 ```
