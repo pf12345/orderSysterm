@@ -17,11 +17,14 @@
     </div>
 
     <left-page :show="showEdit" @on-close="closeEdit">
-      <span slot="title">编辑编辑</span>
+      <span slot="title">编辑</span>
       <div slot="content" class="addContent">
         <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
         <Form-item label="用户名" prop="name">
             <Input v-model="editFormItem.name" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="真实姓名" prop="rightName">
+            <Input v-model="editFormItem.rightName" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="密码" prop="pwd">
             <Input type="password" v-model="editFormItem.pwd" placeholder="请输入"></Input>
@@ -61,6 +64,9 @@
         <Form :model="formItem" ref="formItem" :label-width="100" :rules="ruleValidate">
         <Form-item label="用户名" prop="name">
             <Input v-model="formItem.name" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="真实姓名" prop="rightName">
+            <Input v-model="formItem.rightName" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="密码" prop="password">
             <Input type="password" v-model="formItem.password" placeholder="请输入"></Input>
@@ -103,6 +109,10 @@
         <div class="item">
           <h4>用户名</h4>
           <p>{{detail.name}}</p>
+        </div>
+        <div class="item">
+          <h4>真实姓名</h4>
+          <p>{{detail.rightName}}</p>
         </div>
         <div class="item">
           <h4>密码</h4>
@@ -166,6 +176,9 @@
                   name: [
                     { required: true, message: '用户名不能为空', trigger: 'change' }
                   ],
+                  rightName: [
+                    { required: true, message: '真实姓名不能为空', trigger: 'change' }
+                  ],
                   pwd: [
                     { required: true, message: '密码不能为空', trigger: 'change' }
                   ]
@@ -173,11 +186,15 @@
                 formItem: {
                     name: '',
                     password: '',
+                    rightName: '',
                     jurisdictions: Object.assign([], defaultJurisdictions)
                 },
                 ruleValidate: {
                   name: [
                     { required: true, message: '用户名不能为空', trigger: 'change' }
+                  ],
+                  rightName: [
+                    { required: true, message: '真实姓名不能为空', trigger: 'change' }
                   ],
                   password: [
                     { required: true, message: '密码不能为空', trigger: 'change' }
@@ -188,6 +205,12 @@
                         title: '用户名',
                         width: 120,
                         key: 'name',
+                        // fixed: 'left'
+                    },
+                    {
+                        title: '真实姓名',
+                        width: 120,
+                        key: 'rightName',
                         // fixed: 'left'
                     },
                     {
@@ -251,6 +274,7 @@
             this.editFormItem = {
               name: this.detail.name,
               pwd: this.detail.pwd,
+              rightName: this.detail.rightName,
               jurisdictions: this.detail.jurisdictions,
               _id: this.detail._id
             };

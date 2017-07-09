@@ -45,6 +45,14 @@
                   <Menu-item name="5-1">酒店数据管理</Menu-item>
                   <Menu-item name="5-2">数据对比</Menu-item>
                 </Submenu>
+                <Submenu name="7">
+                  <template slot="title">
+                      <Icon type="location"></Icon>
+                      排班
+                  </template>
+                  <Menu-item name="7-1">签到</Menu-item>
+                  <Menu-item name="7-2">排班统计</Menu-item>
+                </Submenu>
                 <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1">
                     <Icon type="person-stalker"></Icon>
                     账号管理
@@ -107,6 +115,9 @@
                 break;
               case '6-1':
                 window.location.href = '/#/accountManagement';
+                break;
+              case '7-1':
+                window.location.href = '/#/location';
                 break;
               default:
                 break;

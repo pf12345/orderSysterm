@@ -16,7 +16,7 @@ var ZDXSCLTZJL = {
   //保存重大销售策略调整记录表数据入数据库
   saveZdxscltzjlItem: function(req, res) {
     var item = req.body.data;
-    item.created = new Date().toLocaleString();
+    item.created = util.getRightDate(new Date().getTime());
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");

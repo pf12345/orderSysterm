@@ -16,6 +16,7 @@ import EveryDayRoomNightsStatic from '@/components/everyDayRoomNightsStatic'
 import CheckOutDataStatic from '@/components/checkOutDataStatic'
 import CheckOutDataChannelStatic from '@/components/checkOutDataChannelStatic'
 import LossOrderStatic from '@/components/LossOrderStatic'
+import Location from '@/components/location'
 
 import AccountManagement from '@/components/accountManagement'
 
@@ -147,6 +148,14 @@ export default new Router({
       name: 'accountManagement',
       components: {
         content: AccountManagement,
+        left: Menu
+      }
+    },
+    {
+      path: '/location',
+      name: 'Location',
+      components: {
+        content: Location,
         left: Menu
       }
     }

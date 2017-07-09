@@ -16,7 +16,7 @@ var CSDJLB = {
   //保存测试单记录表数据入数据库
   saveCsdjlbItem: function(req, res) {
     var item = req.body.data;
-    item.created = new Date().toLocaleString();
+    item.created = util.getRightDate(new Date().getTime());
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");

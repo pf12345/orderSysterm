@@ -15,6 +15,7 @@ var CSDJLB = require('./handler/csdjlb')
 var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 var USER = require('./handler/user')
+var SCHEDULING = require('./handler/scheduling')
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -243,6 +244,20 @@ router.post('/updateDrjgkjlbItem', function(req, res) {
 //保存测试单记录表图片
 router.post('/uploadImageCsdjlb', function(req, res) {
   UPLOAD.csdjlb(req, res);
+})
+
+//排班
+router.post('/addLocation', function(req, res) {
+  SCHEDULING.addLocation(req, res);
+})
+router.get('/getOrderListLocation', function(req, res) {
+  SCHEDULING.getOrderListLocation(req, res);
+})
+router.post('/deleteLocationItem', function(req, res) {
+  SCHEDULING.deleteLocationItem(req, res);
+})
+router.post('/updateLocationItem', function(req, res) {
+  SCHEDULING.updateLocationItem(req, res);
 })
 
 module.exports = router;

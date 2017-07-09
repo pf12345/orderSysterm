@@ -178,6 +178,7 @@ MEITUAN = {
       item.notice_hour = util.getRightDateHour(item.order_date);
       item.nights = item.stay_days;
       item.room_nights = item.room_number * item.stay_days;
+      item.created = util.getRightDate(new Date().getTime());
 
       //在redis里面去查找订单号
       redisHander.getValue('order_numbers', function(res) {

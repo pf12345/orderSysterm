@@ -17,7 +17,7 @@ var DRJGJKJLB = {
   //保存当日价格监控记录簿数据入数据库
   saveDrjgkjlbItem: function(req, res) {
     var item = req.body.data;
-    item.created = new Date().toLocaleString();
+    item.created = util.getRightDate(new Date().getTime());
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");
