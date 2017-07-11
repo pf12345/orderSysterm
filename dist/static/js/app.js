@@ -3250,28 +3250,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: 150
       }, {
         title: '携程',
-        key: 'xc',
-        width: 120
+        key: 'xc'
       }, {
         title: '去哪儿',
-        key: 'qunaer',
-        width: 120
+        key: 'qunaer'
       }, {
         title: '艺龙',
-        key: 'yinong',
-        width: 120
+        key: 'yinong'
       }, {
         title: '途牛',
-        key: 'xc',
-        width: 120
+        key: 'xc'
       }, {
         title: '同程',
-        key: 'tongcheng',
-        width: 120
+        key: 'tongcheng'
       }, {
         title: '美团酒店',
-        key: 'meituanhotel',
-        width: 120
+        key: 'meituanhotel'
       }],
       data: []
     };

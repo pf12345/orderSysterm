@@ -304,32 +304,26 @@
                     {
                         title: '携程',
                         key: 'xc',
-                        width: 120
                     },
                     {
                         title: '去哪儿',
                         key: 'qunaer',
-                        width: 120
                     },
                     {
                         title: '艺龙',
                         key: 'yinong',
-                        width: 120
                     },
                     {
                         title: '途牛',
                         key: 'xc',
-                        width: 120
                     },
                     {
                         title: '同程',
                         key: 'tongcheng',
-                        width: 120
                     },
                     {
                         title: '美团酒店',
                         key: 'meituanhotel',
-                        width: 120
                     },
                 ],
                 data: []
