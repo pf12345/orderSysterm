@@ -268,6 +268,7 @@
             },
             submitAdd(name) {
               var _this = this;
+              this.formItem.check_date = this.$root.getLocalDate(this.formItem.check_date).split(' ')[0];
               this.$refs[name].validate((valid) => {
                 if (valid) {
                   this.$root.ajaxPost({

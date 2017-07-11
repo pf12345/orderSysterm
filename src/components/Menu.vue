@@ -119,6 +119,9 @@
               case '7-1':
                 window.location.href = '/#/location';
                 break;
+              case '7-2':
+                window.location.href = '/#/locationStatic';
+                break;
               default:
                 break;
             }

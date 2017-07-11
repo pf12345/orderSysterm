@@ -2,6 +2,8 @@ var mongo = require('mongodb'),
   MongoClient = mongo.MongoClient,
   assert = require('assert');
 
+var moment = require('moment');
+
 var config = require('./../../config/config.json');
 
 // Connection URL
@@ -14,6 +16,7 @@ var SCHEDULING = {
     var item = req.body.data;
     item.created = util.getRightDate(new Date().getTime());
     item.check_date = item.check_date ? (item.check_date + ' ' + new Date().toTimeString().split(' ')[0]) : item.check_date;
+    item.check_date_time = item.check_date ? new Date(item.check_date).getTime() : '';
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       var collection = db.collection('ordersystermSCHEDULING');
@@ -53,9 +56,9 @@ var SCHEDULING = {
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
     var queryStr = {};
-    queryStr['check_date'] = {
-      $gte: listFilterStartTime,
-      $lte: listFilterEndTime
+    queryStr['check_date_time'] = {
+      $gte: new Date(listFilterStartTime).getTime(),
+      $lte: new Date(listFilterEndTime).getTime()
     } //{"order_date":{$lt:50}}
     this.getOrderListSCHEDULINGFromDB(function(docs, count) {
       res.send({
@@ -119,6 +122,51 @@ var SCHEDULING = {
         });
     })
   },
+
+  getLocationStatic: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr['check_date_time'] = {
+      $gte: new Date(startTime).getTime(),
+      $lte: new Date(endTime).getTime()
+    } //{"order_date":{$lt:50}}
+    this.getOrderListSCHEDULINGFromDB(function(docs, count) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = [{
+        name: '白班',
+        key: 'early',
+        data: {}
+      },{
+        name: '晚班',
+        key: 'night',
+        data: {}
+      }];
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        for (var key in _hotel.data) {
+          docs.forEach(function(doc) {
+            if (moment(key) && moment(key).isSame && moment(key).isSame(doc.check_date.split(' ')[0], 'day') && _hotel.key == doc.check_type) {
+              _hotel.data[key].value = doc.userName;
+            }
+          })
+        }
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    }, queryStr);
+  }
 }
 
 module.exports = SCHEDULING;

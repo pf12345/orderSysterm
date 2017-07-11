@@ -259,5 +259,7 @@ router.post('/deleteLocationItem', function(req, res) {
 router.post('/updateLocationItem', function(req, res) {
   SCHEDULING.updateLocationItem(req, res);
 })
-
+router.post('/getLocationStatic', function(req, res) {
+  SCHEDULING.getLocationStatic(req, res);
+})
 module.exports = router;
