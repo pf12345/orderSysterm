@@ -6433,13 +6433,13 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
     ajaxPost({ funName, params }, succ, err) {
       let _this = this;
       this.$Loading.start();
-      // if(this.msg) {
-      //   this.msg();
-      // }
-      // this.msg = this.$Message.loading({
-      //   content: '正在加载中...',
-      //   duration: 0
-      // });
+      if (this.msg) {
+        this.msg();
+      }
+      this.msg = this.$Message.loading({
+        content: '正在加载中...',
+        duration: 0
+      });
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(AJAXDOMAIN + '/' + funName, params).then(function (response) {
         _this.$Loading.finish();
         // _this.msg();
@@ -6454,7 +6454,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
         }
       }).catch(function (error) {
         _this.$Loading.error();
-        // _this.msg();
+        _this.msg();
         if (err && typeof err === 'function') {
           err(error);
         } else {
@@ -6472,16 +6472,16 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
         }
       }
       this.$Loading.start();
-      // if(this.msg) {
-      //   this.msg();
-      // }
-      // this.msg = this.$Message.loading({
-      //   content: '正在加载中...',
-      //   duration: 0
-      // });
+      if (this.msg) {
+        this.msg();
+      }
+      this.msg = this.$Message.loading({
+        content: '正在加载中...',
+        duration: 0
+      });
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get(url).then(function (response) {
         _this.$Loading.finish();
-        // _this.msg();
+        _this.msg();
         if (succ && typeof succ === 'function') {
           if (response.data.result == 'TRUE') {
             succ(response.data.data, response.data);
@@ -6495,7 +6495,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
         }
       }).catch(function (error) {
         _this.$Loading.error();
-        // _this.msg();
+        _this.msg();
         if (err && typeof err === 'function') {
           err(error);
         } else {

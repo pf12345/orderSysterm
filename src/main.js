@@ -40,13 +40,13 @@ new Vue({
     ajaxPost({funName, params}, succ, err) {
       let _this = this;
       this.$Loading.start();
-      // if(this.msg) {
-      //   this.msg();
-      // }
-      // this.msg = this.$Message.loading({
-      //   content: '正在加载中...',
-      //   duration: 0
-      // });
+      if(this.msg) {
+        this.msg();
+      }
+      this.msg = this.$Message.loading({
+        content: '正在加载中...',
+        duration: 0
+      });
       axios.post(AJAXDOMAIN + '/' + funName, params)
         .then(function(response) {
           _this.$Loading.finish();
@@ -63,7 +63,7 @@ new Vue({
         })
         .catch(function(error) {
           _this.$Loading.error();
-          // _this.msg();
+          _this.msg();
           if (err && typeof err === 'function') {
             err(error);
           } else {
@@ -81,17 +81,17 @@ new Vue({
         }
       }
       this.$Loading.start();
-      // if(this.msg) {
-      //   this.msg();
-      // }
-      // this.msg = this.$Message.loading({
-      //   content: '正在加载中...',
-      //   duration: 0
-      // });
+      if(this.msg) {
+        this.msg();
+      }
+      this.msg = this.$Message.loading({
+        content: '正在加载中...',
+        duration: 0
+      });
       axios.get(url)
         .then(function(response) {
           _this.$Loading.finish();
-          // _this.msg();
+          _this.msg();
           if (succ && typeof succ === 'function') {
             if(response.data.result == 'TRUE') {
               succ(response.data.data, response.data);
@@ -106,7 +106,7 @@ new Vue({
         })
         .catch(function(error) {
           _this.$Loading.error();
-          // _this.msg();
+          _this.msg();
           if (err && typeof err === 'function') {
             err(error);
           } else {
