@@ -42,25 +42,34 @@ STATIC = {
 
       //连住天数统计
       var _stayDaysArr = [];
-      for (var i = 0; i < 6; i++) {
-        _stayDaysArr[i] = 0;
+      for (var j = 0; j < 6; j++) {
+        _stayDaysArr[j] = 0;
       }
 
       //24小时统计
       var _hoursArr = [];
-      for (var i = 0; i < 24; i++) {
-        _hoursArr[i] = 0;
+      for (var k = 0; k < 24; k++) {
+        _hoursArr[k] = 0;
       }
 
 
       docs.forEach(function(doc) {
         if (doc.advance_days) {
+          if(!_advanceDaysArr[doc.advance_days]) {
+              _advanceDaysArr[doc.advance_days] = 0;
+          }
           _advanceDaysArr[doc.advance_days] += 1;
         }
         if (doc.stay_days) {
+          if(!_stayDaysArr[doc.stay_days]) {
+              _stayDaysArr[doc.stay_days] = 0;
+          }
           _stayDaysArr[doc.stay_days] += 1;
         }
         if (doc.notice_hour) {
+          if(!_hoursArr[doc.notice_hour]) {
+              _hoursArr[doc.notice_hour] = 0;
+          }
           _hoursArr[doc.notice_hour] += 1;
         }
       })

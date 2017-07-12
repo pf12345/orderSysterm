@@ -18,6 +18,7 @@ import CheckOutDataChannelStatic from '@/components/checkOutDataChannelStatic'
 import LossOrderStatic from '@/components/LossOrderStatic'
 import Location from '@/components/location'
 import LocationStatic from '@/components/locationStatic'
+import hotelOrders from '@/components/hotelOrders'
 
 import AccountManagement from '@/components/accountManagement'
 
@@ -165,6 +166,14 @@ export default new Router({
       name: 'locationStatic',
       components: {
         content: LocationStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/hotelOrders',
+      name: 'hotelOrders',
+      components: {
+        content: hotelOrders,
         left: Menu
       }
     }

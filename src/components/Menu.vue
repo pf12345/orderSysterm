@@ -113,6 +113,9 @@
               case '4-3':
                 window.location.href = '/#/csdjlb';
                 break;
+              case '5-1':
+                window.location.href = '/#/hotelOrders';
+                break;
               case '6-1':
                 window.location.href = '/#/accountManagement';
                 break;

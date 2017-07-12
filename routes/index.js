@@ -16,6 +16,7 @@ var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 var USER = require('./handler/user')
 var SCHEDULING = require('./handler/scheduling')
+var Reconciliation = require('./handler/Reconciliation')
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -261,5 +262,10 @@ router.post('/updateLocationItem', function(req, res) {
 })
 router.post('/getLocationStatic', function(req, res) {
   SCHEDULING.getLocationStatic(req, res);
+})
+
+//酒店对账
+router.post('/exportHotelOrders', function(req, res) {
+  Reconciliation.exportHotelOrders(req, res)
 })
 module.exports = router;

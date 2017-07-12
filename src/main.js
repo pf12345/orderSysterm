@@ -57,8 +57,6 @@ new Vue({
             }else {
               if(response.data.message) {
                 _this.$Message.error(response.data.message);
-              }else {
-                _this.$Message.error('数据错误，请刷新重试');
               }
             }
           }
