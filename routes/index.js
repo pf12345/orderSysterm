@@ -16,7 +16,7 @@ var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 var USER = require('./handler/user')
 var SCHEDULING = require('./handler/scheduling')
-var Reconciliation = require('./handler/Reconciliation')
+var Reconciliation = require('./handler/reconciliation')
 
 /* GET home page. */
 router.get('/', function (req, res) {
