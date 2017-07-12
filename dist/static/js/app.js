@@ -6442,7 +6442,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
       });
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(AJAXDOMAIN + '/' + funName, params).then(function (response) {
         _this.$Loading.finish();
-        // _this.msg();
+        _this.msg();
         if (succ && typeof succ === 'function') {
           if (response.data.result == 'TRUE') {
             succ(response.data.data, response.data);
