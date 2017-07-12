@@ -74,6 +74,13 @@ STATIC = {
         }
       })
 
+      _stayDaysArr.forEach(function(_item, _index) {
+        if(!_item) {
+          _stayDaysArr[_index] = 0;
+        }
+      })
+
+
       res.send({
         result: 'TRUE',
         data: {
