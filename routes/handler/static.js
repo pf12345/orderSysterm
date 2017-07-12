@@ -60,7 +60,7 @@ STATIC = {
           }
           _advanceDaysArr[doc.advance_days] += 1;
         }
-        if (doc.stay_days) {
+        if (doc.stay_days && doc.stay_days <= _stayDaysArr.length) {
           if(!_stayDaysArr[doc.stay_days]) {
               _stayDaysArr[doc.stay_days] = 0;
           }
@@ -73,13 +73,6 @@ STATIC = {
           _hoursArr[doc.notice_hour] += 1;
         }
       })
-
-      _stayDaysArr.forEach(function(_item, _index) {
-        if(!_item) {
-          _stayDaysArr[_index] = 0;
-        }
-      })
-
 
       res.send({
         result: 'TRUE',
