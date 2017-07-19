@@ -459,7 +459,7 @@ STATIC = {
       var _docs = [];
       if(docs) {
         _docs = docs.filter(function(_doc) {
-          if(_doc.money < _doc.settlement) {
+          if(Number(_doc.money) < Number(_doc.settlement)) {
             return true;
           }
           return false;

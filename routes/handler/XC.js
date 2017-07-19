@@ -28,7 +28,6 @@ XC = {
     var form = new multiparty.Form();
 
     form.parse(req, function(err, fields, files) {
-
       var stream = fs.createReadStream(files.file[0].path);
       var file_data = [];
       var csvStream = csv()
@@ -41,6 +40,7 @@ XC = {
           for (var key in dataStructure.xc) {
             keys.push(key);
           }
+          console.log(file_data);
           var save_excel_data = [];
           if (file_data && file_data.length) {
             file_data.forEach(function(row, index) {
@@ -57,6 +57,7 @@ XC = {
                     _room_type = '', //房型 4
                     _custom_name = '', //入住人 10
                     _money = '', //金额
+                    _settlement = 0, //结算额
                     _hotel_confirm_number = '', //酒店确认号 16
                     _nights = 0; //晚数
                   _.extend(rowDefault, dataStructure.xc);
@@ -95,6 +96,9 @@ XC = {
                     if (_index == 16) {
                       _hotel_confirm_number = value;
                     }
+                    if(_index == 21) {
+                      _settlement = value;
+                    }
 
                   })
                   save_excel_data.push({
@@ -115,7 +119,7 @@ XC = {
                     room_number: _room_number, //房间数
                     room_nights: _room_number * _nights, //间夜数
                     money: _money, //金额
-                    settlement: 0, //结算额
+                    settlement: _settlement, //结算额
                     nights: _nights, //晚数
                     hotel_confirm_number: _hotel_confirm_number, //酒店确认号
                     notice_hour: util.getRightDateHour(_order_date) //订单时间所属小时

@@ -23,8 +23,8 @@
                 <tr>
                   <th rowspan="2">序号</th>
                   <th rowspan="2">酒店</th>
-                  <th colspan="4">携程</th>
                   <th colspan="4">美团</th>
+                  <th colspan="4">携程</th>
                   <th colspan="4">途牛</th>
                   <th colspan="4">合计</th>
                 </tr>
