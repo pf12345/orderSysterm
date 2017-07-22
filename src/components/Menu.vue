@@ -53,10 +53,14 @@
                   <Menu-item name="7-1">签到</Menu-item>
                   <Menu-item name="7-2">排班统计</Menu-item>
                 </Submenu>
-                <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1">
-                    <Icon type="person-stalker"></Icon>
-                    账号管理
-                </Menu-item>
+                <Submenu name="6">
+                  <template slot="title">
+                      <Icon type="person-stalker"></Icon>
+                      基础数据管理
+                  </template>
+                  <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1">账号管理</Menu-item>
+                  <Menu-item name="6-2" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店管理') != -1">酒店管理</Menu-item>
+                </Submenu>
             </Menu>
   </div>
 </template>
@@ -118,6 +122,9 @@
                 break;
               case '6-1':
                 window.location.href = '/#/accountManagement';
+                break;
+              case '6-2':
+                window.location.href = '/#/hotelManagement';
                 break;
               case '7-1':
                 window.location.href = '/#/location';

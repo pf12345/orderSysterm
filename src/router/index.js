@@ -22,6 +22,7 @@ import LocationStatic from '@/components/locationStatic'
 import hotelOrders from '@/components/hotelOrders'
 
 import AccountManagement from '@/components/accountManagement'
+import HotelManagement from '@/components/hotelManagement'
 
 Vue.use(Router)
 
@@ -159,6 +160,14 @@ export default new Router({
       name: 'accountManagement',
       components: {
         content: AccountManagement,
+        left: Menu
+      }
+    },
+    {
+      path: '/hotelManagement',
+      name: 'hotelManagement',
+      components: {
+        content: HotelManagement,
         left: Menu
       }
     },

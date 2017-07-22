@@ -16,6 +16,7 @@ var CSDJLB = require('./handler/csdjlb')
 var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 var USER = require('./handler/user')
+var HOTEL = require('./handler/hotel')
 var SCHEDULING = require('./handler/scheduling')
 var Reconciliation = require('./handler/reconciliation')
 
@@ -79,26 +80,38 @@ router.post('/loginSystem', function(req, res) {
   });
 })
 
+
+//酒店路由
+router.post('/addHotel', function(req, res) {
+  HOTEL.addHotel(req, res);
+})
+router.get('/getHotelList', function(req, res) {
+  HOTEL.getHotelList(req, res);
+})
+router.post('/deleteHotelItem', function(req, res) {
+  HOTEL.deleteHotelItem(req, res);
+})
+router.post('/updateHotelItem', function(req, res) {
+  HOTEL.updateHotelItem(req, res);
+})
+
+
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
 router.post('/exportOrderXC', function(req, res) {
   XC.exportOrderXC(req, res);
 })
-
 //保存携程订单数据入数据库
 router.post('/saveOrderXC', function(req, res) {
   XC.saveOrderXC(req, res);
 })
-
 //获取携程订单数据列表
 router.get('/getOrderListXC', function(req, res) {
   XC.getOrderListXC(req, res)
 })
-
 //获取携程订单数据详情
 router.post('/getOrderDetailXC', function(req, res) {
   XC.getOrderDetailXC(req, res)
 })
-
 //修改携程订单数据结算金额
 router.post('/updateOrderXCItem', function(req, res) {
   XC.updateOrderXCItem(req, res);
