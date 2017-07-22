@@ -27,7 +27,7 @@ var HOTEL = {
       assert.equal(null, err);
       var collection = db.collection('ordersystermHOTEL');
       collection.findOne({
-        "name_all": name
+        "name_all": name_all
       }, function(err, result) {
         if(result) {
           db.close();
