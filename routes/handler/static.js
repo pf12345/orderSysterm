@@ -10,13 +10,13 @@ var dburl = config.dbInfo.url;
 
 var util = require('./../util');
 var XC = require('./XC');
-var MEITUAN = require('./meituan');
+var OHTER = require('./other');
 var hotel = require('./../hotel');
 
 STATIC = {
   getAllOrderListFromDB: function(queryStr, cb) {
     XC.getOrderListXCFromDB(function(XCdocs) {
-      MEITUAN.getOrderListMEITUANFromDB(function(MTdocs) {
+      OHTER.getOrderListOTHERFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
         if(cb && typeof cb === 'function') {
           cb(docs);
@@ -98,8 +98,10 @@ STATIC = {
     this.getAllOrderListFromDB(queryStr, function(docs) {
       var daysArr = util.getDates(time);
       var _hotel_arr = _.extend([], hotel);
+      var start1 = new Date().getTime()
       _hotel_arr.forEach(function(_hotel) {
         _hotel.data = {};
+        _hotel.docs = [];
         daysArr.forEach(function(day) {
           _hotel.data[day] = {
             weekday: util.getWeekDay(day),
@@ -108,8 +110,19 @@ STATIC = {
         })
       })
       _hotel_arr.forEach(function(_hotel) {
-        for (var key in _hotel.data) {
-          docs.forEach(function(doc) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              order_date: doc.order_date
+            });
+          }
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        if(_hotel.docs && _hotel.docs.length) {
+          _hotel.docs.forEach(function(doc) {
+            var key = moment(doc.order_date).format('YYYY-M-D');
             if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
               _hotel.data[key].value += 1;
             }
@@ -137,6 +150,7 @@ STATIC = {
       var _hotel_arr = _.extend([], hotel);
       _hotel_arr.forEach(function(_hotel) {
         _hotel.data = {};
+        _hotel.docs = [];
         daysArr.forEach(function(day) {
           _hotel.data[day] = {
             weekday: util.getWeekDay(day),
@@ -144,15 +158,27 @@ STATIC = {
           };
         })
       })
+
       _hotel_arr.forEach(function(_hotel) {
-        for (var key in _hotel.data) {
-          docs.forEach(function(doc) {
-            if (moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
-              _hotel.data[key].value += (doc.room_nights || 0);
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              order_date: doc.order_date,
+              room_nights: doc.room_nights
+            });
+          }
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        if(_hotel.docs && _hotel.docs.length) {
+          _hotel.docs.forEach(function(doc) {
+            var key = moment(doc.order_date).format('YYYY-M-D');
+            if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += Number(doc.room_nights || 0);
             }
           })
         }
-
       })
       res.send({
         result: 'TRUE',

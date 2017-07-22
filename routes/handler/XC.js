@@ -40,7 +40,6 @@ XC = {
           for (var key in dataStructure.xc) {
             keys.push(key);
           }
-          console.log(file_data);
           var save_excel_data = [];
           if (file_data && file_data.length) {
             file_data.forEach(function(row, index) {

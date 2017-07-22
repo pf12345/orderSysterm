@@ -1,6 +1,6 @@
 
 var request = require('request');
-
+var transliterate = require('transliteration');
 var mongo = require('mongodb'),
   MongoClient = mongo.MongoClient,
   assert = require('assert');
@@ -14,7 +14,6 @@ var _ = require('underscore');
 var dburl = config.dbInfo.url;
 
 var util = require('./../util');
-
 MEITUAN = {
   initData: function(data) {
     var _arr = [];
@@ -136,7 +135,7 @@ MEITUAN = {
         if(body.status == 0 && body.data) {
           MongoClient.connect(dburl, function(err, db) {
             assert.equal(null, err);
-            var collection = db.collection('ordersystermMEITUAN');
+            var collection = db.collection('ordersystermOther');
             if (body.data.results && body.data.results.length) {
               collection.insertMany(_this.initData(body.data.results), function(err, result) {
                 assert.equal(err, null);
@@ -172,7 +171,9 @@ MEITUAN = {
     var saveDatas = []; //保存入数据库数组
 
     if(item) {
-
+      if(item.platform) {
+        item.platform_en = transliterate.slugify(item.platform).replace(/\-/ig, '');
+      }
       item.hotel_short_name = util.getHotelShortName(item.hotel);
       item.advance_days = util.getDiffDate(item.check_in_date, item.order_date, 'days');
       item.notice_hour = util.getRightDateHour(item.order_date);
@@ -198,7 +199,7 @@ MEITUAN = {
     MongoClient.connect(dburl, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");
-      var collection = db.collection('ordersystermMEITUAN');
+      var collection = db.collection('ordersystermOther');
       // Insert some documents
       if(item) {
         if(saveDatas && saveDatas.length) {
@@ -233,7 +234,7 @@ MEITUAN = {
 
     MongoClient.connect(dburl, function(err, db) {
       assert.equal(null, err);
-      var collection = db.collection('ordersystermMEITUAN');
+      var collection = db.collection('ordersystermOther');
       var cursor = collection.find(queryStr);
       cursor.count(function(err, count) {
         cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
@@ -268,7 +269,7 @@ MEITUAN = {
    var item_id = req.body._id;
    MongoClient.connect(dburl, function(err, db) {
      assert.equal(null, err);
-     var collection = db.collection('ordersystermMEITUAN');
+     var collection = db.collection('ordersystermOther');
      var o_id = new mongo.ObjectID(item_id);
      collection.findOne({
        "_id": o_id
@@ -287,7 +288,7 @@ MEITUAN = {
    var item_id = req.body._id;
    MongoClient.connect(dburl, function(err, db) {
      assert.equal(null, err);
-     var collection = db.collection('ordersystermMEITUAN');
+     var collection = db.collection('ordersystermOther');
      var o_id = new mongo.ObjectID(item_id);
      // Update document where a is 2, set b equal to 1
      var _set = {};
@@ -319,7 +320,7 @@ MEITUAN = {
    var item_id = req.body._id;
    MongoClient.connect(dburl, function(err, db) {
      assert.equal(null, err);
-     var collection = db.collection('ordersystermMEITUAN');
+     var collection = db.collection('ordersystermOther');
      var o_id = new mongo.ObjectID(item_id);
      // Update document where a is 2, set b equal to 1
      collection.deleteOne({

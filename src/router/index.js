@@ -5,6 +5,7 @@ import Tuniu from '@/components/Tuniu'
 import Qunaer from '@/components/qunaer'
 import Tongcheng from '@/components/tongcheng'
 import meituan from '@/components/meituan'
+import other from '@/components/other'
 import checkInStatic from '@/components/checkInStatic'
 import Login from '@/components/Login'
 import Menu from '@/components/Menu'
@@ -54,6 +55,14 @@ export default new Router({
       name: 'meituan',
       components: {
         content: meituan,
+        left: Menu
+      }
+    },
+    {
+      path: '/other',
+      name: 'other',
+      components: {
+        content: other,
         left: Menu
       }
     },

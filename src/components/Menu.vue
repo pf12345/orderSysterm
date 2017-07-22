@@ -7,10 +7,10 @@
                         数据录入
                     </template>
                     <Menu-item name="1-1" >携程</Menu-item>
-                    <Menu-item name="1-2">美团</Menu-item>
-                    <Menu-item name="1-3">途牛</Menu-item>
-                    <Menu-item name="1-4">去哪儿</Menu-item>
-                    <Menu-item name="1-5">同程</Menu-item>
+                    <Menu-item name="1-2">其他平台</Menu-item>
+                    <!-- <Menu-item name="1-3">途牛</Menu-item> -->
+                    <!-- <Menu-item name="1-4">去哪儿</Menu-item> -->
+                    <!-- <Menu-item name="1-5">同程</Menu-item> -->
                 </Submenu>
                 <Submenu name="2">
                     <template slot="title">
@@ -75,7 +75,7 @@
                 window.location.href = '/#/';
                 break;
               case '1-2':
-                window.location.href = '/#/meituan';
+                window.location.href = '/#/other';
                 break;
               case '1-3':
                 window.location.href = '/#/tuniu';

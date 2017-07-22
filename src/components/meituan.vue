@@ -3,7 +3,7 @@
     <div class="top">
       <Row>
         <Col span="12">
-          <h3>网络平台数据-美团</h3>
+          <h3>网络平台数据</h3>
         </Col>
         <Col span="12">
           <div class="export">
@@ -39,6 +39,9 @@
       <span slot="title">编辑订单</span>
       <div slot="content" class="addContent">
         <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
+          <Form-item label="平台" prop="platform">
+              <Input v-model="formItem.platform" placeholder="请输入"></Input>
+          </Form-item>
         <Form-item label="订单号" prop="order_number">
             <Input v-model="editFormItem.order_number" placeholder="请输入"></Input>
         </Form-item>
@@ -101,6 +104,9 @@
       <span slot="title">新建订单</span>
       <div slot="content" class="addContent">
         <Form :model="formItem" ref="formItem" :label-width="100" :rules="ruleValidate">
+          <Form-item label="平台" prop="platform">
+              <Input v-model="formItem.platform" placeholder="请输入"></Input>
+          </Form-item>
         <Form-item label="订单号" prop="order_number">
             <Input v-model="formItem.order_number" placeholder="请输入"></Input>
         </Form-item>
@@ -161,7 +167,7 @@
     </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title" class="detailTitle">美团订单详情
+      <span slot="title" class="detailTitle">订单详情
         <span><a @click="editItem">编辑</a>
         <a @click="deleteItem" style="margin: 0 10px;">删除</a></span>
       </span>
@@ -272,6 +278,9 @@
                 detail: {},
                 editFormItem: {},
                 ruleEditValidate: {
+                  platform: [
+                    { required: true, message: '平台不能为空', trigger: 'change' }
+                  ],
                   order_number: [
                     { required: true, message: '订单号不能为空', trigger: 'change' }
                   ],
@@ -301,8 +310,6 @@
                   ]
                 },
                 defaultItem: {
-                    platform: '美团',
-                    platform_en: 'meituan',
                     order_number: '',
                     hotel: '',
                     hotel_short_name: '',
@@ -319,10 +326,14 @@
                     nights: '',
                     settlement: '',
                     hotel_confirm_number: '',
-                    notice_hour: ''
+                    notice_hour: '',
+                    platform: ''
                 },
                 formItem: Object.assign({}, this.defaultItem),
                 ruleValidate: {
+                  platform: [
+                    { required: true, message: '平台不能为空', trigger: 'change' }
+                  ],
                   order_number: [
                     { required: true, message: '订单号不能为空', trigger: 'change' }
                   ],
@@ -420,12 +431,12 @@
                     {
                         title: '应收金额',
                         width: 120,
-                        key: 'money_ys'
+                        key: 'money'
                     },
                     {
                         title: '结算金额',
                         width: 200,
-                        key: 'money_js'
+                        key: 'settlement'
                     },
                     {
                         title: '酒店预定号',

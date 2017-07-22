@@ -5,47 +5,50 @@ webpackJsonp([1],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(547);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Index__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(551);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Index__ = __webpack_require__(507);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Index__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Tuniu__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Tuniu__ = __webpack_require__(511);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Tuniu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Tuniu__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_qunaer__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_qunaer__ = __webpack_require__(525);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_qunaer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_qunaer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tongcheng__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tongcheng__ = __webpack_require__(526);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tongcheng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_tongcheng__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_meituan__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_meituan__ = __webpack_require__(523);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_meituan___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_meituan__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_checkInStatic__ = __webpack_require__(511);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_checkInStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_checkInStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Login__ = __webpack_require__(506);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Menu__ = __webpack_require__(508);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Menu__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_zdxscltzjl__ = __webpack_require__(524);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_zdxscltzjl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_zdxscltzjl__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_csdjlb__ = __webpack_require__(514);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_csdjlb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_csdjlb__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_drjgjkjlb__ = __webpack_require__(515);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_drjgjkjlb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_drjgjkjlb__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_everyDayOrderStatic__ = __webpack_require__(516);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_everyDayOrderStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_everyDayOrderStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_everyDayRoomNightsStatic__ = __webpack_require__(517);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_everyDayRoomNightsStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_everyDayRoomNightsStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_checkOutDataStatic__ = __webpack_require__(513);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_checkOutDataStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_checkOutDataStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataChannelStatic__ = __webpack_require__(512);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataChannelStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_checkOutDataChannelStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_LossOrderStatic__ = __webpack_require__(507);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_LossOrderStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_LossOrderStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_location__ = __webpack_require__(519);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_location___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_location__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_locationStatic__ = __webpack_require__(520);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_locationStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_locationStatic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_hotelOrders__ = __webpack_require__(518);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_hotelOrders___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_hotelOrders__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_accountManagement__ = __webpack_require__(510);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_accountManagement___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_accountManagement__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_other__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_other___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_other__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_checkInStatic__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_checkInStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_checkInStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Login__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Menu__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Menu__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_zdxscltzjl__ = __webpack_require__(527);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_zdxscltzjl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_zdxscltzjl__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_csdjlb__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_csdjlb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_csdjlb__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_drjgjkjlb__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_drjgjkjlb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_drjgjkjlb__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_everyDayOrderStatic__ = __webpack_require__(518);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_everyDayOrderStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_everyDayOrderStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_everyDayRoomNightsStatic__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_everyDayRoomNightsStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_everyDayRoomNightsStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataStatic__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_checkOutDataStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_checkOutDataChannelStatic__ = __webpack_require__(514);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_checkOutDataChannelStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_checkOutDataChannelStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_LossOrderStatic__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_LossOrderStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_LossOrderStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_location__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_location___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_location__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_locationStatic__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_locationStatic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_locationStatic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_hotelOrders__ = __webpack_require__(520);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_hotelOrders___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_hotelOrders__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_accountManagement__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_accountManagement___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_accountManagement__);
+
 
 
 
@@ -77,133 +80,140 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_1_vue
     path: '/login',
     name: 'Login',
     components: {
-      login: __WEBPACK_IMPORTED_MODULE_8__components_Login___default.a
+      login: __WEBPACK_IMPORTED_MODULE_9__components_Login___default.a
     }
   }, {
     path: '/',
     name: 'Index',
     components: {
       content: __WEBPACK_IMPORTED_MODULE_2__components_Index___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/tuniu',
     name: 'Tuniu',
     components: {
       content: __WEBPACK_IMPORTED_MODULE_3__components_Tuniu___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/meituan',
     name: 'meituan',
     components: {
       content: __WEBPACK_IMPORTED_MODULE_6__components_meituan___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
+    }
+  }, {
+    path: '/other',
+    name: 'other',
+    components: {
+      content: __WEBPACK_IMPORTED_MODULE_7__components_other___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/qunaer',
     name: 'qunaer',
     components: {
       content: __WEBPACK_IMPORTED_MODULE_4__components_qunaer___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/tongcheng',
     name: 'tongcheng',
     components: {
       content: __WEBPACK_IMPORTED_MODULE_5__components_tongcheng___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/checkInStatic',
     name: 'checkInStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_7__components_checkInStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_8__components_checkInStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/zdxscltzjl',
     name: 'zdxscltzjl',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_10__components_zdxscltzjl___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_11__components_zdxscltzjl___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/csdjlb',
     name: 'csdjlb',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_11__components_csdjlb___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_12__components_csdjlb___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/everyDayOrderStatic',
     name: 'everyDayOrderStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_13__components_everyDayOrderStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_14__components_everyDayOrderStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/everyDayRoomNightsStatic',
     name: 'everyDayRoomNightsStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_14__components_everyDayRoomNightsStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_15__components_everyDayRoomNightsStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/drjgjkjlb',
     name: 'drjgjkjlb',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_12__components_drjgjkjlb___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_13__components_drjgjkjlb___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/checkOutDataStatic',
     name: 'checkOutDataStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_15__components_checkOutDataStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/checkOutDataChannelStatic',
     name: 'checkOutDataChannelStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_16__components_checkOutDataChannelStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_17__components_checkOutDataChannelStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/lossOrderStatic',
     name: 'lossOrderStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_17__components_LossOrderStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_18__components_LossOrderStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/accountManagement',
     name: 'accountManagement',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_21__components_accountManagement___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_22__components_accountManagement___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/location',
     name: 'Location',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_18__components_location___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_19__components_location___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/locationStatic',
     name: 'locationStatic',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_19__components_locationStatic___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_20__components_locationStatic___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }, {
     path: '/hotelOrders',
     name: 'hotelOrders',
     components: {
-      content: __WEBPACK_IMPORTED_MODULE_20__components_hotelOrders___default.a,
-      left: __WEBPACK_IMPORTED_MODULE_9__components_Menu___default.a
+      content: __WEBPACK_IMPORTED_MODULE_21__components_hotelOrders___default.a,
+      left: __WEBPACK_IMPORTED_MODULE_10__components_Menu___default.a
     }
   }]
 }));
@@ -221,17 +231,41 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_1_vue
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(491)
+  __webpack_require__(492)
 }
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(183),
   /* template */
-  __webpack_require__(532),
+  __webpack_require__(535),
   /* styles */
   injectStyle,
   /* scopeId */
   null,
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(488)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(198),
+  /* template */
+  __webpack_require__(531),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-1f392d6e",
   /* moduleIdentifier (server only) */
   null
 )
@@ -281,9 +315,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -772,7 +806,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -849,9 +883,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -1107,7 +1141,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           window.location.href = '/#/';
           break;
         case '1-2':
-          window.location.href = '/#/meituan';
+          window.location.href = '/#/other';
           break;
         case '1-3':
           window.location.href = '/#/tuniu';
@@ -1171,9 +1205,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -1699,9 +1733,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -2060,38 +2094,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-function injectStyle (ssrContext) {
-  __webpack_require__(487)
-}
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(198),
-  /* template */
-  __webpack_require__(528),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-1f392d6e",
-  /* moduleIdentifier (server only) */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ }),
-
 /***/ 190:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_echarts__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_echarts__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_echarts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_echarts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 //
 //
@@ -2659,9 +2669,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -2981,11 +2991,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes_hotel__ = __webpack_require__(550);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes_hotel__ = __webpack_require__(554);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes_hotel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__routes_hotel__);
 //
 //
@@ -3661,9 +3671,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -4191,9 +4201,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -4605,10 +4615,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4883,6 +4899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       detail: {},
       editFormItem: {},
       ruleEditValidate: {
+        platform: [{ required: true, message: '平台不能为空', trigger: 'change' }],
         order_number: [{ required: true, message: '订单号不能为空', trigger: 'change' }],
         hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
         room_type: [{ required: true, message: '房型不能为空', trigger: 'change' }],
@@ -4894,8 +4911,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         hotel_confirm_number: [{ required: true, message: '酒店预订号不能为空', trigger: 'change' }]
       },
       defaultItem: {
-        platform: '美团',
-        platform_en: 'meituan',
         order_number: '',
         hotel: '',
         hotel_short_name: '',
@@ -4912,10 +4927,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         nights: '',
         settlement: '',
         hotel_confirm_number: '',
-        notice_hour: ''
+        notice_hour: '',
+        platform: ''
       },
       formItem: Object.assign({}, this.defaultItem),
       ruleValidate: {
+        platform: [{ required: true, message: '平台不能为空', trigger: 'change' }],
         order_number: [{ required: true, message: '订单号不能为空', trigger: 'change' }],
         hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
         room_type: [{ required: true, message: '房型不能为空', trigger: 'change' }],
@@ -4977,11 +4994,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         title: '应收金额',
         width: 120,
-        key: 'money_ys'
+        key: 'money'
       }, {
         title: '结算金额',
         width: 200,
-        key: 'money_js'
+        key: 'settlement'
       }, {
         title: '酒店预定号',
         width: 120,
@@ -5136,9 +5153,547 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
+    return {
+      showModal: false,
+      showDetail: false,
+      showEdit: false,
+      tableHeight: '',
+      showAdd: false,
+      listFilterKey: 'order_date',
+      listFilterStartTime: this.$root.getLocalDate(),
+      listFilterEndTime: this.$root.getLocalDate(),
+      limit: 20,
+      page: 1,
+      total: 0,
+      detail: {},
+      editFormItem: {},
+      ruleEditValidate: {
+        platform: [{ required: true, message: '平台不能为空', trigger: 'change' }],
+        order_number: [{ required: true, message: '订单号不能为空', trigger: 'change' }],
+        hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
+        room_type: [{ required: true, message: '房型不能为空', trigger: 'change' }],
+        room_number: [{ required: true, message: '间数不能为空', trigger: 'change' }],
+        stay_days: [{ required: true, message: '晚数不能为空', trigger: 'change' }],
+        custom_name: [{ required: true, message: '入住人不能为空', trigger: 'change' }],
+        money: [{ required: true, message: '应收金额不能为空', trigger: 'change' }],
+        settlement: [{ required: true, message: '结算不能为空', trigger: 'change' }],
+        hotel_confirm_number: [{ required: true, message: '酒店预订号不能为空', trigger: 'change' }]
+      },
+      defaultItem: {
+        order_number: '',
+        hotel: '',
+        hotel_short_name: '',
+        room_type: '',
+        check_in_date: '',
+        check_out_date: '',
+        room_number: '',
+        stay_days: '',
+        custom_name: '',
+        order_date_time: '',
+        order_date_day: '',
+        order_date: '',
+        money: '',
+        nights: '',
+        settlement: '',
+        hotel_confirm_number: '',
+        notice_hour: '',
+        platform: ''
+      },
+      formItem: Object.assign({}, this.defaultItem),
+      ruleValidate: {
+        platform: [{ required: true, message: '平台不能为空', trigger: 'change' }],
+        order_number: [{ required: true, message: '订单号不能为空', trigger: 'change' }],
+        hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
+        room_type: [{ required: true, message: '房型不能为空', trigger: 'change' }],
+        check_in_date: [{ required: true, type: 'date', message: '入住时间不能为空', trigger: 'change' }],
+        check_out_date: [{ required: true, type: 'date', message: '离店时间不能为空', trigger: 'change' }],
+        room_number: [{ required: true, message: '间数不能为空', trigger: 'change' }],
+        stay_days: [{ required: true, message: '晚数不能为空', trigger: 'change' }],
+        custom_name: [{ required: true, message: '入住人不能为空', trigger: 'change' }],
+        order_date_time: [{ required: true, type: 'date', message: '下单日期不能为空', trigger: 'change' }],
+        order_date_day: [{ required: true, type: 'date', message: '下单时间不能为空', trigger: 'change' }],
+        money_ys: [{ required: true, message: '应收金额不能为空', trigger: 'change' }],
+        money_js: [{ required: true, message: '结算不能为空', trigger: 'change' }],
+        hotel_confirm_number: [{ required: true, message: '酒店预订号不能为空', trigger: 'change' }]
+      },
+      columns: [{
+        title: '订单号',
+        width: 120,
+        key: 'order_number'
+        // fixed: 'left'
+      }, {
+        title: '酒店名称',
+        width: 150,
+        key: 'hotel'
+
+      }, {
+        title: '房型名称',
+        width: 120,
+        key: 'room_type'
+      }, {
+        title: '预定日期',
+        width: 180,
+        key: 'order_date'
+      }, {
+        title: '入住日期',
+        width: 180,
+        key: 'check_in_date',
+        render(h, { row, column, index }) {
+          return `${row.check_in_date.split(' ')[0]}`;
+        }
+      }, {
+        title: '离店日期',
+        width: 180,
+        key: 'check_out_date',
+        render(h, { row, column, index }) {
+          return `${row.check_out_date.split(' ')[0]}`;
+        }
+      }, {
+        title: '间数',
+        width: 80,
+        key: 'room_number'
+      }, {
+        title: '晚数',
+        width: 80,
+        key: 'stay_days'
+      }, {
+        title: '入住人姓名',
+        width: 150,
+        key: 'custom_name'
+      }, {
+        title: '应收金额',
+        width: 120,
+        key: 'money'
+      }, {
+        title: '结算金额',
+        width: 200,
+        key: 'settlement'
+      }, {
+        title: '酒店预定号',
+        width: 120,
+        key: 'hotel_confirm_number'
+      }, {
+        title: '',
+        key: 'zhanwei'
+      }],
+      data: [],
+      previewData: [],
+      exportData: []
+    };
+  },
+  created() {
+    this.listFilter();
+  },
+  methods: {
+    listFilter() {
+      let _this = this;
+      this.$root.ajaxGet({
+        funName: 'getOrderListOTHER',
+        params: {
+          listFilterKey: this.listFilterKey,
+          limit: this.limit,
+          page: this.page,
+          listFilterStartTime: this.$root.getLocalDate(this.listFilterStartTime),
+          listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime)
+        }
+      }, function (res, initRes) {
+        _this.data = res;
+        _this.total = initRes.count;
+      });
+    },
+    changePage(value) {
+      this.page = value;
+      this.listFilter();
+    },
+    editItem() {
+      this.editFormItem = Object.assign({}, this.detail);
+      this.editFormItem.order_date_day = this.editFormItem.order_date.split(' ')[0];
+      this.editFormItem.order_date_time = this.editFormItem.order_date.split(' ')[1];
+      this.showEdit = true;
+      this.showDetail = false;
+    },
+    cancelEdit() {
+      this.showEdit = false;
+    },
+    submitEdit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          let _this = this;
+          this.$root.ajaxPost({
+            funName: 'updateOrderOTHERItem',
+            params: _this.editFormItem
+          }, function (res) {
+            _this.$Message.info('修改成功');
+            _this.showEdit = false;
+            _this.gotoDetail(_this.detail);
+            _this.listFilter();
+          });
+        } else {
+          this.$Message.error('请输入相关数据!');
+        }
+      });
+    },
+    deleteItem() {
+      let _this = this;
+      this.$Modal.confirm({
+        title: '确认信息',
+        content: '确认删除此数据？',
+        onOk() {
+          _this.$root.ajaxPost({
+            funName: 'deleteOrderOTHERitem',
+            params: {
+              _id: _this.detail._id
+            }
+          }, function (res) {
+            _this.showDetail = false;
+            _this.listFilter();
+          });
+        }
+      });
+    },
+    closeEdit() {
+      this.showEdit = false;
+    },
+    show_add() {
+      this.showAdd = true;
+    },
+    close(value) {
+      this.showAdd = !value;
+    },
+    submitAdd(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          let _this = this;
+          this.formItem.check_in_date = this.$root.getLocalDate(this.formItem.check_in_date) + ' 00:00:00';
+          this.formItem.check_out_date = this.$root.getLocalDate(this.formItem.check_out_date) + ' 00:00:00';
+          this.formItem.order_date = this.$root.getLocalDate(this.formItem.order_date_day).split(' ')[0] + ' ' + new Date(this.formItem.order_date_time).toTimeString().split(' ')[0];
+          this.$root.ajaxPost({
+            funName: 'saveOrderOTHER',
+            params: {
+              data: this.formItem
+            }
+          }, function (res) {
+            _this.listFilter();
+            _this.$Message.info('成功添加！');
+            _this.showAdd = false;
+            _this.formItem = Object.assign({}, _this.defaultItem);
+          });
+        } else {
+          this.$Message.error('请输入相关数据!');
+        }
+      });
+    },
+    cancelAdd() {
+      this.showAdd = false;
+    },
+    gotoDetail(item) {
+      let _this = this;
+      this.$root.ajaxPost({
+        funName: 'getOrderDetailOTHER',
+        params: {
+          _id: item._id
+        }
+      }, function (res) {
+        let detail = res;
+        _this.detail = detail;
+        _this.showDetail = true;
+      });
+    },
+    closeDetail() {
+      this.showDetail = false;
+    }
+  },
+  watch: {
+    'data'() {
+      if (this.data.length > 10 && !this.tableHeight) {
+        this.tableHeight = window.innerHeight - 180;
+      }
+    }
+  },
+  components: {
+    leftPage: __WEBPACK_IMPORTED_MODULE_1__leftPage___default.a
+  }
+});
+
+/***/ }),
+
+/***/ 203:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -5659,14 +6214,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -6187,14 +6742,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 204:
+/***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__leftPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__leftPage__);
 //
 //
@@ -6376,7 +6931,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 205:
+/***/ 206:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6389,7 +6944,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_iview__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -6511,13 +7066,6 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
     }
   }
 });
-
-/***/ }),
-
-/***/ 484:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -6662,16 +7210,30 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
 /***/ }),
 
 /***/ 505:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 506:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(489)
+  __webpack_require__(490)
 }
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(184),
   /* template */
-  __webpack_require__(530),
+  __webpack_require__(533),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -6685,17 +7247,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 506:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(484)
+  __webpack_require__(485)
 }
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(185),
   /* template */
-  __webpack_require__(525),
+  __webpack_require__(528),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -6709,17 +7271,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 507:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(492)
+  __webpack_require__(493)
 }
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(186),
   /* template */
-  __webpack_require__(533),
+  __webpack_require__(536),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -6733,66 +7295,18 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 508:
+/***/ 510:
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(187),
   /* template */
-  __webpack_require__(543),
+  __webpack_require__(547),
   /* styles */
   null,
   /* scopeId */
   null,
-  /* moduleIdentifier (server only) */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 509:
-/***/ (function(module, exports, __webpack_require__) {
-
-function injectStyle (ssrContext) {
-  __webpack_require__(501)
-}
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(188),
-  /* template */
-  __webpack_require__(542),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-7ba4c751",
-  /* moduleIdentifier (server only) */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 510:
-/***/ (function(module, exports, __webpack_require__) {
-
-function injectStyle (ssrContext) {
-  __webpack_require__(504)
-}
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(189),
-  /* template */
-  __webpack_require__(546),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-bfc44370",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6806,17 +7320,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(502)
+  __webpack_require__(503)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(190),
+  __webpack_require__(188),
   /* template */
-  __webpack_require__(544),
+  __webpack_require__(546),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-af6680da",
+  "data-v-7ba4c751",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6830,17 +7344,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(493)
+  __webpack_require__(506)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(191),
+  __webpack_require__(189),
   /* template */
-  __webpack_require__(534),
+  __webpack_require__(550),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-38e21cb9",
+  "data-v-bfc44370",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6854,17 +7368,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(499)
+  __webpack_require__(504)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(192),
+  __webpack_require__(190),
   /* template */
-  __webpack_require__(540),
+  __webpack_require__(548),
   /* styles */
   injectStyle,
   /* scopeId */
-  null,
+  "data-v-af6680da",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6882,13 +7396,13 @@ function injectStyle (ssrContext) {
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(193),
+  __webpack_require__(191),
   /* template */
-  __webpack_require__(535),
+  __webpack_require__(537),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-3a33d424",
+  "data-v-38e21cb9",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6906,13 +7420,13 @@ function injectStyle (ssrContext) {
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(194),
+  __webpack_require__(192),
   /* template */
-  __webpack_require__(541),
+  __webpack_require__(543),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-6ed1750c",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -6930,13 +7444,13 @@ function injectStyle (ssrContext) {
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(195),
+  __webpack_require__(193),
   /* template */
-  __webpack_require__(536),
+  __webpack_require__(538),
   /* styles */
   injectStyle,
   /* scopeId */
-  null,
+  "data-v-3a33d424",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6950,17 +7464,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(485)
+  __webpack_require__(501)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(196),
+  __webpack_require__(194),
   /* template */
-  __webpack_require__(526),
+  __webpack_require__(544),
   /* styles */
   injectStyle,
   /* scopeId */
-  null,
+  "data-v-6ed1750c",
   /* moduleIdentifier (server only) */
   null
 )
@@ -6974,61 +7488,13 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(488)
+  __webpack_require__(496)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(197),
-  /* template */
-  __webpack_require__(529),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-29b68d9e",
-  /* moduleIdentifier (server only) */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 519:
-/***/ (function(module, exports, __webpack_require__) {
-
-function injectStyle (ssrContext) {
-  __webpack_require__(498)
-}
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(199),
+  __webpack_require__(195),
   /* template */
   __webpack_require__(539),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-63395a6d",
-  /* moduleIdentifier (server only) */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 520:
-/***/ (function(module, exports, __webpack_require__) {
-
-function injectStyle (ssrContext) {
-  __webpack_require__(503)
-}
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(200),
-  /* template */
-  __webpack_require__(545),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -7042,21 +7508,69 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ 519:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(486)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(196),
+  /* template */
+  __webpack_require__(529),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 520:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(489)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(197),
+  /* template */
+  __webpack_require__(532),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-29b68d9e",
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(497)
+  __webpack_require__(499)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(201),
+  __webpack_require__(199),
   /* template */
-  __webpack_require__(538),
+  __webpack_require__(542),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-531bd037",
+  "data-v-63395a6d",
   /* moduleIdentifier (server only) */
   null
 )
@@ -7070,17 +7584,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(490)
+  __webpack_require__(505)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(202),
+  __webpack_require__(200),
   /* template */
-  __webpack_require__(531),
+  __webpack_require__(549),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-3337ce08",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -7094,17 +7608,17 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(496)
+  __webpack_require__(498)
 }
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(203),
+  __webpack_require__(201),
   /* template */
-  __webpack_require__(537),
+  __webpack_require__(541),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-492e26dd",
+  "data-v-531bd037",
   /* moduleIdentifier (server only) */
   null
 )
@@ -7118,13 +7632,85 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 function injectStyle (ssrContext) {
-  __webpack_require__(486)
+  __webpack_require__(502)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(202),
+  /* template */
+  __webpack_require__(545),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-72984308",
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 525:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(491)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(203),
+  /* template */
+  __webpack_require__(534),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-3337ce08",
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 526:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(497)
 }
 var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(204),
   /* template */
-  __webpack_require__(527),
+  __webpack_require__(540),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-492e26dd",
+  /* moduleIdentifier (server only) */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 527:
+/***/ (function(module, exports, __webpack_require__) {
+
+function injectStyle (ssrContext) {
+  __webpack_require__(487)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(205),
+  /* template */
+  __webpack_require__(530),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -7138,7 +7724,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 525:
+/***/ 528:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7210,7 +7796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 526:
+/***/ 529:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7261,7 +7847,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 527:
+/***/ 530:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7394,7 +7980,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 528:
+/***/ 531:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7419,7 +8005,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 529:
+/***/ 532:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7913,7 +8499,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 530:
+/***/ 533:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8407,7 +8993,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 531:
+/***/ 534:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9098,7 +9684,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 532:
+/***/ 535:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9140,7 +9726,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 533:
+/***/ 536:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9191,7 +9777,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 534:
+/***/ 537:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9273,7 +9859,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 535:
+/***/ 538:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9565,7 +10151,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 536:
+/***/ 539:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9616,7 +10202,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 537:
+/***/ 540:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10307,7 +10893,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 538:
+/***/ 541:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10317,7 +10903,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "span": "12"
     }
-  }, [_c('h3', [_vm._v("网络平台数据-美团")])]), _vm._v(" "), _c('Col', {
+  }, [_c('h3', [_vm._v("网络平台数据")])]), _vm._v(" "), _c('Col', {
     attrs: {
       "span": "12"
     }
@@ -10439,6 +11025,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "rules": _vm.ruleEditValidate
     }
   }, [_c('Form-item', {
+    attrs: {
+      "label": "平台",
+      "prop": "platform"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.platform),
+      callback: function($$v) {
+        _vm.formItem.platform = $$v
+      },
+      expression: "formItem.platform"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
     attrs: {
       "label": "订单号",
       "prop": "order_number"
@@ -10697,6 +11299,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('Form-item', {
     attrs: {
+      "label": "平台",
+      "prop": "platform"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.platform),
+      callback: function($$v) {
+        _vm.formItem.platform = $$v
+      },
+      expression: "formItem.platform"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
       "label": "订单号",
       "prop": "order_number"
     }
@@ -10953,7 +11571,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "detailTitle",
     slot: "title"
-  }, [_vm._v("美团订单详情\n      "), _c('span', [_c('a', {
+  }, [_vm._v("订单详情\n      "), _c('span', [_c('a', {
     on: {
       "click": _vm.editItem
     }
@@ -10998,7 +11616,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 539:
+/***/ 542:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11317,7 +11935,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 540:
+/***/ 543:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11368,7 +11986,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 541:
+/***/ 544:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11889,7 +12507,730 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 542:
+/***/ 545:
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {}, [_c('div', {
+    staticClass: "top"
+  }, [_c('Row', [_c('Col', {
+    attrs: {
+      "span": "12"
+    }
+  }, [_c('h3', [_vm._v("网络平台数据")])]), _vm._v(" "), _c('Col', {
+    attrs: {
+      "span": "12"
+    }
+  }, [_c('div', {
+    staticClass: "export"
+  }, [_c('Button', {
+    attrs: {
+      "type": "ghost",
+      "icon": "ios-cloud-upload-outline"
+    },
+    on: {
+      "click": _vm.show_add
+    }
+  }, [_vm._v("新建")])], 1)])], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "warp_content"
+  }, [_c('div', {
+    staticClass: "item"
+  }, [_c('Radio-group', {
+    model: {
+      value: (_vm.listFilterKey),
+      callback: function($$v) {
+        _vm.listFilterKey = $$v
+      },
+      expression: "listFilterKey"
+    }
+  }, [_c('Radio', {
+    attrs: {
+      "label": "order_date"
+    }
+  }, [_c('span', [_vm._v("下单时间")])]), _vm._v(" "), _c('Radio', {
+    attrs: {
+      "label": "check_in_date"
+    }
+  }, [_c('span', [_vm._v("入住时间")])])], 1), _vm._v(" "), _c('Date-picker', {
+    staticStyle: {
+      "width": "200px",
+      "display": "inline-block",
+      "margin": "0 20px"
+    },
+    attrs: {
+      "type": "date",
+      "placeholder": "开始时间"
+    },
+    model: {
+      value: (_vm.listFilterStartTime),
+      callback: function($$v) {
+        _vm.listFilterStartTime = $$v
+      },
+      expression: "listFilterStartTime"
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("至")]), _vm._v(" "), _c('Date-picker', {
+    staticStyle: {
+      "width": "200px",
+      "display": "inline-block",
+      "margin": "0 20px"
+    },
+    attrs: {
+      "type": "date",
+      "placeholder": "截止时间"
+    },
+    model: {
+      value: (_vm.listFilterEndTime),
+      callback: function($$v) {
+        _vm.listFilterEndTime = $$v
+      },
+      expression: "listFilterEndTime"
+    }
+  }), _vm._v(" "), _c('Button', {
+    attrs: {
+      "type": "info"
+    },
+    on: {
+      "click": _vm.listFilter
+    }
+  }, [_vm._v("查询")])], 1), _vm._v(" "), _c('Table', {
+    attrs: {
+      "height": _vm.tableHeight,
+      "columns": _vm.columns,
+      "data": _vm.data
+    },
+    on: {
+      "on-row-click": _vm.gotoDetail
+    }
+  }), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin": "10px",
+      "overflow": "hidden"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "float": "right"
+    }
+  }, [_c('Page', {
+    attrs: {
+      "total": _vm.total,
+      "current": _vm.page,
+      "page-size": _vm.limit
+    },
+    on: {
+      "on-change": _vm.changePage
+    }
+  })], 1)])], 1), _vm._v(" "), _c('left-page', {
+    attrs: {
+      "show": _vm.showEdit
+    },
+    on: {
+      "on-close": _vm.closeEdit
+    }
+  }, [_c('span', {
+    slot: "title"
+  }, [_vm._v("编辑订单")]), _vm._v(" "), _c('div', {
+    staticClass: "addContent",
+    slot: "content"
+  }, [_c('Form', {
+    ref: "editFormItem",
+    attrs: {
+      "model": _vm.editFormItem,
+      "label-width": 100,
+      "rules": _vm.ruleEditValidate
+    }
+  }, [_c('Form-item', {
+    attrs: {
+      "label": "平台",
+      "prop": "platform"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.platform),
+      callback: function($$v) {
+        _vm.formItem.platform = $$v
+      },
+      expression: "formItem.platform"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "订单号",
+      "prop": "order_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.order_number),
+      callback: function($$v) {
+        _vm.editFormItem.order_number = $$v
+      },
+      expression: "editFormItem.order_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "酒店名称",
+      "prop": "hotel"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.hotel),
+      callback: function($$v) {
+        _vm.editFormItem.hotel = $$v
+      },
+      expression: "editFormItem.hotel"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "房型名称",
+      "prop": "room_type"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.room_type),
+      callback: function($$v) {
+        _vm.editFormItem.room_type = $$v
+      },
+      expression: "editFormItem.room_type"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "预定日期"
+    }
+  }, [_c('Row', [_c('Col', {
+    attrs: {
+      "span": "11"
+    }
+  }, [_c('Form-item', [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.editFormItem.order_date_day),
+      callback: function($$v) {
+        _vm.editFormItem.order_date_day = $$v
+      },
+      expression: "editFormItem.order_date_day"
+    }
+  })], 1)], 1), _vm._v(" "), _c('Col', {
+    staticStyle: {
+      "text-align": "center"
+    },
+    attrs: {
+      "span": "2"
+    }
+  }, [_vm._v("-")]), _vm._v(" "), _c('Col', {
+    attrs: {
+      "span": "11"
+    }
+  }, [_c('Form-item', [_c('Time-picker', {
+    attrs: {
+      "type": "time",
+      "placeholder": "选择时间"
+    },
+    model: {
+      value: (_vm.editFormItem.order_date_time),
+      callback: function($$v) {
+        _vm.editFormItem.order_date_time = $$v
+      },
+      expression: "editFormItem.order_date_time"
+    }
+  })], 1)], 1)], 1)], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "入住日期"
+    }
+  }, [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.editFormItem.check_in_date),
+      callback: function($$v) {
+        _vm.editFormItem.check_in_date = $$v
+      },
+      expression: "editFormItem.check_in_date"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "离店日期"
+    }
+  }, [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.editFormItem.check_out_date),
+      callback: function($$v) {
+        _vm.editFormItem.check_out_date = $$v
+      },
+      expression: "editFormItem.check_out_date"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "间数",
+      "prop": "room_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.room_number),
+      callback: function($$v) {
+        _vm.editFormItem.room_number = $$v
+      },
+      expression: "editFormItem.room_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "晚数",
+      "prop": "stay_days"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.stay_days),
+      callback: function($$v) {
+        _vm.editFormItem.stay_days = $$v
+      },
+      expression: "editFormItem.stay_days"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "入住人姓名",
+      "prop": "custom_name"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.custom_name),
+      callback: function($$v) {
+        _vm.editFormItem.custom_name = $$v
+      },
+      expression: "editFormItem.custom_name"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "应收金额",
+      "prop": "money"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.money),
+      callback: function($$v) {
+        _vm.editFormItem.money = $$v
+      },
+      expression: "editFormItem.money"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "结算金额",
+      "prop": "settlement"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.settlement),
+      callback: function($$v) {
+        _vm.editFormItem.settlement = $$v
+      },
+      expression: "editFormItem.settlement"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "酒店预定号",
+      "prop": "hotel_confirm_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.hotel_confirm_number),
+      callback: function($$v) {
+        _vm.editFormItem.hotel_confirm_number = $$v
+      },
+      expression: "editFormItem.hotel_confirm_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', [_c('Button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {
+        _vm.submitEdit('editFormItem')
+      }
+    }
+  }, [_vm._v("提交")]), _vm._v(" "), _c('Button', {
+    staticStyle: {
+      "margin-left": "8px"
+    },
+    attrs: {
+      "type": "ghost"
+    },
+    on: {
+      "click": _vm.cancelEdit
+    }
+  }, [_vm._v("取消")])], 1)], 1)], 1)]), _vm._v(" "), _c('left-page', {
+    attrs: {
+      "show": _vm.showAdd
+    },
+    on: {
+      "on-close": _vm.close
+    }
+  }, [_c('span', {
+    slot: "title"
+  }, [_vm._v("新建订单")]), _vm._v(" "), _c('div', {
+    staticClass: "addContent",
+    slot: "content"
+  }, [_c('Form', {
+    ref: "formItem",
+    attrs: {
+      "model": _vm.formItem,
+      "label-width": 100,
+      "rules": _vm.ruleValidate
+    }
+  }, [_c('Form-item', {
+    attrs: {
+      "label": "平台",
+      "prop": "platform"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入平台名称，如(美团、途牛等)"
+    },
+    model: {
+      value: (_vm.formItem.platform),
+      callback: function($$v) {
+        _vm.formItem.platform = $$v
+      },
+      expression: "formItem.platform"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "订单号",
+      "prop": "order_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.order_number),
+      callback: function($$v) {
+        _vm.formItem.order_number = $$v
+      },
+      expression: "formItem.order_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "酒店名称",
+      "prop": "hotel"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.hotel),
+      callback: function($$v) {
+        _vm.formItem.hotel = $$v
+      },
+      expression: "formItem.hotel"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "房型名称",
+      "prop": "room_type"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.room_type),
+      callback: function($$v) {
+        _vm.formItem.room_type = $$v
+      },
+      expression: "formItem.room_type"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "预定日期"
+    }
+  }, [_c('Row', [_c('Col', {
+    attrs: {
+      "span": "11"
+    }
+  }, [_c('Form-item', {
+    attrs: {
+      "prop": "order_date_day"
+    }
+  }, [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.formItem.order_date_day),
+      callback: function($$v) {
+        _vm.formItem.order_date_day = $$v
+      },
+      expression: "formItem.order_date_day"
+    }
+  })], 1)], 1), _vm._v(" "), _c('Col', {
+    staticStyle: {
+      "text-align": "center"
+    },
+    attrs: {
+      "span": "2"
+    }
+  }, [_vm._v("-")]), _vm._v(" "), _c('Col', {
+    attrs: {
+      "span": "11"
+    }
+  }, [_c('Form-item', {
+    attrs: {
+      "prop": "order_date_time"
+    }
+  }, [_c('Time-picker', {
+    attrs: {
+      "type": "time",
+      "placeholder": "选择时间"
+    },
+    model: {
+      value: (_vm.formItem.order_date_time),
+      callback: function($$v) {
+        _vm.formItem.order_date_time = $$v
+      },
+      expression: "formItem.order_date_time"
+    }
+  })], 1)], 1)], 1)], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "入住日期",
+      "prop": "check_in_date"
+    }
+  }, [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.formItem.check_in_date),
+      callback: function($$v) {
+        _vm.formItem.check_in_date = $$v
+      },
+      expression: "formItem.check_in_date"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "离店日期",
+      "prop": "check_out_date"
+    }
+  }, [_c('Date-picker', {
+    attrs: {
+      "type": "date",
+      "placeholder": "选择日期"
+    },
+    model: {
+      value: (_vm.formItem.check_out_date),
+      callback: function($$v) {
+        _vm.formItem.check_out_date = $$v
+      },
+      expression: "formItem.check_out_date"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "间数",
+      "prop": "room_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.room_number),
+      callback: function($$v) {
+        _vm.formItem.room_number = $$v
+      },
+      expression: "formItem.room_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "晚数",
+      "prop": "stay_days"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.stay_days),
+      callback: function($$v) {
+        _vm.formItem.stay_days = $$v
+      },
+      expression: "formItem.stay_days"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "入住人姓名",
+      "prop": "custom_name"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.custom_name),
+      callback: function($$v) {
+        _vm.formItem.custom_name = $$v
+      },
+      expression: "formItem.custom_name"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "应收金额",
+      "prop": "money"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.money),
+      callback: function($$v) {
+        _vm.formItem.money = $$v
+      },
+      expression: "formItem.money"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "结算金额",
+      "prop": "settlement"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.settlement),
+      callback: function($$v) {
+        _vm.formItem.settlement = $$v
+      },
+      expression: "formItem.settlement"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "酒店预定号",
+      "prop": "hotel_confirm_number"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.hotel_confirm_number),
+      callback: function($$v) {
+        _vm.formItem.hotel_confirm_number = $$v
+      },
+      expression: "formItem.hotel_confirm_number"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', [_c('Button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {
+        _vm.submitAdd('formItem')
+      }
+    }
+  }, [_vm._v("提交")]), _vm._v(" "), _c('Button', {
+    staticStyle: {
+      "margin-left": "8px"
+    },
+    attrs: {
+      "type": "ghost"
+    },
+    on: {
+      "click": _vm.cancelAdd
+    }
+  }, [_vm._v("取消")])], 1)], 1)], 1)]), _vm._v(" "), _c('left-page', {
+    attrs: {
+      "show": _vm.showDetail
+    },
+    on: {
+      "on-close": _vm.closeDetail
+    }
+  }, [_c('span', {
+    staticClass: "detailTitle",
+    slot: "title"
+  }, [_vm._v("订单详情\n      "), _c('span', [_c('a', {
+    on: {
+      "click": _vm.editItem
+    }
+  }, [_vm._v("编辑")]), _vm._v(" "), _c('a', {
+    staticStyle: {
+      "margin": "0 10px"
+    },
+    on: {
+      "click": _vm.deleteItem
+    }
+  }, [_vm._v("删除")])])]), _vm._v(" "), _c('div', {
+    staticClass: "addContent",
+    slot: "content"
+  }, [_c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("订单号")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.order_number))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("酒店")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.hotel))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("房型")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.room_type))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("入住日期")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.check_in_date ? _vm.detail.check_in_date.split(' ')[0] : ''))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("离店日期")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.check_out_date ? _vm.detail.check_out_date.split(' ')[0] : ''))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("房间数")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.room_number))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("晚数")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.stay_days))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("间夜数")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.room_nights))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("入住人")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.custom_name))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("下单日期")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.order_date))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("总金额")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.money))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("结算金额")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.settlement))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("酒店确认号")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.hotel_confirm_number))])])])])], 1)
+},staticRenderFns: []}
+
+/***/ }),
+
+/***/ 546:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12580,7 +13921,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 543:
+/***/ 547:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12610,19 +13951,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": "1-2"
     }
-  }, [_vm._v("美团")]), _vm._v(" "), _c('Menu-item', {
-    attrs: {
-      "name": "1-3"
-    }
-  }, [_vm._v("途牛")]), _vm._v(" "), _c('Menu-item', {
-    attrs: {
-      "name": "1-4"
-    }
-  }, [_vm._v("去哪儿")]), _vm._v(" "), _c('Menu-item', {
-    attrs: {
-      "name": "1-5"
-    }
-  }, [_vm._v("同程")])], 2) : _vm._e(), _vm._v(" "), _c('Submenu', {
+  }, [_vm._v("其他平台")])], 2) : _vm._e(), _vm._v(" "), _c('Submenu', {
     attrs: {
       "name": "2"
     }
@@ -12731,7 +14060,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 544:
+/***/ 548:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12827,7 +14156,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 545:
+/***/ 549:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12878,7 +14207,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 546:
+/***/ 550:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13268,7 +14597,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 550:
+/***/ 554:
 /***/ (function(module, exports) {
 
 
@@ -13308,5 +14637,5 @@ module.exports = hotel;
 
 /***/ })
 
-},[205]);
+},[206]);
 //# sourceMappingURL=app.js.map

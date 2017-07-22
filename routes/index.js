@@ -9,6 +9,7 @@ var TUNIU = require('./handler/TuNiu')
 var QUNAER = require('./handler/qunaer')
 var TONGCHENG = require('./handler/tongcheng')
 var MEITUAN = require('./handler/meituan')
+var OTHER = require('./handler/other')
 var STATIC = require('./handler/static')
 var ZDXSCLTZJL = require('./handler/zdxscltzjl')
 var CSDJLB = require('./handler/csdjlb')
@@ -157,6 +158,27 @@ router.post('/updateOrderTONGCHENGItem', function(req, res) {
 })
 router.post('/deleteOrderTONGCHENGitem', function(req, res) {
   TONGCHENG.deleteOrderTONGCHENGitem(req, res);
+})
+
+
+//获取其他平台数据
+router.post('/saveOrderOTHER', function(req, res) {
+  OTHER.saveOrderOTHER(req, res);
+})
+router.get('/getDataFromOTHER', function(req, res) {
+  OTHER.getDataFromOTHER(req, res)
+})
+router.get('/getOrderListOTHER', function(req, res) {
+  OTHER.getOrderListOTHER(req, res)
+})
+router.post('/getOrderDetailOTHER', function(req, res) {
+  OTHER.getOrderDetailOTHER(req, res);
+})
+router.post('/updateOrderOTHERItem', function(req, res) {
+  OTHER.updateOrderOTHERItem(req, res);
+})
+router.post('/deleteOrderOTHERitem', function(req, res) {
+  OTHER.deleteOrderOTHERitem(req, res);
 })
 
 //获取美团数据

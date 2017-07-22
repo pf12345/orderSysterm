@@ -29,10 +29,10 @@ util = {
   //获取某年某月天数数组  getDates("2012-02")
   getDates: function(yearMonth) {
     var days = moment(yearMonth, "YYYY-MM").daysInMonth(); //获取某月总天数
-    var start = yearMonth + '-01';
+    var start = moment(yearMonth + '-1').format('YYYY-M-D');
     var daysArr = [start];
     for (var i = 1; i < days; i++) {
-      var _day = moment(start).add(i, 'days').format('YYYY-MM-DD'); //本月1号后几天时间
+      var _day = moment(start).add(i, 'days').format('YYYY-M-D'); //本月1号后几天时间
       daysArr.push(_day)
     }
     return daysArr;
