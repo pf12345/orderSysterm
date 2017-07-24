@@ -23,6 +23,7 @@ import hotelOrders from '@/components/hotelOrders'
 
 import AccountManagement from '@/components/accountManagement'
 import HotelManagement from '@/components/hotelManagement'
+import PlatformManagement from '@/components/platformManagement'
 
 Vue.use(Router)
 
@@ -168,6 +169,14 @@ export default new Router({
       name: 'hotelManagement',
       components: {
         content: HotelManagement,
+        left: Menu
+      }
+    },
+    {
+      path: '/platformManagement',
+      name: 'platformManagement',
+      components: {
+        content: PlatformManagement,
         left: Menu
       }
     },

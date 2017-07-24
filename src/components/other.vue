@@ -40,13 +40,19 @@
       <div slot="content" class="addContent">
         <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
           <Form-item label="平台" prop="platform">
-              <Input v-model="formItem.platform" placeholder="请输入"></Input>
+              <Select v-model="editFormItem.platform" placeholder="请选择平台">
+                  <Option v-for="platform in platforms" :value="platform.name" :key="platform.key">{{platform.name}}</Option>
+
+              </Select>
           </Form-item>
         <Form-item label="订单号" prop="order_number">
             <Input v-model="editFormItem.order_number" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="酒店名称" prop="hotel">
-            <Input v-model="editFormItem.hotel" placeholder="请输入"></Input>
+            <Select v-model="editFormItem.hotel" placeholder="请选择酒店名称">
+                <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+            </Select>
         </Form-item>
         <Form-item label="房型名称" prop="room_type">
             <Input v-model="editFormItem.room_type" placeholder="请输入"></Input>
@@ -105,13 +111,20 @@
       <div slot="content" class="addContent">
         <Form :model="formItem" ref="formItem" :label-width="100" :rules="ruleValidate">
           <Form-item label="平台" prop="platform">
-              <Input v-model="formItem.platform" placeholder="请输入平台名称，如(美团、途牛等)"></Input>
+              <Select v-model="formItem.platform" placeholder="请选择平台">
+                  <Option v-for="platform in platforms" :value="platform.name" :key="platform.key">{{platform.name}}</Option>
+
+              </Select>
           </Form-item>
+
         <Form-item label="订单号" prop="order_number">
             <Input v-model="formItem.order_number" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="酒店名称" prop="hotel">
-            <Input v-model="formItem.hotel" placeholder="请输入"></Input>
+            <Select v-model="formItem.hotel" placeholder="请选择酒店名称">
+                <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+            </Select>
         </Form-item>
         <Form-item label="房型名称" prop="room_type">
             <Input v-model="formItem.room_type" placeholder="请输入"></Input>
@@ -277,6 +290,8 @@
                 total: 0,
                 detail: {},
                 editFormItem: {},
+                hotels: [],
+                platforms: [],
                 ruleEditValidate: {
                   platform: [
                     { required: true, message: '平台不能为空', trigger: 'change' }
@@ -455,6 +470,8 @@
         },
         created() {
           this.listFilter();
+          this.getHotelList();
+          this.getPlatformList();
         },
         methods: {
           listFilter() {
@@ -471,6 +488,22 @@
             }, function(res, initRes) {
               _this.data =  res;
               _this.total = initRes.count;
+            })
+          },
+          getHotelList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getHotelList'
+            }, function(res) {
+              _this.hotels = res
+            })
+          },
+          getPlatformList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getPlatformList'
+            }, function(res) {
+              _this.platforms = res
             })
           },
           changePage(value) {

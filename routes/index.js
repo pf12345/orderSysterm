@@ -17,6 +17,7 @@ var DRJGJKJLB = require('./handler/drjgkjlb')
 var UPLOAD = require('./handler/upload')
 var USER = require('./handler/user')
 var HOTEL = require('./handler/hotel')
+var PLATFORM = require('./handler/platform')
 var SCHEDULING = require('./handler/scheduling')
 var Reconciliation = require('./handler/reconciliation')
 
@@ -95,6 +96,19 @@ router.post('/updateHotelItem', function(req, res) {
   HOTEL.updateHotelItem(req, res);
 })
 
+//平台路由
+router.post('/addPlatform', function(req, res) {
+  PLATFORM.addPlatform(req, res);
+})
+router.get('/getPlatformList', function(req, res) {
+  PLATFORM.getPlatformList(req, res);
+})
+router.post('/deletePlatformItem', function(req, res) {
+  PLATFORM.deletePlatformItem(req, res);
+})
+router.post('/updatePlatformItem', function(req, res) {
+  PLATFORM.updatePlatformItem(req, res);
+})
 
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
 router.post('/exportOrderXC', function(req, res) {

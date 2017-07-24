@@ -60,6 +60,7 @@
                   </template>
                   <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1">账号管理</Menu-item>
                   <Menu-item name="6-2" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店管理') != -1">酒店管理</Menu-item>
+                  <Menu-item name="6-3" v-if="!user.jurisdictions || user.jurisdictions.indexOf('平台管理') != -1">平台管理</Menu-item>
                 </Submenu>
             </Menu>
   </div>
@@ -125,6 +126,9 @@
                 break;
               case '6-2':
                 window.location.href = '/#/hotelManagement';
+                break;
+              case '6-3':
+                window.location.href = '/#/platformManagement';
                 break;
               case '7-1':
                 window.location.href = '/#/location';

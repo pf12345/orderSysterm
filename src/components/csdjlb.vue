@@ -37,9 +37,12 @@
                   </Col>
               </Row>
           </Form-item>
-        <Form-item label="酒店名称" prop="hotel">
-            <Input v-model="formItem.hotel" placeholder="请输入"></Input>
-        </Form-item>
+          <Form-item label="酒店名称" prop="hotel">
+              <Select v-model="formItem.hotel" placeholder="请选择酒店名称">
+                  <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+              </Select>
+          </Form-item>
         <Form-item label="测试渠道" prop="test_channel">
             <Input v-model="formItem.test_channel" placeholder="请输入"></Input>
         </Form-item>
@@ -184,6 +187,7 @@
                 detail: {
                   files: ['']
                 },
+                hotels: [],
                 previewImgUrl: '',
                 previewDetailImgUrl: '',
                 uoloadImageAction: this.$root.serverUrl + '/uploadImageCsdjlb',
@@ -244,8 +248,17 @@
           }, function(res) {
             _this.data =  res;
           })
+          this.getHotelList();
         },
         methods: {
+          getHotelList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getHotelList'
+            }, function(res) {
+              _this.hotels = res
+            })
+          },
             show_add() {
               this.showAdd = true;
             },

@@ -255,7 +255,6 @@
 <script>
     import axios from 'axios'
     import leftPage from './leftPage';
-    import hotel from './../../routes/hotel'
     export default {
         data () {
             return {
@@ -266,7 +265,7 @@
                 visible: false,
                 visibleDetail: false,
                 detail: {},
-                hotels: hotel,
+                hotels: [],
                 formItem: {
                     xc: '',
                     xc_cause: '',
@@ -336,10 +335,19 @@
           }, function(res) {
             _this.data =  res;
           })
+          this.getHotelList();
         },
         methods: {
             show_add() {
               this.showAdd = true;
+            },
+            getHotelList() {
+              var _this = this;
+              this.$root.ajaxGet({
+                funName: 'getHotelList'
+              }, function(res) {
+                _this.hotels = res
+              })
             },
             close(value) {
               this.showAdd = !value;

@@ -22,7 +22,10 @@
       <div slot="content" class="addContent">
         <Form :model="formItem" ref="formItem" :label-width="100" :rules="ruleValidate">
           <Form-item label="酒店名称" prop="hotel">
-              <Input v-model="formItem.hotel" placeholder="请输入"></Input>
+              <Select v-model="formItem.hotel" placeholder="请选择酒店名称">
+                  <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+              </Select>
           </Form-item>
           <Form-item label="策略" prop="strategy">
               <Input v-model="formItem.strategy" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
@@ -90,6 +93,7 @@
                     strategy: '' //策略
                 },
                 detail: {},
+                hotels: [],
                 ruleValidate: {
                   hotel: [
                     { required: true, message: '酒店不能为空', trigger: 'change' }
@@ -125,8 +129,17 @@
           }, function(res) {
             _this.data =  res;
           })
+          this.getHotelList();
         },
         methods: {
+          getHotelList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getHotelList'
+            }, function(res) {
+              _this.hotels = res
+            })
+          },
             show_add() {
               this.showAdd = true;
             },

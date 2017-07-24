@@ -54,7 +54,7 @@
     </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title" class="detailTitle">账号详情
+      <span slot="title" class="detailTitle">酒店详情
         <span><a @click="editItem">编辑</a>
         <a @click="deleteItem" style="margin: 0 10px;">删除</a></span>
       </span>
@@ -106,11 +106,9 @@
     import leftPage from './leftPage';
     export default {
         data () {
-            var defaultJurisdictions = ['数据录入', '数据监控及记录保存', '酒店账单比对', '每日新订订单量', '每日新订订单间夜', '入住数据分析', '离店数据汇总', '离店数据渠道占比分析', '离店数据明细', '亏损订单明细'];
             return {
               indeterminate: true,
               checkAll: false,
-              defaultJurisdictions: Object.assign([], defaultJurisdictions),
                 showDetail: false,
                 showEdit: false,
                 tableHeight: '',
