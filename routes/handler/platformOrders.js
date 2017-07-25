@@ -21,8 +21,8 @@ var util = require('./../util');
 
 var redisHander = require('./../../redisHander')
 
-var Reconciliation = {
-  exportHotelOrders: function(req, res) {
+var PlatformOrders = {
+  exportPlatformOrders: function(req, res) {
     var form = new multiparty.Form();
     form.parse(req, function(err, fields, files) {
       var workSheetsFromFile = xlsx.parse(files.file[0].path);
@@ -56,7 +56,7 @@ var Reconciliation = {
     });
   },
   //保存订单数据入数据库
-  saveHotelOrders: function(req, res) {
+  savePlatformOrders: function(req, res) {
     var saveDatas = []; //保存入数据库数组
     if(req.body.data) {
       //在redis里面去查找订单号
@@ -79,7 +79,7 @@ var Reconciliation = {
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       // console.log("Connected correctly to server");
-      var collection = db.collection('ordersystermHotelOrders');
+      var collection = db.collection('ordersystermPlatformOrders');
       // Insert some documents
       if (req.body.data && req.body.data.length) {
         if(saveDatas && saveDatas.length) {
@@ -106,14 +106,14 @@ var Reconciliation = {
     });
   },
   //从数据库获取列表数据
-  getHotelOrdersFromDB: function(cb, queryStr, page, limit) {
+  getPlatformOrdersFromDB: function(cb, queryStr, page, limit) {
     queryStr = queryStr || {};
     page = page || 1;
     limit = limit || 10000;
 
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
-      var collection = db.collection('ordersystermHotelOrders');
+      var collection = db.collection('ordersystermPlatformOrders');
       var cursor = collection.find(queryStr);
       cursor.count(function(err, count) {
         cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
@@ -127,7 +127,7 @@ var Reconciliation = {
     });
   },
   //获取订单数据列表
-  getHotelOrdersList: function(req, res) {
+  getPlatformOrdersList: function(req, res) {
     var listFilterKey = req.query.listFilterKey || 'order_date';
     var listFilterStartTime = (req.query.listFilterStartTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 00:00:00';
     var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
@@ -136,7 +136,7 @@ var Reconciliation = {
     var queryStr = {};
     // queryStr[listFilterKey] = {$gte: listFilterStartTime,$lte: listFilterEndTime} //{"order_date":{$lt:50}}
     // console.log(queryStr);
-    this.getHotelOrdersFromDB(function(docs, count) {
+    this.getPlatformOrdersFromDB(function(docs, count) {
       res.send({
         result: 'TRUE',
         data: docs,
@@ -145,11 +145,11 @@ var Reconciliation = {
     }, queryStr, page, limit)
   },
 
-  getHotelOrdersDetail: function(req, res) {
+  getPlatformOrdersDetail: function(req, res) {
     var item_id = req.body._id;
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
-      var collection = db.collection('ordersystermHotelOrders');
+      var collection = db.collection('ordersystermPlatformOrders');
       var o_id = new mongo.ObjectID(item_id);
       collection.findOne({
         "_id": o_id
@@ -163,11 +163,11 @@ var Reconciliation = {
     });
   },
   //删除
-  deleteHotelOrdersitem: function(req, res) {
+  deletePlatformOrdersitem: function(req, res) {
     var item_id = req.body._id;
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
-      var collection = db.collection('ordersystermHotelOrders');
+      var collection = db.collection('ordersystermPlatformOrders');
       var o_id = new mongo.ObjectID(item_id);
       // Update document where a is 2, set b equal to 1
       collection.deleteOne({
@@ -183,4 +183,4 @@ var Reconciliation = {
   }
 }
 
-module.exports = Reconciliation;
+module.exports = PlatformOrders;

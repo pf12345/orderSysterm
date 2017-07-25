@@ -20,6 +20,7 @@ import LossOrderStatic from '@/components/LossOrderStatic'
 import Location from '@/components/location'
 import LocationStatic from '@/components/locationStatic'
 import hotelOrders from '@/components/hotelOrders'
+import platformOrders from '@/components/platformOrders'
 
 import AccountManagement from '@/components/accountManagement'
 import HotelManagement from '@/components/hotelManagement'
@@ -201,6 +202,14 @@ export default new Router({
       name: 'hotelOrders',
       components: {
         content: hotelOrders,
+        left: Menu
+      }
+    },
+    {
+      path: '/platformOrders',
+      name: 'platformOrders',
+      components: {
+        content: platformOrders,
         left: Menu
       }
     }

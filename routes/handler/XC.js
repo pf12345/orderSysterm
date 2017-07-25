@@ -58,6 +58,7 @@ XC = {
                     _money = '', //金额
                     _settlement = 0, //结算额
                     _hotel_confirm_number = '', //酒店确认号 16
+                    _billing_number = '', //发单单号
                     _nights = 0; //晚数
                   _.extend(rowDefault, dataStructure.xc);
                   row.forEach(function(value, _index) {
@@ -121,6 +122,7 @@ XC = {
                     settlement: _settlement, //结算额
                     nights: _nights, //晚数
                     hotel_confirm_number: _hotel_confirm_number, //酒店确认号
+                    billing_number: _billing_number, //发单单号
                     notice_hour: util.getRightDateHour(_order_date) //订单时间所属小时
                   });
                 }

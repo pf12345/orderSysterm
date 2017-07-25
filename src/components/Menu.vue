@@ -40,10 +40,12 @@
                 <Submenu name="5" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店账单比对') != -1">
                   <template slot="title">
                       <Icon type="shuffle"></Icon>
-                      酒店账单比对
+                      账单比对
                   </template>
-                  <Menu-item name="5-1">酒店数据管理</Menu-item>
-                  <Menu-item name="5-2">数据对比</Menu-item>
+                  <Menu-item name="5-1">酒店账单管理</Menu-item>
+                  <Menu-item name="5-2">酒店账单对比</Menu-item>
+                  <Menu-item name="5-3">平台账单管理</Menu-item>
+                  <Menu-item name="5-4">平台账单对比</Menu-item>
                 </Submenu>
                 <Submenu name="7">
                   <template slot="title">
@@ -120,6 +122,9 @@
                 break;
               case '5-1':
                 window.location.href = '/#/hotelOrders';
+                break;
+              case '5-3':
+                window.location.href = '/#/platformOrders';
                 break;
               case '6-1':
                 window.location.href = '/#/accountManagement';

@@ -123,6 +123,10 @@
           <p>{{detail.order_number}}</p>
         </div>
         <div class="item">
+          <h4>发单单号</h4>
+          <p>{{detail.billing_number}}</p>
+        </div>
+        <div class="item">
           <h4>酒店</h4>
           <p>{{detail.hotel}}</p>
         </div>
@@ -277,6 +281,12 @@
                       title: '订单号',
                       key: 'order_number',
                       width: 120,
+                      // fixed: 'left'
+                  },
+                  {
+                      title: '发单单号',
+                      width: 120,
+                      key: 'billing_number',
                       // fixed: 'left'
                   },
                   {

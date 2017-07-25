@@ -20,6 +20,7 @@ var HOTEL = require('./handler/hotel')
 var PLATFORM = require('./handler/platform')
 var SCHEDULING = require('./handler/scheduling')
 var Reconciliation = require('./handler/reconciliation')
+var PlatformOrders = require('./handler/platformOrders')
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -316,5 +317,34 @@ router.post('/getLocationStatic', function(req, res) {
 //酒店对账
 router.post('/exportHotelOrders', function(req, res) {
   Reconciliation.exportHotelOrders(req, res)
+})
+router.post('/saveHotelOrders', function(req, res) {
+  Reconciliation.saveHotelOrders(req, res);
+})
+router.get('/getHotelOrdersList', function(req, res) {
+  Reconciliation.getHotelOrdersList(req, res);
+})
+router.post('/getHotelOrdersDetail', function(req, res) {
+  Reconciliation.getHotelOrdersDetail(req, res);
+})
+router.post('/deleteHotelOrdersitem', function(req, res) {
+  Reconciliation.deleteHotelOrdersitem(req, res);
+})
+
+//平台对账
+router.post('/exportPlatformOrders', function(req, res) {
+  PlatformOrders.exportPlatformOrders(req, res)
+})
+router.post('/savePlatformOrders', function(req, res) {
+  PlatformOrders.savePlatformOrders(req, res);
+})
+router.get('/getPlatformOrdersList', function(req, res) {
+  PlatformOrders.getPlatformOrdersList(req, res);
+})
+router.post('/getPlatformOrdersDetail', function(req, res) {
+  PlatformOrders.getPlatformOrdersDetail(req, res);
+})
+router.post('/deletePlatformOrdersitem', function(req, res) {
+  PlatformOrders.deletePlatformOrdersitem(req, res);
 })
 module.exports = router;

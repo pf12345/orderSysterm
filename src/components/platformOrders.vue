@@ -3,7 +3,7 @@
     <div class="top">
       <Row>
         <Col span="12">
-          <h3>酒店账单</h3>
+          <h3>平台账单</h3>
         </Col>
         <Col span="12">
           <div class="export">
@@ -147,7 +147,7 @@
                 total: 0,
                 detail: {},
                 tableHeight: '',
-                actionUrl: this.$root.serverUrl + '/exportHotelOrders',
+                actionUrl: this.$root.serverUrl + '/exportPlatformOrders',
                 formItem: {
                   settlementAmount: 0
                 },
@@ -224,7 +224,7 @@
           listFilter() {
             let _this = this;
             this.$root.ajaxGet({
-              funName: 'getHotelOrdersList',
+              funName: 'getPlatformOrdersList',
               params: {
                 listFilterKey: this.listFilterKey,
                 limit: this.limit,
@@ -248,7 +248,7 @@
               content: '确认删除此数据？',
               onOk() {
                 _this.$root.ajaxPost({
-                  funName: 'deleteHotelOrdersitem',
+                  funName: 'deletePlatformOrdersitem',
                   params: {
                     _id: _this.detail._id
                   }
@@ -263,7 +263,7 @@
                 let _this = this;
 
                 this.$root.ajaxPost({
-                  funName:'saveHotelOrders',
+                  funName:'savePlatformOrders',
                   params: {
                     data: this.exportData
                   }
@@ -289,7 +289,7 @@
             gotoDetail(item) {
               let _this = this;
               this.$root.ajaxPost({
-                funName:'getHotelOrdersDetail',
+                funName:'getPlatformOrdersDetail',
                 params: {
                   _id: item._id
                 }

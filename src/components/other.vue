@@ -48,6 +48,9 @@
         <Form-item label="订单号" prop="order_number">
             <Input v-model="editFormItem.order_number" placeholder="请输入"></Input>
         </Form-item>
+        <Form-item label="发单单号" prop="billing_number">
+            <Input v-model="formItem.billing_number" placeholder="请输入"></Input>
+        </Form-item>
         <Form-item label="酒店名称" prop="hotel">
             <Select v-model="editFormItem.hotel" placeholder="请选择酒店名称">
                 <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
@@ -120,6 +123,9 @@
         <Form-item label="订单号" prop="order_number">
             <Input v-model="formItem.order_number" placeholder="请输入"></Input>
         </Form-item>
+        <Form-item label="发单单号" prop="billing_number">
+            <Input v-model="formItem.billing_number" placeholder="请输入"></Input>
+        </Form-item>
         <Form-item label="酒店名称" prop="hotel">
             <Select v-model="formItem.hotel" placeholder="请选择酒店名称">
                 <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
@@ -188,6 +194,10 @@
         <div class="item">
           <h4>订单号</h4>
           <p>{{detail.order_number}}</p>
+        </div>
+        <div class="item">
+          <h4>发单单号</h4>
+          <p>{{detail.billing_number}}</p>
         </div>
         <div class="item">
           <h4>酒店</h4>
@@ -322,6 +332,9 @@
                   ],
                   hotel_confirm_number: [
                     { required: true, message: '酒店预订号不能为空', trigger: 'change' }
+                  ],
+                  billing_number: [
+                    { required: true, message: '发单单号不能为空', trigger: 'change' }
                   ]
                 },
                 defaultItem: {
@@ -342,7 +355,8 @@
                     settlement: '',
                     hotel_confirm_number: '',
                     notice_hour: '',
-                    platform: ''
+                    platform: '',
+                    billing_number: ''
                 },
                 formItem: Object.assign({}, this.defaultItem),
                 ruleValidate: {
@@ -387,6 +401,9 @@
                   ],
                   hotel_confirm_number: [
                     { required: true, message: '酒店预订号不能为空', trigger: 'change' }
+                  ],
+                  billing_number: [
+                    { required: true, message: '发单单号不能为空', trigger: 'change' }
                   ]
                 },
                 columns: [
@@ -394,6 +411,12 @@
                         title: '订单号',
                         width: 120,
                         key: 'order_number',
+                        // fixed: 'left'
+                    },
+                    {
+                        title: '发单单号',
+                        width: 120,
+                        key: 'billing_number',
                         // fixed: 'left'
                     },
                     {
