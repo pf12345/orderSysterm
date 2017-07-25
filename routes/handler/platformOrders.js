@@ -44,6 +44,7 @@ var PlatformOrders = {
                 _list.room_nights = _item[8] || 0; //间夜数 8
                 _list.unit_settlement = _item[9] || 0; //结算单价 9
                 _list.settlement = _item[10] || 0; //结算额 10
+                _list.created = util.getRightDate(new Date().getTime());
                 lists.push(_list);
             }
           }
