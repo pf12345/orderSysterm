@@ -123,8 +123,14 @@
               case '5-1':
                 window.location.href = '/#/hotelOrders';
                 break;
+              case '5-2':
+                window.location.href = '/#/hotelOrderComparison'
+                break;
               case '5-3':
                 window.location.href = '/#/platformOrders';
+                break;
+              case '5-4':
+                window.location.href = '/#/platformOrderComparison'
                 break;
               case '6-1':
                 window.location.href = '/#/accountManagement';

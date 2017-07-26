@@ -61,7 +61,7 @@ var PlatformOrders = {
     var saveDatas = []; //保存入数据库数组
     if(req.body.data) {
       //在redis里面去查找订单号
-      redisHander.getValue('billing_number', function(res) {
+      redisHander.getValue('platform_billing_numbers', function(res) {
         var billing_numbers = [];
         if(!res) {
           billing_numbers = [];
@@ -74,7 +74,7 @@ var PlatformOrders = {
             billing_numbers.push(_data.billing_number);
           }
         })
-        redisHander.setValue('billing_numbers', {value: JSON.stringify(billing_numbers)});
+        redisHander.setValue('platform_billing_numbers', {value: JSON.stringify(billing_numbers)});
       })
     }
     MongoClient.connect(url, function(err, db) {
@@ -180,6 +180,50 @@ var PlatformOrders = {
             data: result
           });
         });
+    })
+  },
+
+  getPlatformOrdersComparison: function(req, res) {
+    var _this = this;
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr = {
+      'order_date': {
+        $gte: startTime,
+        $lte: endTime
+      }
+    }
+    var queryStrOrders = {};
+    queryStrOrders = {
+      'created': {
+        $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+        $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
+      }
+    }
+    STATIC.getAllOrderListFromDB(queryStr, function(docs) {
+      _this.getPlatformOrdersFromDB(function(_docs, count) {
+        var lists = [];
+        _docs.forEach(function(_doc) {
+          docs.forEach(function(doc) {
+            if(_doc.billing_number == doc.billing_number) {
+              if(_doc.settlement != doc.settlement) {
+                _doc.isError = true;
+              }else {
+                _doc.isError = false;
+              }
+              _doc.systemSettlement = doc.settlement;
+              lists.push(_doc);
+            }
+          })
+        })
+        res.send({
+          result: 'TRUE',
+          data: lists,
+          count: count
+        });
+      }, queryStrOrders)
     })
   }
 }

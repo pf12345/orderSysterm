@@ -20,7 +20,9 @@ import LossOrderStatic from '@/components/LossOrderStatic'
 import Location from '@/components/location'
 import LocationStatic from '@/components/locationStatic'
 import hotelOrders from '@/components/hotelOrders'
+import hotelOrderComparison from '@/components/hotelOrderComparison'
 import platformOrders from '@/components/platformOrders'
+import platformOrderComparison from '@/components/platformOrderComparison'
 
 import AccountManagement from '@/components/accountManagement'
 import HotelManagement from '@/components/hotelManagement'
@@ -206,10 +208,26 @@ export default new Router({
       }
     },
     {
+      path: '/hotelOrderComparison',
+      name: 'hotelOrderComparison',
+      components: {
+        content: hotelOrderComparison,
+        left: Menu
+      }
+    },
+    {
       path: '/platformOrders',
       name: 'platformOrders',
       components: {
         content: platformOrders,
+        left: Menu
+      }
+    },
+    {
+      path: '/platformOrderComparison',
+      name: 'platformOrderComparison',
+      components: {
+        content: platformOrderComparison,
         left: Menu
       }
     }

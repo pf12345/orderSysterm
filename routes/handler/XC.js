@@ -96,6 +96,9 @@ XC = {
                     if (_index == 16) {
                       _hotel_confirm_number = value;
                     }
+                    if(_index == 20) {
+                      _billing_number = value;
+                    }
                     if(_index == 21) {
                       _settlement = value;
                     }

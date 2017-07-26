@@ -70,6 +70,14 @@ export default {
   margin-left: 15px;
   color: #9ba7b5;
 }
+.ivu-table .demo-table-info-row td{
+        background-color: #2db7f5;
+        color: #fff;
+    }
+    .ivu-table .demo-table-error-row td{
+        background-color: #ff6600;
+        color: #fff;
+    }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -330,6 +330,9 @@ router.post('/getHotelOrdersDetail', function(req, res) {
 router.post('/deleteHotelOrdersitem', function(req, res) {
   Reconciliation.deleteHotelOrdersitem(req, res);
 })
+router.post('/getHotelOrderComparison', function(req, res) {
+  Reconciliation.getHotelOrderComparison(req, res);
+})
 
 //平台对账
 router.post('/exportPlatformOrders', function(req, res) {
@@ -346,5 +349,8 @@ router.post('/getPlatformOrdersDetail', function(req, res) {
 })
 router.post('/deletePlatformOrdersitem', function(req, res) {
   PlatformOrders.deletePlatformOrdersitem(req, res);
+})
+router.post('/getPlatformOrdersComparison', function(req, res) {
+  PlatformOrders.getPlatformOrdersComparison(req, res);
 })
 module.exports = router;
