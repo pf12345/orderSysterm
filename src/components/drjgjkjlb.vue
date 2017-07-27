@@ -13,7 +13,24 @@
     </Row>
     </div>
     <div class="warp_content">
+      <div class="item">
+        <Date-picker v-model="advanceDaysStart" type="date" placeholder="开始时间" style="width: 200px;display:inline-block"></Date-picker>
+        <Date-picker v-model="advanceDaysEnd" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <div class="" style="display: inline-block; width: 150px;margin-right: 10px;">
+          <Select v-model="hotel" placeholder="请选择酒店名称">
+              <Option v-for="_hotel in filterHotels" :value="_hotel.name_all" :key="_hotel.key">{{_hotel.name_all}}</Option>
+          </Select>
+        </div>
+
+        <Button type="info" @click="filterTimeChange">查询</Button>
+
+      </div>
       <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
+        </div>
+    </div>
     </div>
 
     <left-page :show="showAdd" @on-close="close">
@@ -89,9 +106,85 @@
 
     </left-page>
 
+    <left-page :show="showEdit" @on-close="closeEdit">
+      <span slot="title">编辑当日价格监控记录簿</span>
+      <div slot="content" class="addContent">
+        <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
+        <Form-item label="酒店名称" prop="hotel">
+            <Select v-model="editFormItem.hotel" placeholder="请选择酒店名称">
+                <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+            </Select>
+        </Form-item>
+        <Form-item label="携程监控" prop="xc">
+            <Select v-model="editFormItem.xc" placeholder="请选择Y/N" @on-change="selectChange('xc')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="xc_cause" v-if="editFormItem.xc === 'N'">
+            <Input v-model="editFormItem.xc_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item label="去哪儿监控" prop="qunaer" >
+            <Select v-model="editFormItem.qunaer" placeholder="请选择Y/N" @on-change="selectChange('qunaer')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="qunaer_cause" v-if="editFormItem.qunaer === 'N'">
+            <Input v-model="editFormItem.qunaer_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item label="艺龙监控" prop="yinong" >
+            <Select v-model="editFormItem.yinong" placeholder="请选择Y/N" @on-change="selectChange('yinong')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="yinong_cause" v-if="editFormItem.yinong === 'N'">
+            <Input v-model="editFormItem.yinong_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item label="途牛监控" prop="tuniu" >
+            <Select v-model="editFormItem.tuniu" placeholder="请选择Y/N" @on-change="selectChange('tuniu')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="tuniu_cause" v-if="editFormItem.tuniu === 'N'">
+            <Input v-model="editFormItem.tuniu_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item label="同程监控" prop="tongcheng" >
+            <Select v-model="editFormItem.tongcheng" placeholder="请选择Y/N" @on-change="selectChange('tongcheng')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="tongcheng_cause" v-if="editFormItem.tongcheng === 'N'">
+            <Input v-model="editFormItem.tongcheng_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item label="美团酒店监控" prop="meituanhotel" >
+            <Select v-model="editFormItem.meituanhotel" placeholder="请选择Y/N" @on-change="selectChange('meituanhotel')">
+                <Option value="Y">Y</Option>
+                <Option value="N">N</Option>
+            </Select>
+        </Form-item>
+        <Form-item label="劣势原因" prop="meituanhotel_cause" v-if="editFormItem.meituanhotel === 'N'">
+            <Input v-model="editFormItem.meituanhotel_cause" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+        </Form-item>
+        <Form-item>
+            <Button type="primary" @click="submitEdit('editFormItem')">提交</Button>
+            <Button type="ghost" style="margin-left: 8px" @click="cancelEdit">取消</Button>
+        </Form-item>
+    </Form>
+      </div>
+
+    </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title" class="detailTitle">测试单记录表详情 <a @click="addSolveData">修改解决情况</a></span>
+      <span slot="title" class="detailTitle">测试单记录表详情
+         <a @click="addSolveData">修改解决情况</a>
+         <span><a @click="editItem">编辑</a>
+         <a @click="deleteItem" style="margin: 0 10px;">删除</a></span>
+       </span>
       <div slot="content" class="addContent">
         <div class="item">
           <h4>录入时间</h4>
@@ -247,7 +340,11 @@
       display: inline-block;
       width: 550px;
     }
-    .detailTitle a {
+    .detailTitle > a {
+      position: absolute;
+      right: 100px;
+    }
+    .detailTitle span {
       position: absolute;
       right: 10px;
     }
@@ -261,10 +358,23 @@
                 tableHeight: '',
                 showAdd: false,
                 showDetail: false,
+                showEdit: false,
                 showModal: false,
                 visible: false,
                 visibleDetail: false,
                 detail: {},
+                editFormItem: {},
+                limit: 20,
+                page: 1,
+                total: 0,
+                advanceDaysStart: this.$root.getLocalDate(),
+                advanceDaysEnd: this.$root.getLocalDate(),
+                hotel: '全部',
+                filterHotels: [{
+                  key: "all",
+                  name: "全部",
+                  name_all: "全部"
+                }],
                 hotels: [],
                 formItem: {
                     xc: '',
@@ -285,6 +395,11 @@
                     solve_cause: ''
                 },
                 ruleValidate: {
+                  hotel: [
+                    { required: true, message: '酒店不能为空', trigger: 'change' }
+                  ]
+                },
+                ruleEditValidate: {
                   hotel: [
                     { required: true, message: '酒店不能为空', trigger: 'change' }
                   ]
@@ -329,15 +444,29 @@
             }
         },
         created() {
-          let _this = this;
-          this.$root.ajaxGet({
-            funName: 'getDrjgkjlbList'
-          }, function(res) {
-            _this.data =  res;
-          })
           this.getHotelList();
+          this.listFilter();
         },
         methods: {
+            listFilter() {
+              let _this = this;
+              this.$root.ajaxPost({
+                funName: 'getDrjgkjlbList',
+                params: {
+                  limit: this.limit,
+                  page: this.page,
+                  start: this.$root.getLocalDate(this.advanceDaysStart),
+                  end: this.$root.getLocalDate(this.advanceDaysEnd),
+                  hotel: this.hotel != '全部' ? this.hotel : ''
+                }
+              }, function(res) {
+                _this.data =  res;
+              })
+            },
+            changePage(value) {
+              this.page = value;
+              this.listFilter();
+            },
             show_add() {
               this.showAdd = true;
             },
@@ -346,7 +475,8 @@
               this.$root.ajaxGet({
                 funName: 'getHotelList'
               }, function(res) {
-                _this.hotels = res
+                _this.hotels = res;
+                _this.filterHotels = _this.filterHotels.concat(res);
               })
             },
             close(value) {
@@ -422,12 +552,62 @@
               if(this.formItem[type] === 'Y') {
                 this.formItem[type + '_cause'] = '';
               }
-            }
+            },
+            filterTimeChange() {
+                this.listFilter();
+            },
+            editItem() {
+              this.editFormItem = Object.assign({},this.detail);
+              this.showEdit = true;
+              this.showDetail = false;
+            },
+            cancelEdit() {
+              this.showEdit = false;
+            },
+            submitEdit(name) {
+              this.$refs[name].validate((valid) => {
+                if (valid) {
+                  let _this = this;
+                  this.$root.ajaxPost({
+                    funName: 'updateDrjgkjlbItemAll',
+                    params: _this.editFormItem
+                  }, function(res) {
+                    _this.$Message.info('修改成功');
+                    _this.showEdit = false;
+                    _this.gotoDetail(_this.detail);
+                    _this.listFilter();
+                  })
+                } else {
+                  this.$Message.error('请输入相关数据!');
+                }
+              })
+            },
+            deleteItem() {
+              let _this = this;
+              this.$Modal.confirm({
+                title: '确认信息',
+                content: '确认删除此数据？',
+                onOk() {
+                  _this.$root.ajaxPost({
+                    funName: 'deleteDrjgkjlbItem',
+                    params: {
+                      _id: _this.detail._id
+                    }
+                  }, function(res) {
+                    _this.showDetail = false;
+                    _this.listFilter();
+                  })
+                }
+              });
+            },
+            closeEdit() {
+              this.showEdit = false;
+            },
         },
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight;
+              this.tableHeight = window.innerHeight - 180;
             }
           }
         },

@@ -7,7 +7,14 @@
     <div class="item">
       <Date-picker v-model="advanceDaysStart" type="date" placeholder="开始时间" style="width: 200px;display:inline-block"></Date-picker>
       <Date-picker v-model="advanceDaysEnd" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+      <div class="" style="display: inline-block; width: 150px;margin-right: 10px;">
+        <Select v-model="hotel" placeholder="请选择酒店名称">
+            <Option v-for="_hotel in hotels" :value="_hotel.name_all" :key="_hotel.key">{{_hotel.name_all}}</Option>
+        </Select>
+      </div>
+
       <Button type="info" @click="find">查询</Button>
+
     </div>
 
     <div class="item">
@@ -36,23 +43,40 @@ export default {
   data() {
     return {
       advanceDaysStart: this.$root.getLocalDate(),
-      advanceDaysEnd: this.$root.getLocalDate()
+      advanceDaysEnd: this.$root.getLocalDate(),
+      hotel: '全部',
+      hotels: [{
+        key: "all",
+        name: "全部",
+        name_all: "全部"
+      }]
     }
   },
   mounted() {
+    this.getHotelList();
     this.post();
   },
   methods: {
+    getHotelList() {
+      var _this = this;
+      this.$root.ajaxGet({
+        funName: 'getHotelList'
+      }, function(res) {
+        _this.hotels = _this.hotels.concat(res)
+      })
+    },
     find() {
       this.post();
     },
     post() {
       let _this = this;
+      console.log(this.hotel);
       this.$root.ajaxPost({
           funName: 'getAdvanceDaysStatic',
           params: {
               start: this.$root.getLocalDate(this.advanceDaysStart),
-              end: this.$root.getLocalDate(this.advanceDaysEnd)
+              end: this.$root.getLocalDate(this.advanceDaysEnd),
+              hotel: this.hotel != '全部' ? this.hotel : ''
           }
       }, function (res) {
         _this.advanceDays(res);

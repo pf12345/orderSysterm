@@ -27,12 +27,16 @@ STATIC = {
   //提前预定天数统计
   getStaticData: function(req, res) {
     var start = req.body.start + ' 00:00:00',
-      end = req.body.end + ' 23:59:59';
+      end = req.body.end + ' 23:59:59',
+      hotel = req.body.hotel;
     var queryStr = {};
     queryStr.check_in_date = {
       $gte: start,
       $lte: end
     } //{"order_date":{$lt:50}}
+    if(hotel) {
+      queryStr.hotel = {$regex: hotel, $options:'i'};
+    }
     this.getAllOrderListFromDB(queryStr, function(docs) {
       //提前预定天数统计
       var _advanceDaysArr = [];
@@ -471,29 +475,40 @@ STATIC = {
   },
   //亏损订单明细表
   getLossStatic: function(req, res) {
-    var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var start = req.body.start + ' 00:00:00',
+      end = req.body.end + ' 23:59:59',
+      hotel = req.body.hotel,
+      limit = req.body.limit,
+      page = req.body.page;
     var queryStr = {};
-    queryStr = {
-      'order_date': {
-        $gte: startTime,
-        $lte: endTime
-      }
+    queryStr.check_in_date = {
+      $gte: start,
+      $lte: end
+    } //{"order_date":{$lt:50}}
+    if(hotel) {
+      queryStr.hotel = {$regex: hotel, $options:'i'};
     }
     this.getAllOrderListFromDB(queryStr, function(docs) {
-      var _docs = [];
+      var _docs = [], $_docs = [];
       if(docs) {
-        _docs = docs.filter(function(_doc) {
+        _docs = docs.filter(function(_doc, _index) {
           if(Number(_doc.money) < Number(_doc.settlement)) {
             return true;
           }
           return false;
         })
+        $_docs = _docs.filter(function(_doc, _index) {
+          if(page && limit) {
+            if((_index < (page - 1) * limit) || (_index > page * limit)) {
+              return false;
+            }
+          }
+          return true;
+        })
       }
       res.send({
         result: 'TRUE',
-        data: _docs,
+        data: $_docs,
         count: _docs.length
       });
     })

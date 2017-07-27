@@ -15,20 +15,13 @@
     </Row>
     </div>
     <div class="warp_content">
-      <!-- <div class="item">
-        <Radio-group v-model="listFilterKey">
-          <Radio label="order_date">
-              <span>下单时间</span>
-          </Radio>
-          <Radio label="check_in_date">
-              <span>入住时间</span>
-          </Radio>
-        </Radio-group>
-        <Date-picker v-model="listFilterStartTime" type="date" placeholder="开始时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
-        <span>至</span>
-        <Date-picker v-model="listFilterEndTime" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
-        <Button type="info" @click="listFilter">查询</Button>
-      </div> -->
+      <div class="item">
+        <div style="margin-bottom: 20px;">
+            <Date-picker type="month" @on-change="filterTimeChange" v-model="filterTime" placeholder="选择月"
+                         style="width: 200px"></Date-picker>
+        </div>
+
+      </div>
       <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
       <div style="margin: 10px;overflow: hidden">
         <div style="float: right;">
@@ -134,17 +127,17 @@
     import leftPage from './leftPage';
     export default {
         data () {
+          let month = new Date().getMonth() + 1;
+          month = month < 10 ? '0' + month : month;
             return {
                 showModal: false,
                 showModal1: false,
                 showDetail: false,
                 showEdit: false,
-                listFilterKey: 'order_date',
-                listFilterStartTime: this.$root.getLocalDate(),
-                listFilterEndTime: this.$root.getLocalDate(),
                 limit: 20,
                 page: 1,
                 total: 0,
+                filterTime: new Date().getFullYear() + '-' + month,
                 detail: {},
                 tableHeight: '',
                 actionUrl: this.$root.serverUrl + '/exportPlatformOrders',
@@ -223,14 +216,12 @@
         methods: {
           listFilter() {
             let _this = this;
-            this.$root.ajaxGet({
+            this.$root.ajaxPost({
               funName: 'getPlatformOrdersList',
               params: {
-                listFilterKey: this.listFilterKey,
                 limit: this.limit,
                 page: this.page,
-                listFilterStartTime: this.$root.getLocalDate(this.listFilterStartTime),
-                listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime)
+                time: _this.filterTime
               }
             }, function(res, initRes) {
               _this.data =  res;
@@ -302,7 +293,11 @@
             },
             closeDetail() {
               this.showDetail = false;
-            }
+            },
+            filterTimeChange(value) {
+                this.filterTime = value;
+                this.listFilter();
+            },
         },
         watch: {
           'data'() {

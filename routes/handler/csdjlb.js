@@ -4,6 +4,8 @@ var mongo = require('mongodb'),
   MongoClient = mongo.MongoClient,
   assert = require('assert');
 
+var moment = require('moment');
+
 var config = require('./../../config/config.json');
 
 // Connection URL
@@ -43,18 +45,38 @@ var CSDJLB = {
 
   //获取测试单记录表数据列表
   getCsdjlbList: function(req, res) {
+    var start = req.body.start ? moment(req.body.start).format('YYYY-MM-DD') + ' 00:00:00' : '',
+      end = req.body.end ? moment(req.body.end).format('YYYY-MM-DD') + ' 23:59:59' : '',
+      hotel = req.body.hotel,
+      page = req.body.page || 1,
+      limit = req.body.limit || 10000;
+    var queryStr = {};
+    queryStr.created = {
+      $gte: start,
+      $lte: end
+    } //{"order_date":{$lt:50}}
+    if(hotel) {
+      queryStr.hotel = {$regex: hotel, $options:'i'};
+    }
+
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       var collection = db.collection('ordersystermCSDJLB');
-      collection.find().toArray(function(err, docs) {
-        assert.equal(null, err);
-        db.close();
-        res.send({
-          result: 'TRUE',
-          data: docs
+      var cursor = collection.find(queryStr);
+      cursor.count(function(err, count) {
+        cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
+          assert.equal(null, err);
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: docs,
+            count: count
+          });
         });
-      });
+      })
+
     });
+
   },
 
   //获取测试单记录表数据
@@ -72,6 +94,53 @@ var CSDJLB = {
         });
       });
     });
+  },
+
+  //修改
+  updateCsdjlbItem: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermCSDJLB');
+      var o_id = new mongo.ObjectID(item_id);
+      // Update document where a is 2, set b equal to 1
+      var _set = {};
+      for(var key in req.body) {
+        if(key != '_id') {
+          _set[key] = req.body[key];
+        }
+      }
+      collection.updateOne({
+        "_id": o_id
+      }, {
+          $set: _set
+        }, function(err, result) {
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: result
+          });
+        });
+    })
+  },
+  //删除
+  deleteCsdjlbItem: function(req, res) {
+    var item_id = req.body._id;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermCSDJLB');
+      var o_id = new mongo.ObjectID(item_id);
+      // Update document where a is 2, set b equal to 1
+      collection.deleteOne({
+        "_id": o_id
+      }, {}, function(err, result) {
+          db.close();
+          res.send({
+            result: 'TRUE',
+            data: result
+          });
+        });
+    })
   }
 }
 

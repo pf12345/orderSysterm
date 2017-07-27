@@ -18,6 +18,11 @@
                        style="width: 200px"></Date-picker>
       </div>
       <Table :row-class-name="rowClassName" :height="tableHeight" :columns="columns" :data="data"></Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
+        </div>
+    </div>
     </div>
     </div>
   </div>
@@ -154,13 +159,19 @@
             this.$root.ajaxPost({
               funName: 'getPlatformOrdersComparison',
               params: {
-                  time: _this.filterTime
+                  time: _this.filterTime,
+                  page: this.page,
+                  limit: _this.limit
               }
             }, function(res, initRes) {
-              console.log(res, initRes);
+              // console.log(res, initRes);
               _this.data =  res;
               _this.total = initRes.count;
             })
+          },
+          changePage(value) {
+            this.page = value;
+            this.listFilter();
           },
           filterTimeChange(value) {
               this.filterTime = value;

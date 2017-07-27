@@ -130,14 +130,19 @@ var Reconciliation = {
   },
   //获取订单数据列表
   getHotelOrdersList: function(req, res) {
-    var listFilterKey = req.query.listFilterKey || 'order_date';
-    var listFilterStartTime = (req.query.listFilterStartTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 00:00:00';
-    var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
-    var limit = Number(req.query.limit) || 20;
-    var page = Number(req.query.page) || 1;
+    var _this = this;
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var queryStr = {};
-    // queryStr[listFilterKey] = {$gte: listFilterStartTime,$lte: listFilterEndTime} //{"order_date":{$lt:50}}
-    // console.log(queryStr);
+    var page = req.body.page || 1;
+    var limit = req.body.limit || 10000;
+    queryStr = {
+      'created': {
+        $gte: startTime,
+        $lte: endTime
+      }
+    }
     this.getHotelOrdersFromDB(function(docs, count) {
       res.send({
         result: 'TRUE',
@@ -189,6 +194,8 @@ var Reconciliation = {
     var time = req.body.time;
     var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var page = req.body.page || 1;
+    var limit = req.body.limit || 10000;
     var queryStr = {};
     queryStr = {
       'order_date': {
@@ -205,7 +212,7 @@ var Reconciliation = {
     }
     STATIC.getAllOrderListFromDB(queryStr, function(docs) {
       _this.getHotelOrdersFromDB(function(_docs, count) {
-        var lists = [];
+        var lists = [], $_docs = [];
         _docs.forEach(function(_doc) {
           docs.forEach(function(doc) {
             if(_doc.billing_number == doc.billing_number) {
@@ -219,10 +226,18 @@ var Reconciliation = {
             }
           })
         })
+        $_docs = lists.filter(function(_doc, _index) {
+          if(page && limit) {
+            if((_index < (page - 1) * limit) || (_index > page * limit - 1)) {
+              return false;
+            }
+          }
+          return true;
+        })
         res.send({
           result: 'TRUE',
-          data: lists,
-          count: count
+          data: $_docs,
+          count: lists.length
         });
       }, queryStrOrders)
     })

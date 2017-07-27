@@ -260,29 +260,41 @@ router.get('/getYearToTodayRoomNights', function(req, res) {
 router.post('/saveZdxscltzjlItem', function(req, res) {
   ZDXSCLTZJL.saveZdxscltzjlItem(req, res);
 })
-router.get('/getZdxscltzjlList', function(req, res) {
+router.post('/getZdxscltzjlList', function(req, res) {
   ZDXSCLTZJL.getZdxscltzjlList(req, res);
 })
 router.post('/getZdxscltzjlDetail', function(req, res) {
   ZDXSCLTZJL.getZdxscltzjlDetail(req, res);
+})
+router.post('/updateZdxscltzjlItem', function(req, res) {
+  ZDXSCLTZJL.updateZdxscltzjlItem(req, res);
+})
+router.post('/deleteZdxscltzjlItem', function(req, res) {
+  ZDXSCLTZJL.deleteZdxscltzjlItem(req, res);
 })
 
 //测试单记录表 路由
 router.post('/saveCsdjlbItem', function(req, res) {
   CSDJLB.saveCsdjlbItem(req, res);
 })
-router.get('/getCsdjlbList', function(req, res) {
+router.post('/getCsdjlbList', function(req, res) {
   CSDJLB.getCsdjlbList(req, res);
 })
 router.post('/getCsdjlbDetail', function(req, res) {
   CSDJLB.getCsdjlbDetail(req, res);
+})
+router.post('/updateCsdjlbItem', function(req, res) {
+  CSDJLB.updateCsdjlbItem(req, res);
+})
+router.post('/deleteCsdjlbItem', function(req, res) {
+  CSDJLB.deleteCsdjlbItem(req, res);
 })
 
 //当日价格监控记录簿 路由
 router.post('/saveDrjgkjlbItem', function(req, res) {
   DRJGJKJLB.saveDrjgkjlbItem(req, res);
 })
-router.get('/getDrjgkjlbList', function(req, res) {
+router.post('/getDrjgkjlbList', function(req, res) {
   DRJGJKJLB.getDrjgkjlbList(req, res);
 })
 router.post('/getDrjgkjlbDetail', function(req, res) {
@@ -290,6 +302,12 @@ router.post('/getDrjgkjlbDetail', function(req, res) {
 })
 router.post('/updateDrjgkjlbItem', function(req, res) {
   DRJGJKJLB.updateDrjgkjlbItem(req, res);
+})
+router.post('/updateDrjgkjlbItemAll', function(req, res) {
+  DRJGJKJLB.updateDrjgkjlbItemAll(req, res);
+})
+router.post('/deleteDrjgkjlbItem', function(req, res) {
+  DRJGJKJLB.deleteDrjgkjlbItem(req, res);
 })
 
 //保存测试单记录表图片
@@ -321,7 +339,7 @@ router.post('/exportHotelOrders', function(req, res) {
 router.post('/saveHotelOrders', function(req, res) {
   Reconciliation.saveHotelOrders(req, res);
 })
-router.get('/getHotelOrdersList', function(req, res) {
+router.post('/getHotelOrdersList', function(req, res) {
   Reconciliation.getHotelOrdersList(req, res);
 })
 router.post('/getHotelOrdersDetail', function(req, res) {
@@ -341,7 +359,7 @@ router.post('/exportPlatformOrders', function(req, res) {
 router.post('/savePlatformOrders', function(req, res) {
   PlatformOrders.savePlatformOrders(req, res);
 })
-router.get('/getPlatformOrdersList', function(req, res) {
+router.post('/getPlatformOrdersList', function(req, res) {
   PlatformOrders.getPlatformOrdersList(req, res);
 })
 router.post('/getPlatformOrdersDetail', function(req, res) {

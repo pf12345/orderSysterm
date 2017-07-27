@@ -23,7 +23,7 @@
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('入住数据分析') != -1" name="2-4">入住数据分析</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据汇总') != -1" name="2-5">离店数据汇总</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据渠道占比分析') != -1" name="2-6">离店数据渠道占比分析</Menu-item>
-                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item>
+                    <!-- <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item> -->
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('亏损订单明细') != -1" name="2-8">亏损订单明细</Menu-item>
                 </Submenu>
 

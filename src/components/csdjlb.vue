@@ -13,7 +13,24 @@
     </Row>
     </div>
     <div class="warp_content">
+      <div class="item">
+        <Date-picker v-model="advanceDaysStart" type="date" placeholder="开始时间" style="width: 200px;display:inline-block"></Date-picker>
+        <Date-picker v-model="advanceDaysEnd" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <div class="" style="display: inline-block; width: 150px;margin-right: 10px;">
+          <Select v-model="hotel" placeholder="请选择酒店名称">
+              <Option v-for="_hotel in filterHotels" :value="_hotel.name_all" :key="_hotel.key">{{_hotel.name_all}}</Option>
+          </Select>
+        </div>
+
+        <Button type="info" @click="filterTimeChange">查询</Button>
+
+      </div>
       <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
+        </div>
+    </div>
     </div>
 
     <left-page :show="showAdd" @on-close="close">
@@ -73,9 +90,53 @@
 
     </left-page>
 
+    <left-page :show="showEdit" @on-close="closeEdit">
+      <span slot="title">编辑测试单记录表</span>
+      <div slot="content" class="addContent">
+        <Form :model="editFormItem" ref="editFormItem" :label-width="100" :rules="ruleEditValidate">
+          <Form-item label="录入时间">
+              <Row>
+                  <Col span="11">
+                    <Form-item prop="entry_date_day">
+                        <Date-picker type="date" placeholder="选择日期" v-model="editFormItem.entry_date_day"></Date-picker>
+                    </Form-item>
+
+                  </Col>
+                  <Col span="2" style="text-align: center">-</Col>
+                  <Col span="11">
+                    <Form-item prop="entry_date_time">
+                          <Time-picker type="time" placeholder="选择时间" v-model="editFormItem.entry_date_time"></Time-picker>
+                      </Form-item>
+
+                  </Col>
+              </Row>
+          </Form-item>
+          <Form-item label="酒店名称" prop="hotel">
+              <Select v-model="editFormItem.hotel" placeholder="请选择酒店名称">
+                  <Option v-for="hotel in hotels" :value="hotel.name_all" :key="hotel.key">{{hotel.name_all}}</Option>
+
+              </Select>
+          </Form-item>
+        <Form-item label="测试渠道" prop="test_channel">
+            <Input v-model="editFormItem.test_channel" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="价格" prop="price">
+            <Input v-model="editFormItem.price" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item>
+            <Button type="primary" @click="submitEdit('editFormItem')">提交</Button>
+            <Button type="ghost" style="margin-left: 8px" @click="cancelEdit">取消</Button>
+        </Form-item>
+    </Form>
+      </div>
+
+    </left-page>
 
     <left-page :show="showDetail" @on-close="closeDetail">
-      <span slot="title">测试单记录表详情</span>
+      <span slot="title" class="detailTitle">测试单记录表详情
+        <span><a @click="editItem">编辑</a>
+        <a @click="deleteItem" style="margin: 0 10px;">删除</a></span>
+      </span>
       <div slot="content" class="addContent">
         <div class="item">
           <h4>录入时间</h4>
@@ -172,6 +233,15 @@
         cursor: pointer;
         margin: 0 2px;
     }
+    .detailTitle {
+      position: relative;
+      display: inline-block;
+      width: 550px;
+    }
+    .detailTitle span {
+      position: absolute;
+      right: 10px;
+    }
 </style>
 <script>
     import axios from 'axios'
@@ -182,11 +252,24 @@
                 tableHeight: '',
                 showAdd: false,
                 showDetail: false,
+                showEdit: false,
                 visible: false,
                 visibleDetail: false,
                 detail: {
                   files: ['']
                 },
+                editFormItem: {},
+                limit: 20,
+                page: 1,
+                total: 0,
+                advanceDaysStart: this.$root.getLocalDate(),
+                advanceDaysEnd: this.$root.getLocalDate(),
+                hotel: '全部',
+                filterHotels: [{
+                  key: "all",
+                  name: "全部",
+                  name_all: "全部"
+                }],
                 hotels: [],
                 previewImgUrl: '',
                 previewDetailImgUrl: '',
@@ -201,6 +284,23 @@
                     test_channel: '' //测试渠道
                 },
                 ruleValidate: {
+                  hotel: [
+                    { required: true, message: '酒店不能为空', trigger: 'change' }
+                  ],
+                  test_channel: [
+                    { required: true, message: '测试渠道不能为空', trigger: 'change' }
+                  ],
+                  // entry_date_day: [
+                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
+                  // ],
+                  // entry_date_time: [
+                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
+                  // ],
+                  price: [
+                    { required: true, message: '价格不能为空', trigger: 'change' }
+                  ]
+                },
+                ruleEditValidate: {
                   hotel: [
                     { required: true, message: '酒店不能为空', trigger: 'change' }
                   ],
@@ -242,21 +342,36 @@
             }
         },
         created() {
-          let _this = this;
-          this.$root.ajaxGet({
-            funName: 'getCsdjlbList'
-          }, function(res) {
-            _this.data =  res;
-          })
           this.getHotelList();
+          this.listFilter();
         },
         methods: {
+          listFilter() {
+            let _this = this;
+            this.$root.ajaxPost({
+              funName: 'getCsdjlbList',
+              params: {
+                limit: this.limit,
+                page: this.page,
+                start: this.$root.getLocalDate(this.advanceDaysStart),
+                end: this.$root.getLocalDate(this.advanceDaysEnd),
+                hotel: this.hotel != '全部' ? this.hotel : ''
+              }
+            }, function(res) {
+              _this.data =  res;
+            })
+          },
+          changePage(value) {
+            this.page = value;
+            this.listFilter();
+          },
           getHotelList() {
             var _this = this;
             this.$root.ajaxGet({
               funName: 'getHotelList'
             }, function(res) {
-              _this.hotels = res
+              _this.hotels = res;
+              _this.filterHotels = _this.filterHotels.concat(res);
             })
           },
             show_add() {
@@ -319,7 +434,57 @@
             handleViewDetail (item) {
                 this.previewDetailImgUrl = item;
                 this.visibleDetail = true;
-            }
+            },
+            filterTimeChange() {
+                this.listFilter();
+            },
+            editItem() {
+              this.editFormItem = Object.assign({},this.detail);
+              this.showEdit = true;
+              this.showDetail = false;
+            },
+            cancelEdit() {
+              this.showEdit = false;
+            },
+            submitEdit(name) {
+              this.$refs[name].validate((valid) => {
+                if (valid) {
+                  let _this = this;
+                  this.$root.ajaxPost({
+                    funName: 'updateCsdjlbItem',
+                    params: _this.editFormItem
+                  }, function(res) {
+                    _this.$Message.info('修改成功');
+                    _this.showEdit = false;
+                    _this.gotoDetail(_this.detail);
+                    _this.listFilter();
+                  })
+                } else {
+                  this.$Message.error('请输入相关数据!');
+                }
+              })
+            },
+            deleteItem() {
+              let _this = this;
+              this.$Modal.confirm({
+                title: '确认信息',
+                content: '确认删除此数据？',
+                onOk() {
+                  _this.$root.ajaxPost({
+                    funName: 'deleteCsdjlbItem',
+                    params: {
+                      _id: _this.detail._id
+                    }
+                  }, function(res) {
+                    _this.showDetail = false;
+                    _this.listFilter();
+                  })
+                }
+              });
+            },
+            closeEdit() {
+              this.showEdit = false;
+            },
         },
         watch: {
           'data'() {

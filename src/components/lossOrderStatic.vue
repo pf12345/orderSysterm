@@ -13,11 +13,28 @@
     </Row>
     </div>
     <div class="warp_content">
-      <div style="margin-bottom: 20px;">
+      <div class="item">
+        <Date-picker v-model="advanceDaysStart" type="date" placeholder="开始时间" style="width: 200px;display:inline-block"></Date-picker>
+        <Date-picker v-model="advanceDaysEnd" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <div class="" style="display: inline-block; width: 150px;margin-right: 10px;">
+          <Select v-model="hotel" placeholder="请选择酒店名称">
+              <Option v-for="_hotel in hotels" :value="_hotel.name_all" :key="_hotel.key">{{_hotel.name_all}}</Option>
+          </Select>
+        </div>
+
+        <Button type="info" @click="filterTimeChange">查询</Button>
+
+      </div>
+      <!-- <div style="margin-bottom: 20px;">
           <Date-picker type="month" @on-change="filterTimeChange" v-model="filterTime" placeholder="选择月"
                        style="width: 200px"></Date-picker>
-      </div>
+      </div> -->
       <Table :height="tableHeight" :columns="columns" :data="data"></Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
+        </div>
+    </div>
     </div>
     </div>
   </div>
@@ -64,6 +81,14 @@
                 limit: 20,
                 page: 1,
                 total: 0,
+                advanceDaysStart: this.$root.getLocalDate(),
+                advanceDaysEnd: this.$root.getLocalDate(),
+                hotel: '全部',
+                hotels: [{
+                  key: "all",
+                  name: "全部",
+                  name_all: "全部"
+                }],
                 detail: {},
                 tableHeight: '',
                 columns: [
@@ -151,31 +176,47 @@
             }
         },
         created() {
+          this.getHotelList();
           this.listFilter();
         },
         methods: {
+          getHotelList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getHotelList'
+            }, function(res) {
+              _this.hotels = _this.hotels.concat(res)
+            })
+          },
           listFilter() {
             let _this = this;
             this.$root.ajaxPost({
               funName: 'getLossStatic',
               params: {
-                  time: _this.filterTime
+                limit: this.limit,
+                page: this.page,
+                start: this.$root.getLocalDate(this.advanceDaysStart),
+                end: this.$root.getLocalDate(this.advanceDaysEnd),
+                hotel: this.hotel != '全部' ? this.hotel : ''
               }
             }, function(res, initRes) {
-              console.log(res, initRes);
+              // console.log(res, initRes);
               _this.data =  res;
               _this.total = initRes.count;
             })
           },
-          filterTimeChange(value) {
-              this.filterTime = value;
+          changePage(value) {
+            this.page = value;
+            this.listFilter();
+          },
+          filterTimeChange() {
               this.listFilter();
           }
         },
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight - 180;
+              this.tableHeight = window.innerHeight - 210;
             }
           }
         },

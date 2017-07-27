@@ -18,6 +18,11 @@
                        style="width: 200px"></Date-picker>
       </div>
       <Table :row-class-name="rowClassName" :height="tableHeight" :columns="columns" :data="data"></Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
+        </div>
+    </div>
     </div>
     </div>
   </div>
@@ -154,10 +159,12 @@
             this.$root.ajaxPost({
               funName: 'getHotelOrderComparison',
               params: {
-                  time: _this.filterTime
+                limit: this.limit,
+                page: this.page,
+                time: _this.filterTime
               }
             }, function(res, initRes) {
-              console.log(res, initRes);
+              // console.log(res, initRes);
               _this.data =  res;
               _this.total = initRes.count;
             })
@@ -165,6 +172,10 @@
           filterTimeChange(value) {
               this.filterTime = value;
               this.listFilter();
+          },
+          changePage(value) {
+            this.page = value;
+            this.listFilter();
           },
           rowClassName (row, index) {
               if(row.isError) {
