@@ -81,6 +81,21 @@
             <img :src="previewImgUrl" v-if="visible" style="width: 100%">
           </Modal>
         </Form-item>
+        <Form-item label="姓名" prop="xingming">
+            <Input v-model="formItem.xingming" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="电话" prop="dianhua">
+            <Input v-model="formItem.dianhua" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="测试结果" prop="result">
+            <Input v-model="formItem.result" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="是否退款" prop="istuikuan">
+            <Select v-model="formItem.istuikuan" placeholder="请选择是/否" @on-change="selectChange('xc')">
+                <Option value="是">是</Option>
+                <Option value="否">否</Option>
+            </Select>
+        </Form-item>
         <Form-item>
             <Button type="primary" @click="submitAdd('formItem')">提交</Button>
             <Button type="ghost" style="margin-left: 8px" @click="cancelAdd">取消</Button>
@@ -123,6 +138,21 @@
         <Form-item label="价格" prop="price">
             <Input v-model="editFormItem.price" placeholder="请输入"></Input>
         </Form-item>
+        <Form-item label="姓名" prop="xingming">
+            <Input v-model="editFormItem.xingming" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="电话" prop="dianhua">
+            <Input v-model="editFormItem.dianhua" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="测试结果" prop="result">
+            <Input v-model="editFormItem.result" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入"></Input>
+        </Form-item>
+        <Form-item label="是否退款" prop="istuikuan">
+            <Select v-model="editFormItem.istuikuan" placeholder="请选择是/否" @on-change="selectChange('xc')">
+                <Option value="是">是</Option>
+                <Option value="否">否</Option>
+            </Select>
+        </Form-item>
         <Form-item>
             <Button type="primary" @click="submitEdit('editFormItem')">提交</Button>
             <Button type="ghost" style="margin-left: 8px" @click="cancelEdit">取消</Button>
@@ -153,6 +183,22 @@
         <div class="item">
           <h4>价格</h4>
           <p>{{detail.price}}</p>
+        </div>
+        <div class="item">
+          <h4>姓名</h4>
+          <p>{{detail.xingming}}</p>
+        </div>
+        <div class="item">
+          <h4>电话</h4>
+          <p>{{detail.dianhua}}</p>
+        </div>
+        <div class="item">
+          <h4>测试结果</h4>
+          <p>{{detail.result}}</p>
+        </div>
+        <div class="item">
+          <h4>是否退款</h4>
+          <p>{{detail.istuikuan}}</p>
         </div>
         <div class="item">
           <h4>附件</h4>
@@ -281,6 +327,10 @@
                     hotel: '', //酒店名称
                     price: '', //价格
                     files: [''], //附件列表
+                    xingming: '',
+                    dianhua: '',
+                    result: '',
+                    istuikuan: '',
                     test_channel: '' //测试渠道
                 },
                 ruleValidate: {
@@ -290,12 +340,6 @@
                   test_channel: [
                     { required: true, message: '测试渠道不能为空', trigger: 'change' }
                   ],
-                  // entry_date_day: [
-                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-                  // ],
-                  // entry_date_time: [
-                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-                  // ],
                   price: [
                     { required: true, message: '价格不能为空', trigger: 'change' }
                   ]
@@ -307,12 +351,6 @@
                   test_channel: [
                     { required: true, message: '测试渠道不能为空', trigger: 'change' }
                   ],
-                  // entry_date_day: [
-                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-                  // ],
-                  // entry_date_time: [
-                  //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-                  // ],
                   price: [
                     { required: true, message: '价格不能为空', trigger: 'change' }
                   ]
@@ -326,15 +364,36 @@
                     {
                         title: '酒店名称',
                         key: 'hotel',
-
+                        width: 150,
                     },
                     {
                         title: '测试渠道',
-                        key: 'test_channel'
+                        key: 'test_channel',
+                        width: 150,
                     },
                     {
                         title: '价格',
                         key: 'price',
+                        width: 120
+                    },
+                    {
+                        title: '姓名',
+                        key: 'xingming',
+                        width: 120
+                    },
+                    {
+                        title: '电话',
+                        key: 'dianhua',
+                        width: 120
+                    },
+                    {
+                        title: '测试结果',
+                        key: 'result',
+                        width: 120
+                    },
+                    {
+                        title: '是否退款',
+                        key: 'istuikuan',
                         width: 120
                     }
                 ],

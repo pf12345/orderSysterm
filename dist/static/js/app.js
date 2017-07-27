@@ -3064,6 +3064,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3102,28 +3148,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         hotel: '', //酒店名称
         price: '', //价格
         files: [''], //附件列表
+        xingming: '',
+        dianhua: '',
+        result: '',
+        istuikuan: '',
         test_channel: '' //测试渠道
       },
       ruleValidate: {
         hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
         test_channel: [{ required: true, message: '测试渠道不能为空', trigger: 'change' }],
-        // entry_date_day: [
-        //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-        // ],
-        // entry_date_time: [
-        //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-        // ],
         price: [{ required: true, message: '价格不能为空', trigger: 'change' }]
       },
       ruleEditValidate: {
         hotel: [{ required: true, message: '酒店不能为空', trigger: 'change' }],
         test_channel: [{ required: true, message: '测试渠道不能为空', trigger: 'change' }],
-        // entry_date_day: [
-        //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-        // ],
-        // entry_date_time: [
-        //   { required: true, message: '录入时间不能为空', trigger: 'change' }
-        // ],
         price: [{ required: true, message: '价格不能为空', trigger: 'change' }]
       },
       columns: [{
@@ -3132,14 +3170,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: 'entry_date'
       }, {
         title: '酒店名称',
-        key: 'hotel'
-
+        key: 'hotel',
+        width: 150
       }, {
         title: '测试渠道',
-        key: 'test_channel'
+        key: 'test_channel',
+        width: 150
       }, {
         title: '价格',
         key: 'price',
+        width: 120
+      }, {
+        title: '姓名',
+        key: 'xingming',
+        width: 120
+      }, {
+        title: '电话',
+        key: 'dianhua',
+        width: 120
+      }, {
+        title: '测试结果',
+        key: 'result',
+        width: 120
+      }, {
+        title: '是否退款',
+        key: 'istuikuan',
         width: 120
       }],
       data: []
@@ -12131,7 +12186,89 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.previewImgUrl
     }
-  }) : _vm._e()])], 2), _vm._v(" "), _c('Form-item', [_c('Button', {
+  }) : _vm._e()])], 2), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "姓名",
+      "prop": "xingming"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.xingming),
+      callback: function($$v) {
+        _vm.formItem.xingming = $$v
+      },
+      expression: "formItem.xingming"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "电话",
+      "prop": "dianhua"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.dianhua),
+      callback: function($$v) {
+        _vm.formItem.dianhua = $$v
+      },
+      expression: "formItem.dianhua"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "测试结果",
+      "prop": "result"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "type": "textarea",
+      "autosize": {
+        minRows: 2,
+        maxRows: 5
+      },
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.formItem.result),
+      callback: function($$v) {
+        _vm.formItem.result = $$v
+      },
+      expression: "formItem.result"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "是否退款",
+      "prop": "istuikuan"
+    }
+  }, [_c('Select', {
+    attrs: {
+      "placeholder": "请选择是/否"
+    },
+    on: {
+      "on-change": function($event) {
+        _vm.selectChange('xc')
+      }
+    },
+    model: {
+      value: (_vm.formItem.istuikuan),
+      callback: function($$v) {
+        _vm.formItem.istuikuan = $$v
+      },
+      expression: "formItem.istuikuan"
+    }
+  }, [_c('Option', {
+    attrs: {
+      "value": "是"
+    }
+  }, [_vm._v("是")]), _vm._v(" "), _c('Option', {
+    attrs: {
+      "value": "否"
+    }
+  }, [_vm._v("否")])], 1)], 1), _vm._v(" "), _c('Form-item', [_c('Button', {
     attrs: {
       "type": "primary"
     },
@@ -12275,7 +12412,89 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "editFormItem.price"
     }
-  })], 1), _vm._v(" "), _c('Form-item', [_c('Button', {
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "姓名",
+      "prop": "xingming"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.xingming),
+      callback: function($$v) {
+        _vm.editFormItem.xingming = $$v
+      },
+      expression: "editFormItem.xingming"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "电话",
+      "prop": "dianhua"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.dianhua),
+      callback: function($$v) {
+        _vm.editFormItem.dianhua = $$v
+      },
+      expression: "editFormItem.dianhua"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "测试结果",
+      "prop": "result"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "type": "textarea",
+      "autosize": {
+        minRows: 2,
+        maxRows: 5
+      },
+      "placeholder": "请输入"
+    },
+    model: {
+      value: (_vm.editFormItem.result),
+      callback: function($$v) {
+        _vm.editFormItem.result = $$v
+      },
+      expression: "editFormItem.result"
+    }
+  })], 1), _vm._v(" "), _c('Form-item', {
+    attrs: {
+      "label": "是否退款",
+      "prop": "istuikuan"
+    }
+  }, [_c('Select', {
+    attrs: {
+      "placeholder": "请选择是/否"
+    },
+    on: {
+      "on-change": function($event) {
+        _vm.selectChange('xc')
+      }
+    },
+    model: {
+      value: (_vm.editFormItem.istuikuan),
+      callback: function($$v) {
+        _vm.editFormItem.istuikuan = $$v
+      },
+      expression: "editFormItem.istuikuan"
+    }
+  }, [_c('Option', {
+    attrs: {
+      "value": "是"
+    }
+  }, [_vm._v("是")]), _vm._v(" "), _c('Option', {
+    attrs: {
+      "value": "否"
+    }
+  }, [_vm._v("否")])], 1)], 1), _vm._v(" "), _c('Form-item', [_c('Button', {
     attrs: {
       "type": "primary"
     },
@@ -12327,6 +12546,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h4', [_vm._v("测试渠道")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.test_channel))])]), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('h4', [_vm._v("价格")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.price))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("姓名")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.xingming))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("电话")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.dianhua))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("测试结果")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.result))])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('h4', [_vm._v("是否退款")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.detail.istuikuan))])]), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('h4', [_vm._v("附件")]), _vm._v(" "), _vm._l((_vm.detail.files), function(file, index) {
     return (file) ? _c('div', {
