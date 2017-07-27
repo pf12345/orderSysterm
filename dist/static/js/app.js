@@ -3246,7 +3246,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       let _this = this;
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.formItem.entry_date = new Date(this.formItem.entry_date_day).toLocaleString().split(' ')[0] + ' ' + new Date(this.formItem.entry_date_time).toLocaleString().split(' ')[1];
+          try {
+            this.formItem.entry_date = new Date(this.formItem.entry_date_day).toLocaleString().split(' ')[0].replace(/\//ig, '-') + ' ' + new Date(this.formItem.entry_date_time).toTimeString().split(' ')[0];
+          } catch (e) {
+            this.formItem.entry_date = '';
+          }
           this.$root.ajaxPost({
             funName: 'saveCsdjlbItem',
             params: {
@@ -3309,6 +3313,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs[name].validate(valid => {
         if (valid) {
           let _this = this;
+          try {
+            this.editFormItem.entry_date = new Date(this.editFormItem.entry_date_day).toLocaleString().split(' ')[0].replace(/\//ig, '-') + ' ' + new Date(this.editFormItem.entry_date_time).toTimeString().split(' ')[0];
+          } catch (e) {
+            this.editFormItem.entry_date = '';
+          }
           this.$root.ajaxPost({
             funName: 'updateCsdjlbItem',
             params: _this.editFormItem
@@ -12248,11 +12257,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "placeholder": "请选择是/否"
     },
-    on: {
-      "on-change": function($event) {
-        _vm.selectChange('xc')
-      }
-    },
     model: {
       value: (_vm.formItem.istuikuan),
       callback: function($$v) {
@@ -12473,11 +12477,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('Select', {
     attrs: {
       "placeholder": "请选择是/否"
-    },
-    on: {
-      "on-change": function($event) {
-        _vm.selectChange('xc')
-      }
     },
     model: {
       value: (_vm.editFormItem.istuikuan),

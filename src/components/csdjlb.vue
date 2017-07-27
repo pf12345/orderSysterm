@@ -91,7 +91,7 @@
             <Input v-model="formItem.result" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="是否退款" prop="istuikuan">
-            <Select v-model="formItem.istuikuan" placeholder="请选择是/否" @on-change="selectChange('xc')">
+            <Select v-model="formItem.istuikuan" placeholder="请选择是/否">
                 <Option value="是">是</Option>
                 <Option value="否">否</Option>
             </Select>
@@ -148,7 +148,7 @@
             <Input v-model="editFormItem.result" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入"></Input>
         </Form-item>
         <Form-item label="是否退款" prop="istuikuan">
-            <Select v-model="editFormItem.istuikuan" placeholder="请选择是/否" @on-change="selectChange('xc')">
+            <Select v-model="editFormItem.istuikuan" placeholder="请选择是/否">
                 <Option value="是">是</Option>
                 <Option value="否">否</Option>
             </Select>
@@ -446,7 +446,11 @@
               let _this = this;
               this.$refs[name].validate((valid) => {
                 if (valid) {
-                  this.formItem.entry_date = new Date(this.formItem.entry_date_day).toLocaleString().split(' ')[0] + ' ' +new Date(this.formItem.entry_date_time).toLocaleString().split(' ')[1]
+                  try {
+                    this.formItem.entry_date = new Date(this.formItem.entry_date_day).toLocaleString().split(' ')[0].replace(/\//ig, '-') + ' ' +new Date(this.formItem.entry_date_time).toTimeString().split(' ')[0]
+                  }catch(e) {
+                    this.formItem.entry_date = '';
+                  }
                   this.$root.ajaxPost({
                     funName:'saveCsdjlbItem',
                     params: {
@@ -509,6 +513,11 @@
               this.$refs[name].validate((valid) => {
                 if (valid) {
                   let _this = this;
+                  try {
+                    this.editFormItem.entry_date = new Date(this.editFormItem.entry_date_day).toLocaleString().split(' ')[0].replace(/\//ig, '-') + ' ' +new Date(this.editFormItem.entry_date_time).toTimeString().split(' ')[0]
+                  }catch(e) {
+                    this.editFormItem.entry_date = '';
+                  }
                   this.$root.ajaxPost({
                     funName: 'updateCsdjlbItem',
                     params: _this.editFormItem
