@@ -3115,6 +3115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data() {
+
     return {
       tableHeight: '',
       showAdd: false,
@@ -3142,8 +3143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       previewDetailImgUrl: '',
       uoloadImageAction: this.$root.serverUrl + '/uploadImageCsdjlb',
       formItem: {
-        entry_date_day: '', //录入时间
-        entry_date_time: '', //录入时间
+        entry_date_day: new Date().toLocaleDateString().replace(/\//ig, '-'), //录入时间
+        entry_date_time: new Date().toTimeString().split(' ')[0], //录入时间
         entry_date: '',
         hotel: '', //酒店名称
         price: '', //价格
@@ -12052,13 +12053,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "formItem.entry_date_day"
     }
   })], 1)], 1), _vm._v(" "), _c('Col', {
-    staticStyle: {
-      "text-align": "center"
-    },
-    attrs: {
-      "span": "2"
-    }
-  }, [_vm._v("-")]), _vm._v(" "), _c('Col', {
     attrs: {
       "span": "11"
     }
@@ -12335,13 +12329,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "editFormItem.entry_date_day"
     }
   })], 1)], 1), _vm._v(" "), _c('Col', {
-    staticStyle: {
-      "text-align": "center"
-    },
-    attrs: {
-      "span": "2"
-    }
-  }, [_vm._v("-")]), _vm._v(" "), _c('Col', {
     attrs: {
       "span": "11"
     }

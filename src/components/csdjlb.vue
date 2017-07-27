@@ -45,7 +45,7 @@
                     </Form-item>
 
                   </Col>
-                  <Col span="2" style="text-align: center">-</Col>
+                  <!-- <Col span="2" style="text-align: center">-</Col> -->
                   <Col span="11">
                     <Form-item prop="entry_date_time">
                           <Time-picker type="time" placeholder="选择时间" v-model="formItem.entry_date_time"></Time-picker>
@@ -117,7 +117,7 @@
                     </Form-item>
 
                   </Col>
-                  <Col span="2" style="text-align: center">-</Col>
+                  <!-- <Col span="2" style="text-align: center">-</Col> -->
                   <Col span="11">
                     <Form-item prop="entry_date_time">
                           <Time-picker type="time" placeholder="选择时间" v-model="editFormItem.entry_date_time"></Time-picker>
@@ -294,6 +294,7 @@
     import leftPage from './leftPage';
     export default {
         data () {
+
             return {
                 tableHeight: '',
                 showAdd: false,
@@ -321,8 +322,8 @@
                 previewDetailImgUrl: '',
                 uoloadImageAction: this.$root.serverUrl + '/uploadImageCsdjlb',
                 formItem: {
-                    entry_date_day: '', //录入时间
-                    entry_date_time: '',//录入时间
+                    entry_date_day: new Date().toLocaleDateString().replace(/\//ig, '-'), //录入时间
+                    entry_date_time: new Date().toTimeString().split(' ')[0],//录入时间
                     entry_date: '',
                     hotel: '', //酒店名称
                     price: '', //价格
