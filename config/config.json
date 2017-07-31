@@ -3,7 +3,7 @@
   "env":"product",
   "dbInfo": {
     "cookieSecret":"pengfeng",
-    "db": "carSchool",
+    "db": "orderSysterm",
     "host": "localhost",
     "url": "mongodb://127.0.0.1:27017/carSchool"
   }
