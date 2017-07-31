@@ -61,8 +61,8 @@
                       基础数据管理
                   </template>
                   <Menu-item name="6-1" v-if="!user.jurisdictions || user.jurisdictions.indexOf('账号管理') != -1 || user.name === 'admin'">账号管理</Menu-item>
-                  <Menu-item name="6-2" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店管理') != -1">酒店管理</Menu-item>
-                  <Menu-item name="6-3" v-if="!user.jurisdictions || user.jurisdictions.indexOf('平台管理') != -1">平台管理</Menu-item>
+                  <Menu-item name="6-2" v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店管理') != -1 || user.name === 'admin'">酒店管理</Menu-item>
+                  <Menu-item name="6-3" v-if="!user.jurisdictions || user.jurisdictions.indexOf('平台管理') != -1 || user.name === 'admin'">平台管理</Menu-item>
                 </Submenu>
             </Menu>
   </div>

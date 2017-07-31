@@ -17217,11 +17217,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": "6-1"
     }
-  }, [_vm._v("账号管理")]) : _vm._e(), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('酒店管理') != -1) ? _c('Menu-item', {
+  }, [_vm._v("账号管理")]) : _vm._e(), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('酒店管理') != -1 || _vm.user.name === 'admin') ? _c('Menu-item', {
     attrs: {
       "name": "6-2"
     }
-  }, [_vm._v("酒店管理")]) : _vm._e(), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('平台管理') != -1) ? _c('Menu-item', {
+  }, [_vm._v("酒店管理")]) : _vm._e(), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('平台管理') != -1 || _vm.user.name === 'admin') ? _c('Menu-item', {
     attrs: {
       "name": "6-3"
     }
