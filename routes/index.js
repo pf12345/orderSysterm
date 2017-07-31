@@ -41,6 +41,9 @@ router.get('/login', function(req, res) {
 })
 
 
+router.get('/addAdmin', function(req, res) {
+  USER.addAdmin(req, res);
+})
 router.post('/addUser', function(req, res) {
   USER.addUser(req, res);
 })

@@ -9,6 +9,39 @@ var url = config.dbInfo.url;
 var util = require('./../util');
 
 var USER = {
+  addAdmin: function(req, res) {
+    var user = {
+      name: 'admin',
+      pwd: 'admin',
+      jurisdictions: [],
+      created: util.getRightDate(new Date().getTime())
+    }
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermUSER');
+      collection.findOne({
+        "name": name
+      }, function(err, result) {
+        if(result) {
+          db.close();
+          res.send({
+            result: 'FALSE',
+            data: result,
+            message: '已有相关用户'
+          });
+        }else {
+          collection.insertMany([user], function(err, result) {
+            assert.equal(err, null);
+            db.close();
+            res.send({
+              result: 'TRUE',
+              data: user
+            });
+          });
+        }
+      });
+    });
+  },
   addUser: function(req, res) {
     var name = req.body.data.name;
     var pwd = req.body.data.password;
