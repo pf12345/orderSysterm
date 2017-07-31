@@ -20,7 +20,7 @@ var USER = {
       assert.equal(null, err);
       var collection = db.collection('ordersystermUSER');
       collection.findOne({
-        "name": name
+        "name": 'admin'
       }, function(err, result) {
         if(result) {
           db.close();
