@@ -17213,7 +17213,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "person-stalker"
     }
-  }), _vm._v("\n                    基础数据管理\n                ")], 1), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('账号管理') != -1) ? _c('Menu-item', {
+  }), _vm._v("\n                    基础数据管理\n                ")], 1), _vm._v(" "), (!_vm.user.jurisdictions || _vm.user.jurisdictions.indexOf('账号管理') != -1 || _vm.user.name === 'admin') ? _c('Menu-item', {
     attrs: {
       "name": "6-1"
     }
