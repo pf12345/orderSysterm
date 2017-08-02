@@ -13,7 +13,7 @@ var USER = {
     var user = {
       name: 'admin',
       pwd: 'admin',
-      jurisdictions: [],
+      jurisdictions: '',
       created: util.getRightDate(new Date().getTime())
     }
     MongoClient.connect(url, function(err, db) {
