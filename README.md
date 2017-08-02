@@ -25,11 +25,11 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ``` bash
 备份：  
 
-./mongodump -h 127.0.0.1:27017 -d carSchool -o /data/dump
+./mongodump -h 127.0.0.1:27017 -d orderSysterm -o /data/backups
 
 恢复：
 
-./mongorestore -h 127.0.0.1:27017 -d carSchool -o /data/dump
+./mongorestore -h 127.0.0.1:27017 -d orderSysterm /data/backups/orderSysterm
 
 ```
 
