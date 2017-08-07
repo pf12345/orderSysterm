@@ -31,6 +31,12 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ./mongorestore -h 127.0.0.1:27017 -d orderSysterm /data/backups/orderSysterm
 
+删除数据库：
+
+show dbs
+use orderSysterm
+db.dropDatabase()
+
 ```
 
 ## shell命令
