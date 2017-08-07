@@ -634,7 +634,7 @@
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight - 180;
+              this.tableHeight = window.innerHeight - 220;
             }
           }
         },
