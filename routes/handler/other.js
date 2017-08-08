@@ -30,6 +30,9 @@ OTHER = {
       item.nights = item.stay_days;
       item.room_nights = item.room_number * item.stay_days;
       item.created = util.getRightDate(new Date().getTime());
+      item.check_in_date = util.getRightDate(item.check_in_date);
+      item.check_out_date = util.getRightDate(item.check_out_date);
+      item.order_date = util.getRightDate(item.order_date);
 
       //在redis里面去查找订单号
       redisHander.getValue('order_numbers', function(res) {
@@ -101,7 +104,9 @@ OTHER = {
   getOrderListOTHER: function(req, res) {
     var listFilterKey = req.query.listFilterKey || 'order_date';
     var listFilterStartTime = (req.query.listFilterStartTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 00:00:00';
+    listFilterStartTime = util.getRightDate(listFilterStartTime);
     var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
+    listFilterEndTime = util.getRightDate(listFilterEndTime);
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
     var queryStr = {};
@@ -182,6 +187,36 @@ OTHER = {
            data: result
          });
        });
+   })
+ },
+ updateData: function(req, res) {
+   this.getOrderListOTHERFromDB(function(docs, count) {
+     MongoClient.connect(dburl, function(err, db) {
+       assert.equal(null, err);
+       var collection = db.collection('ordersystermOther');
+       var number = 0;
+       docs.forEach(function(doc, _index) {
+         var o_id = new mongo.ObjectID(doc._id);
+         collection.updateOne({
+           "_id": o_id
+         }, {
+           $set: {
+             check_in_date: util.getRightDate(doc.check_in_date),
+             check_out_date: util.getRightDate(doc.check_out_date),
+             order_date: util.getRightDate(doc.order_date)
+           }
+         }, function(err, result) {
+           number ++;
+           if(number >= count) {
+             db.close();
+             res.send({
+               result: 'TRUE',
+             });
+           }
+         });
+       })
+
+     })
    })
  }
 }

@@ -31,8 +31,8 @@ STATIC = {
       hotel = req.body.hotel;
     var queryStr = {};
     queryStr.check_in_date = {
-      $gte: start,
-      $lte: end
+      $gte: util.getRightDate(start),
+      $lte: util.getRightDate(end)
     } //{"order_date":{$lt:50}}
     if(hotel) {
       queryStr.hotel = {$regex: hotel, $options:'i'};
@@ -92,12 +92,12 @@ STATIC = {
   //获取某年某月 每天各酒店订单数据
   getHotelDaysStatic: function(req, res) {
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var queryStr = {};
     queryStr.order_date = {
-      $gte: startTime,
-      $lte: endTime
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
     } //{"order_date":{$lt:50}}
     this.getAllOrderListFromDB(queryStr, function(docs) {
       var daysArr = util.getDates(time);
@@ -126,7 +126,7 @@ STATIC = {
       _hotel_arr.forEach(function(_hotel) {
         if(_hotel.docs && _hotel.docs.length) {
           _hotel.docs.forEach(function(doc) {
-            var key = moment(doc.order_date).format('YYYY-M-D');
+            var key = moment(doc.order_date).format('YYYY-MM-DD');
             if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
               _hotel.data[key].value += 1;
             }
@@ -142,12 +142,12 @@ STATIC = {
   //获取某年某月 每天各酒店订单间夜数据
   getHotelDaysRoomNightStatic: function(req, res) {
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var queryStr = {};
     queryStr.order_date = {
-      $gte: startTime,
-      $lte: endTime
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
     } //{"order_date":{$lt:50}}
     this.getAllOrderListFromDB(queryStr, function(docs) {
       var daysArr = util.getDates(time);
@@ -177,7 +177,7 @@ STATIC = {
       _hotel_arr.forEach(function(_hotel) {
         if(_hotel.docs && _hotel.docs.length) {
           _hotel.docs.forEach(function(doc) {
-            var key = moment(doc.order_date).format('YYYY-M-D');
+            var key = moment(doc.order_date).format('YYYY-MM-DD');
             if (moment(key) && moment(key).isSame && moment(key).isSame(doc.order_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
               _hotel.data[key].value += Number(doc.room_nights || 0);
             }
@@ -193,11 +193,11 @@ STATIC = {
   //获取本年到目前为止间夜数
   getYearToTodayRoomNights: function(req, res) {
     var startTime = moment().add(-1, 'days').format('YYYY') + '-1-1 00:00:00',
-      endTime = moment().format('YYYY-M-D') + ' 23:59:59';
+      endTime = moment().format('YYYY-MM-DD') + ' 23:59:59';
       var queryStr = {};
       queryStr.order_date = {
-        $gte: startTime,
-        $lte: endTime
+        $gte: util.getRightDate(startTime),
+        $lte: util.getRightDate(endTime)
       } //{"order_date":{$lt:50}}
       this.getAllOrderListFromDB(queryStr, function(docs) {
         var _hotel_arr = [];
@@ -232,12 +232,12 @@ STATIC = {
   },
   //获取昨日总间夜数、毛利、间夜数对比、毛利对比数据
   getYesterdayAndTodaydiff: function(req, res) {
-    var startTime = moment().add(-1, 'days').format('YYYY-M-D') + ' 00:00:00',
-      endTime = moment().format('YYYY-M-D') + ' 23:59:59';
+    var startTime = moment().add(-1, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+      endTime = moment().format('YYYY-MM-DD') + ' 23:59:59';
       var queryStr = {};
       queryStr.order_date = {
-        $gte: startTime,
-        $lte: endTime
+        $gte: util.getRightDate(startTime),
+        $lte: util.getRightDate(endTime)
       } //{"order_date":{$lt:50}}
       this.getAllOrderListFromDB(queryStr, function(docs) {
         var _hotel_arr = [];
@@ -247,8 +247,8 @@ STATIC = {
         var otherStrObject = {
           roomNightsToday: 0, //今日总计间夜数
           grossProfitToday: 0, //今日总计毛利金额
-          todayDate: moment().format('YYYY-M-DD'),
-          yesterdayDate: moment().add(-1, 'days').format('YYYY-M-DD'),
+          todayDate: moment().format('YYYY-MM-DD'),
+          yesterdayDate: moment().add(-1, 'days').format('YYYY-MM-DD'),
           roomNightsYesterday: 0, //昨日总计间夜数
           grossProfitYesterday: 0, //昨日总计毛利金额
           roomNightsToYesAdd: 0, //间夜数对比昨日增加
@@ -259,9 +259,9 @@ STATIC = {
         var totalRow = _.extend({
           name: '总计'
         }, otherStrObject);
-        var left = new Date(moment().add(-1, 'days').format('YYYY-M-DD') + ' 00:00:00').getTime(),
-          middle = new Date(moment().add(-1, 'days').format('YYYY-M-DD') + ' 23:59:59').getTime(),
-          right = new Date(moment().format('YYYY-M-DD') + ' 23:59:59').getTime();
+        var left = new Date(moment().add(-1, 'days').format('YYYY-MM-DD') + ' 00:00:00').getTime(),
+          middle = new Date(moment().add(-1, 'days').format('YYYY-MM-DD') + ' 23:59:59').getTime(),
+          right = new Date(moment().format('YYYY-MM-DD') + ' 23:59:59').getTime();
         _hotel_arr.forEach(function(_hotel) {
           _.extend(_hotel, otherStrObject)
           docs.forEach(function(doc) {
@@ -307,12 +307,12 @@ STATIC = {
   //获取某年某月 每天各酒店离店数据
   getHotelCheckoutStatic: function(req, res) {
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var queryStr = {};
     queryStr.order_date = {
-      $gte: startTime,
-      $lte: endTime
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
     } //{"order_date":{$lt:50}}
     this.getAllOrderListFromDB(queryStr, function(docs) {
       var _hotel_arr = [];
@@ -376,12 +376,12 @@ STATIC = {
   //获取离店渠道统计
   getCheckoutDataChannelStatic: function(req, res) {
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var queryStr = {};
     queryStr.order_date = {
-      $gte: startTime,
-      $lte: endTime
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
     } //{"order_date":{$lt:50}}
     var _hotel_arr = [];
     hotel.forEach(function(_hotel) {
@@ -482,8 +482,8 @@ STATIC = {
       page = req.body.page;
     var queryStr = {};
     queryStr.check_in_date = {
-      $gte: start,
-      $lte: end
+      $gte: util.getRightDate(start),
+      $lte: util.getRightDate(end)
     } //{"order_date":{$lt:50}}
     if(hotel) {
       queryStr.hotel = {$regex: hotel, $options:'i'};

@@ -96,10 +96,10 @@ XC = {
                     if (_index == 16) {
                       _hotel_confirm_number = value;
                     }
-                    if(_index == 20) {
+                    if (_index == 20) {
                       _billing_number = value;
                     }
-                    if(_index == 21) {
+                    if (_index == 21) {
                       _settlement = value;
                     }
 
@@ -114,9 +114,9 @@ XC = {
                     hotel_short_name: util.getHotelShortName(_hotel), //酒店简称
                     room_type: _room_type, //房型
                     custom_name: _custom_name, //入住人
-                    check_in_date: _checkIn_date_init, //入住时间
-                    check_out_date: _checkOut_date_init, //离店时间
-                    order_date: _order_date, //下单时间
+                    check_in_date: util.getRightDate(_checkIn_date_init), //入住时间
+                    check_out_date: util.getRightDate(_checkOut_date_init), //离店时间
+                    order_date: util.getRightDate(_order_date), //下单时间
                     stay_days: _nights, //入住天数
                     advance_days: util.getDiffDate(_checkIn_date_init, _order_date, 'days'), //提前预定天数
                     room_number: _room_number, //房间数
@@ -154,22 +154,24 @@ XC = {
   //保存携程订单数据入数据库
   saveOrderXC: function(req, res) {
     var saveDatas = []; //保存入数据库数组
-    if(req.body.data) {
+    if (req.body.data) {
       //在redis里面去查找订单号
       redisHander.getValue('order_numbers', function(res) {
         var order_numbers = [];
-        if(!res) {
+        if (!res) {
           order_numbers = [];
-        }else{
+        } else {
           order_numbers = JSON.parse(res.value)
         }
         req.body.data.forEach(function(_data) {
-          if(order_numbers.indexOf(_data.order_number) == -1) {
+          if (order_numbers.indexOf(_data.order_number) == -1) {
             saveDatas.push(_data);
             order_numbers.push(_data.order_number);
           }
         })
-        redisHander.setValue('order_numbers', {value: JSON.stringify(order_numbers)});
+        redisHander.setValue('order_numbers', {
+          value: JSON.stringify(order_numbers)
+        });
       })
     }
     MongoClient.connect(url, function(err, db) {
@@ -178,7 +180,7 @@ XC = {
       var collection = db.collection('ordersystermXC');
       // Insert some documents
       if (req.body.data && req.body.data.length) {
-        if(saveDatas && saveDatas.length) {
+        if (saveDatas && saveDatas.length) {
           collection.insertMany(saveDatas, function(err, result) {
             assert.equal(err, null);
             db.close();
@@ -187,7 +189,7 @@ XC = {
               data: saveDatas
             });
           });
-        }else{
+        } else {
           res.send({
             result: 'TRUE',
             data: []
@@ -226,11 +228,16 @@ XC = {
   getOrderListXC: function(req, res) {
     var listFilterKey = req.query.listFilterKey || 'order_date';
     var listFilterStartTime = (req.query.listFilterStartTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 00:00:00';
+    listFilterStartTime = util.getRightDate(listFilterStartTime);
     var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
+    listFilterEndTime = util.getRightDate(listFilterEndTime);
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
     var queryStr = {};
-    queryStr[listFilterKey] = {$gte: listFilterStartTime,$lte: listFilterEndTime} //{"order_date":{$lt:50}}
+    queryStr[listFilterKey] = {
+      $gte: listFilterStartTime,
+      $lte: listFilterEndTime
+    } //{"order_date":{$lt:50}}
     // console.log(queryStr);
     this.getOrderListXCFromDB(function(docs, count) {
       res.send({
@@ -269,27 +276,27 @@ XC = {
       var o_id = new mongo.ObjectID(item_id);
       // Update document where a is 2, set b equal to 1
       var _set = {};
-      for(var key in req.body) {
-        if(key != '_id') {
+      for (var key in req.body) {
+        if (key != '_id') {
           _set[key] = req.body[key];
         }
       }
 
-      if(_set.hotel) {
+      if (_set.hotel) {
         _set.hotel_short_name = util.getHotelShortName(_set.hotel);
       }
 
       collection.updateOne({
         "_id": o_id
       }, {
-          $set: _set
-        }, function(err, result) {
-          db.close();
-          res.send({
-            result: 'TRUE',
-            data: result
-          });
+        $set: _set
+      }, function(err, result) {
+        db.close();
+        res.send({
+          result: 'TRUE',
+          data: result
         });
+      });
     })
   },
 
@@ -304,12 +311,42 @@ XC = {
       collection.deleteOne({
         "_id": o_id
       }, {}, function(err, result) {
-          db.close();
-          res.send({
-            result: 'TRUE',
-            data: result
-          });
+        db.close();
+        res.send({
+          result: 'TRUE',
+          data: result
         });
+      });
+    })
+  },
+  updateData: function(req, res) {
+    this.getOrderListXCFromDB(function(docs, count) {
+      MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var collection = db.collection('ordersystermXC');
+        var number = 0;
+        docs.forEach(function(doc, _index) {
+          var o_id = new mongo.ObjectID(doc._id);
+          collection.updateOne({
+            "_id": o_id
+          }, {
+            $set: {
+              check_in_date: util.getRightDate(doc.check_in_date),
+              check_out_date: util.getRightDate(doc.check_out_date),
+              order_date: util.getRightDate(doc.order_date)
+            }
+          }, function(err, result) {
+            number ++;
+            if(number >= count) {
+              db.close();
+              res.send({
+                result: 'TRUE',
+              });
+            }
+          });
+        })
+
+      })
     })
   }
 }

@@ -137,7 +137,9 @@ router.post('/updateOrderXCItem', function(req, res) {
 router.post('/deleteOrderXCitem', function(req, res) {
   XC.deleteOrderXCitem(req, res);
 })
-
+router.get('/updateDataXC', function(req, res) {
+  XC.updateData(req, res);
+})
 
 
 //保存途牛订单数据入数据库
@@ -210,6 +212,9 @@ router.post('/updateOrderOTHERItem', function(req, res) {
 })
 router.post('/deleteOrderOTHERitem', function(req, res) {
   OTHER.deleteOrderOTHERitem(req, res);
+})
+router.get('/updateDataOTHER', function(req, res) {
+  OTHER.updateData(req, res);
 })
 
 //获取美团数据

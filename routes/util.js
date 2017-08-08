@@ -3,7 +3,7 @@ var hotel = require('./hotel');
 
 util = {
   getRightDate: function(dateVal) {
-    return moment(dateVal).format('YYYY-MM-DD HH:mm')
+    return moment(dateVal).format('YYYY-MM-DD HH:mm:ss')
   },
   getRightDateHour: function(dateVal) {
     return moment(dateVal).hour()
@@ -29,10 +29,10 @@ util = {
   //获取某年某月天数数组  getDates("2012-02")
   getDates: function(yearMonth) {
     var days = moment(yearMonth, "YYYY-MM").daysInMonth(); //获取某月总天数
-    var start = moment(yearMonth + '-1').format('YYYY-M-D');
+    var start = moment(yearMonth + '-1').format('YYYY-MM-DD');
     var daysArr = [start];
     for (var i = 1; i < days; i++) {
-      var _day = moment(start).add(i, 'days').format('YYYY-M-D'); //本月1号后几天时间
+      var _day = moment(start).add(i, 'days').format('YYYY-MM-DD'); //本月1号后几天时间
       daysArr.push(_day)
     }
     return daysArr;
