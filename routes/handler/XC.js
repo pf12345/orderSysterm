@@ -139,7 +139,7 @@ XC = {
             result: 'TRUE',
             data: save_excel_data
           });
-          console.log("done");
+          console.log("export xc data done");
         });
 
       stream.pipe(csvStream);
@@ -231,14 +231,35 @@ XC = {
     listFilterStartTime = util.getRightDate(listFilterStartTime);
     var listFilterEndTime = (req.query.listFilterEndTime || new Date().toLocaleDateString().replace(/\//ig, '-')) + ' 23:59:59';
     listFilterEndTime = util.getRightDate(listFilterEndTime);
+
+    var listFilterName = req.query.listFilterName;
+    var listFilterHotelName = req.query.listFilterHotelName;
+    var listFilterOrderNumber = req.query.listFilterOrderNumber;
+    var listFilterBillingNumber = req.query.listFilterBillingNumber;
+
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
-    var queryStr = {};
-    queryStr[listFilterKey] = {
-      $gte: listFilterStartTime,
-      $lte: listFilterEndTime
-    } //{"order_date":{$lt:50}}
-    // console.log(queryStr);
+    var queryStr = {
+      $and: [{
+        [listFilterKey]: {
+          $gte: listFilterStartTime,
+          $lte: listFilterEndTime
+        }
+      }, {
+        custom_name: new RegExp(listFilterName)
+      }, {
+        hotel: new RegExp(listFilterHotelName)
+      }, {
+        order_number: new RegExp(listFilterOrderNumber)
+      }, {
+        billing_number: new RegExp(listFilterBillingNumber)
+      }]
+    };
+    // queryStr[listFilterKey] = {
+    //   $gte: listFilterStartTime,
+    //   $lte: listFilterEndTime
+    // } //{"order_date":{$lt:50}}
+    // console.log(JSON.stringify(queryStr));
     this.getOrderListXCFromDB(function(docs, count) {
       res.send({
         result: 'TRUE',
@@ -336,8 +357,8 @@ XC = {
               order_date: util.getRightDate(doc.order_date)
             }
           }, function(err, result) {
-            number ++;
-            if(number >= count) {
+            number++;
+            if (number >= count) {
               db.close();
               res.send({
                 result: 'TRUE',

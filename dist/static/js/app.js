@@ -590,6 +590,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -600,9 +604,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showModal1: false,
       showDetail: false,
       showEdit: false,
-      listFilterKey: 'order_date',
+      listFilterKey: 'check_out_date',
       listFilterStartTime: this.$root.getLocalDate(),
       listFilterEndTime: this.$root.getLocalDate(),
+      listFilterName: '', //姓名
+      listFilterHotelName: '', //酒店名
+      listFilterOrderNumber: '', //订单号
+      listFilterBillingNumber: '', //发单号
       limit: 20,
       page: 1,
       total: 0,
@@ -713,7 +721,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           limit: this.limit,
           page: this.page,
           listFilterStartTime: this.$root.getLocalDate(this.listFilterStartTime),
-          listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime)
+          listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime),
+          listFilterName: this.listFilterName, //姓名
+          listFilterHotelName: this.listFilterHotelName, //酒店名
+          listFilterOrderNumber: this.listFilterOrderNumber, //订单号
+          listFilterBillingNumber: this.listFilterBillingNumber
         }
       }, function (res, initRes) {
         _this.data = res;
@@ -848,8 +860,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   watch: {
     'data'() {
-      if (this.data.length > 10 && !this.tableHeight) {
-        this.tableHeight = window.innerHeight - 220;
+      if (!this.tableHeight) {
+        this.tableHeight = window.innerHeight - 280;
       }
     }
   },
@@ -6289,6 +6301,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6300,9 +6316,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showEdit: false,
       tableHeight: '',
       showAdd: false,
-      listFilterKey: 'order_date',
+      listFilterKey: 'check_out_date',
       listFilterStartTime: this.$root.getLocalDate(),
       listFilterEndTime: this.$root.getLocalDate(),
+      listFilterName: '', //姓名
+      listFilterHotelName: '', //酒店名
+      listFilterOrderNumber: '', //订单号
+      listFilterBillingNumber: '', //发单号
       limit: 20,
       page: 1,
       total: 0,
@@ -6447,7 +6467,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           limit: this.limit,
           page: this.page,
           listFilterStartTime: this.$root.getLocalDate(this.listFilterStartTime),
-          listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime)
+          listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime),
+          listFilterName: this.listFilterName, //姓名
+          listFilterHotelName: this.listFilterHotelName, //酒店名
+          listFilterOrderNumber: this.listFilterOrderNumber, //订单号
+          listFilterBillingNumber: this.listFilterBillingNumber
         }
       }, function (res, initRes) {
         _this.data = res;
@@ -6575,7 +6599,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   watch: {
     'data'() {
       if (this.data.length > 10 && !this.tableHeight) {
-        this.tableHeight = window.innerHeight - 220;
+        this.tableHeight = window.innerHeight - 280;
       }
     }
   },
@@ -10507,13 +10531,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('Radio', {
     attrs: {
-      "label": "order_date"
+      "label": "check_out_date"
     }
-  }, [_c('span', [_vm._v("下单时间")])]), _vm._v(" "), _c('Radio', {
+  }, [_c('span', [_vm._v("离店日期")])]), _vm._v(" "), _c('Radio', {
     attrs: {
       "label": "check_in_date"
     }
-  }, [_c('span', [_vm._v("入住时间")])])], 1), _vm._v(" "), _c('Date-picker', {
+  }, [_c('span', [_vm._v("入住日期")])])], 1), _vm._v(" "), _c('Date-picker', {
     staticStyle: {
       "width": "200px",
       "display": "inline-block",
@@ -10546,6 +10570,66 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.listFilterEndTime = $$v
       },
       expression: "listFilterEndTime"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入姓名"
+    },
+    model: {
+      value: (_vm.listFilterName),
+      callback: function($$v) {
+        _vm.listFilterName = $$v
+      },
+      expression: "listFilterName"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入酒店名称"
+    },
+    model: {
+      value: (_vm.listFilterHotelName),
+      callback: function($$v) {
+        _vm.listFilterHotelName = $$v
+      },
+      expression: "listFilterHotelName"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入订单号"
+    },
+    model: {
+      value: (_vm.listFilterOrderNumber),
+      callback: function($$v) {
+        _vm.listFilterOrderNumber = $$v
+      },
+      expression: "listFilterOrderNumber"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入发单号"
+    },
+    model: {
+      value: (_vm.listFilterBillingNumber),
+      callback: function($$v) {
+        _vm.listFilterBillingNumber = $$v
+      },
+      expression: "listFilterBillingNumber"
     }
   }), _vm._v(" "), _c('Button', {
     attrs: {
@@ -15427,13 +15511,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('Radio', {
     attrs: {
-      "label": "order_date"
+      "label": "check_out_date"
     }
-  }, [_c('span', [_vm._v("下单时间")])]), _vm._v(" "), _c('Radio', {
+  }, [_c('span', [_vm._v("离店日期")])]), _vm._v(" "), _c('Radio', {
     attrs: {
       "label": "check_in_date"
     }
-  }, [_c('span', [_vm._v("入住时间")])])], 1), _vm._v(" "), _c('Date-picker', {
+  }, [_c('span', [_vm._v("入住日期")])])], 1), _vm._v(" "), _c('Date-picker', {
     staticStyle: {
       "width": "200px",
       "display": "inline-block",
@@ -15466,6 +15550,66 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.listFilterEndTime = $$v
       },
       expression: "listFilterEndTime"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入姓名"
+    },
+    model: {
+      value: (_vm.listFilterName),
+      callback: function($$v) {
+        _vm.listFilterName = $$v
+      },
+      expression: "listFilterName"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入酒店名称"
+    },
+    model: {
+      value: (_vm.listFilterHotelName),
+      callback: function($$v) {
+        _vm.listFilterHotelName = $$v
+      },
+      expression: "listFilterHotelName"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入订单号"
+    },
+    model: {
+      value: (_vm.listFilterOrderNumber),
+      callback: function($$v) {
+        _vm.listFilterOrderNumber = $$v
+      },
+      expression: "listFilterOrderNumber"
+    }
+  }), _vm._v(" "), _c('Input', {
+    staticStyle: {
+      "width": "200px",
+      "margin": "5px"
+    },
+    attrs: {
+      "placeholder": "请输入发单号"
+    },
+    model: {
+      value: (_vm.listFilterBillingNumber),
+      callback: function($$v) {
+        _vm.listFilterBillingNumber = $$v
+      },
+      expression: "listFilterBillingNumber"
     }
   }), _vm._v(" "), _c('Button', {
     attrs: {

@@ -15,16 +15,20 @@
     <div class="warp_content">
       <div class="item">
         <Radio-group v-model="listFilterKey">
-          <Radio label="order_date">
-              <span>下单时间</span>
+          <Radio label="check_out_date">
+              <span>离店日期</span>
           </Radio>
           <Radio label="check_in_date">
-              <span>入住时间</span>
+              <span>入住日期</span>
           </Radio>
         </Radio-group>
         <Date-picker v-model="listFilterStartTime" type="date" placeholder="开始时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
         <span>至</span>
         <Date-picker v-model="listFilterEndTime" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <Input v-model="listFilterName" placeholder="请输入姓名" style="width: 200px;margin: 5px"></Input>
+        <Input v-model="listFilterHotelName" placeholder="请输入酒店名称" style="width: 200px;margin: 5px"></Input>
+        <Input v-model="listFilterOrderNumber" placeholder="请输入订单号" style="width: 200px;margin: 5px"></Input>
+        <Input v-model="listFilterBillingNumber" placeholder="请输入发单号" style="width: 200px;margin: 5px"></Input>
         <Button type="info" @click="listFilter">查询</Button>
       </div>
       <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
@@ -292,9 +296,13 @@
                 showEdit: false,
                 tableHeight: '',
                 showAdd: false,
-                listFilterKey: 'order_date',
+                listFilterKey: 'check_out_date',
                 listFilterStartTime: this.$root.getLocalDate(),
                 listFilterEndTime: this.$root.getLocalDate(),
+                listFilterName: '', //姓名
+                listFilterHotelName: '', //酒店名
+                listFilterOrderNumber: '', //订单号
+                listFilterBillingNumber: '', //发单号
                 limit: 20,
                 page: 1,
                 total: 0,
@@ -506,7 +514,11 @@
                 limit: this.limit,
                 page: this.page,
                 listFilterStartTime: this.$root.getLocalDate(this.listFilterStartTime),
-                listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime)
+                listFilterEndTime: this.$root.getLocalDate(this.listFilterEndTime),
+                listFilterName: this.listFilterName, //姓名
+                listFilterHotelName: this.listFilterHotelName, //酒店名
+                listFilterOrderNumber: this.listFilterOrderNumber, //订单号
+                listFilterBillingNumber: this.listFilterBillingNumber
               }
             }, function(res, initRes) {
               _this.data =  res;
@@ -634,7 +646,7 @@
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight - 220;
+              this.tableHeight = window.innerHeight - 280;
             }
           }
         },
