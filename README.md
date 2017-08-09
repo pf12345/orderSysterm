@@ -47,4 +47,11 @@ db.dropDatabase()
 >chmod +x ./deploy.sh
 >./deploy.sh
 
+登录服务器：
+> ssh root@xxx.xxx.xx.xx
+
 ```
+
+## 相关链接
+
+[pm2](http://pm2.keymetrics.io/docs/usage/quick-start/)
