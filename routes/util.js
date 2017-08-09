@@ -1,5 +1,8 @@
 var moment = require('moment');
 var hotel = require('./hotel');
+moment.createFromInputFallback = function(config) {
+  config._d = new Date(config._i);
+};
 
 util = {
   getRightDate: function(dateVal) {
