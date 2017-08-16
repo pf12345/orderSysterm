@@ -239,21 +239,25 @@ XC = {
 
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
-    var queryStr = {
-      $and: [{
+    var queryAnd = [{
+      custom_name: new RegExp(listFilterName)
+    }, {
+      hotel: new RegExp(listFilterHotelName)
+    }, {
+      order_number: new RegExp(listFilterOrderNumber)
+    }, {
+      billing_number: new RegExp(listFilterBillingNumber)
+    }];
+    if(listFilterKey && listFilterKey != 'no') {
+      queryAnd.push({
         [listFilterKey]: {
           $gte: listFilterStartTime,
           $lte: listFilterEndTime
         }
-      }, {
-        custom_name: new RegExp(listFilterName)
-      }, {
-        hotel: new RegExp(listFilterHotelName)
-      }, {
-        order_number: new RegExp(listFilterOrderNumber)
-      }, {
-        billing_number: new RegExp(listFilterBillingNumber)
-      }]
+      })
+    }
+    var queryStr = {
+      $and: queryAnd
     };
     // queryStr[listFilterKey] = {
     //   $gte: listFilterStartTime,

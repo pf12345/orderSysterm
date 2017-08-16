@@ -359,6 +359,9 @@ router.post('/deleteHotelOrdersitem', function(req, res) {
 router.post('/getHotelOrderComparison', function(req, res) {
   Reconciliation.getHotelOrderComparison(req, res);
 })
+router.get('/updateDataReconciliation', function(req, res) {
+  Reconciliation.updateData(req, res);
+})
 
 //平台对账
 router.post('/exportPlatformOrders', function(req, res) {

@@ -15,16 +15,22 @@
     <div class="warp_content">
       <div class="item">
         <Radio-group v-model="listFilterKey">
+          <Radio label="no">
+            <span>无</span>
+          </Radio>
           <Radio label="check_out_date">
               <span>离店日期</span>
           </Radio>
           <Radio label="check_in_date">
               <span>入住日期</span>
           </Radio>
+          <Radio label="order_date">
+            <span>下单日期</span>
+          </Radio>
         </Radio-group>
-        <Date-picker v-model="listFilterStartTime" type="date" placeholder="开始时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
-        <span>至</span>
-        <Date-picker v-model="listFilterEndTime" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <Date-picker v-if="listFilterKey != 'no'" v-model="listFilterStartTime" type="date" placeholder="开始时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
+        <span v-if="listFilterKey != 'no'">至</span>
+        <Date-picker v-if="listFilterKey != 'no'" v-model="listFilterEndTime" type="date" placeholder="截止时间" style="width: 200px;display:inline-block;margin: 0 20px;"></Date-picker>
         <Input v-model="listFilterName" placeholder="请输入姓名" style="width: 200px;margin: 5px"></Input>
         <Input v-model="listFilterHotelName" placeholder="请输入酒店名称" style="width: 200px;margin: 5px"></Input>
         <Input v-model="listFilterOrderNumber" placeholder="请输入订单号" style="width: 200px;margin: 5px"></Input>
@@ -296,7 +302,7 @@
                 showEdit: false,
                 tableHeight: '',
                 showAdd: false,
-                listFilterKey: 'check_out_date',
+                listFilterKey: 'no',
                 listFilterStartTime: this.$root.getLocalDate(),
                 listFilterEndTime: this.$root.getLocalDate(),
                 listFilterName: '', //姓名

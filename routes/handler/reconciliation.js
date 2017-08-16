@@ -241,6 +241,38 @@ var Reconciliation = {
         });
       }, queryStrOrders)
     })
+  },
+
+  updateData(req, res) {
+    this.getHotelOrdersFromDB(function(docs, count) {
+      MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var collection = db.collection('ordersystermHotelOrders');
+        var number = 0;
+        docs.forEach(function(doc, _index) {
+          var o_id = new mongo.ObjectID(doc._id);
+          var billing_number = doc.name;
+          var name = doc.billing_number;
+          collection.updateOne({
+            "_id": o_id
+          }, {
+            $set: {
+              billing_number: billing_number,
+              name: name
+            }
+          }, function(err, result) {
+            number++;
+            if (number >= count) {
+              db.close();
+              res.send({
+                result: 'TRUE',
+              });
+            }
+          });
+        })
+
+      })
+    }, {})
   }
 }
 
