@@ -558,7 +558,9 @@ STATIC = {
                 _hotel.data[doc.check_in_dates[0]].value += Number(doc.room_number);
               }else {
                 doc.check_in_dates.forEach(function(_date) {
-                  _hotel.data[_date].value += Number(doc.room_number);
+                  if(_hotel.data[_date]) {
+                    _hotel.data[_date].value += Number(doc.room_number);
+                  }
                 })
               }
             }
