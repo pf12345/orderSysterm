@@ -112,6 +112,10 @@ structrue.xc = {
   'is_free_sale': {
     name: '是否FREESALE',
     value: ''
+  },
+  'payment_status': {
+    name: '支付状态',
+    value: ''
   }
 }
 

@@ -14,6 +14,7 @@ import Csdjlb from '@/components/csdjlb'
 import Drjgjkjlb from '@/components/drjgjkjlb'
 import EveryDayOrderStatic from '@/components/everyDayOrderStatic'
 import EveryDayRoomNightsStatic from '@/components/everyDayRoomNightsStatic'
+import CheckInRoomNights from '@/components/checkInRoomNights'
 import CheckOutDataStatic from '@/components/checkOutDataStatic'
 import CheckOutDataChannelStatic from '@/components/checkOutDataChannelStatic'
 import LossOrderStatic from '@/components/LossOrderStatic'
@@ -228,6 +229,14 @@ export default new Router({
       name: 'platformOrderComparison',
       components: {
         content: platformOrderComparison,
+        left: Menu
+      }
+    },
+    {
+      path: '/checkInRoomNights',
+      name: 'checkInRoomNights',
+      components: {
+        content: CheckInRoomNights,
         left: Menu
       }
     }

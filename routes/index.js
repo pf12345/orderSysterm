@@ -263,6 +263,9 @@ router.get('/getYesterdayAndTodaydiff', function(req, res) {
 router.get('/getYearToTodayRoomNights', function(req, res) {
   STATIC.getYearToTodayRoomNights(req, res);
 })
+router.post('/getCheckInRoomNights', function(req, res) {
+  STATIC.getCheckInRoomNights(req, res);
+})
 
 //重大销售策略调整记录表 路由
 router.post('/saveZdxscltzjlItem', function(req, res) {

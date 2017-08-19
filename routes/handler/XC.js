@@ -59,9 +59,13 @@ XC = {
                     _settlement = 0, //结算额
                     _hotel_confirm_number = '', //酒店确认号 16
                     _billing_number = '', //发单单号
+                    _payment_status = '', //支付状态
+                    _order_status = '', //订单状态
                     _nights = 0; //晚数
                   _.extend(rowDefault, dataStructure.xc);
+                  // console.log(rowDefault);
                   row.forEach(function(value, _index) {
+                    // console.log(keys[_index]);
                     rowDefault[keys[_index]].value = value;
                     if (_index == 0) {
                       _orderNum = value;
@@ -93,6 +97,9 @@ XC = {
                     if (_index == 13) {
                       _money = value;
                     }
+                    if(_index == 15) {
+                      _order_status = value;
+                    }
                     if (_index == 16) {
                       _hotel_confirm_number = value;
                     }
@@ -102,7 +109,9 @@ XC = {
                     if (_index == 21) {
                       _settlement = value;
                     }
-
+                    if (_index == 27) {
+                      _payment_status = value;
+                    }
                   })
                   save_excel_data.push({
                     created: util.getRightDate(new Date().getTime()),
@@ -124,9 +133,11 @@ XC = {
                     money: _money, //金额
                     settlement: _settlement, //结算额
                     nights: _nights, //晚数
+                    order_status: _order_status, //订单类型
                     hotel_confirm_number: _hotel_confirm_number, //酒店确认号
                     billing_number: _billing_number, //发单单号
-                    notice_hour: util.getRightDateHour(_order_date) //订单时间所属小时
+                    notice_hour: util.getRightDateHour(_order_date), //订单时间所属小时
+                    payment_status: _payment_status //支付状态
                   });
                 }
               }

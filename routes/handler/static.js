@@ -512,6 +512,72 @@ STATIC = {
         count: _docs.length
       });
     })
+  },
+  getCheckInRoomNights: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr.check_in_date = {
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
+    } //{"order_date":{$lt:50}}
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        _hotel.docs = [];
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+
+      docs.forEach(function(doc) {
+        var check_in_dates = []; //每个订单实际入住日期
+        var nights = doc.nights;
+        if(nights > 1) {
+          for(var i = 0, _i = nights; i < _i; i++) {
+            check_in_dates.push(moment(doc.check_in_date).add(i, 'days').format('YYYY-MM-DD'));
+          }
+        }else {
+          check_in_dates.push(moment(doc.check_in_date).format('YYYY-MM-DD'))
+        }
+        doc.check_in_dates = check_in_dates;
+      })
+
+      _hotel_arr.forEach(function(_hotel) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            if(doc.check_in_dates.length) {
+              if(doc.check_in_dates.length == 1) {
+                _hotel.data[doc.check_in_dates[0]].value += Number(doc.room_number);
+              }else {
+                doc.check_in_dates.forEach(function(_date) {
+                  _hotel.data[_date].value += Number(doc.room_number);
+                })
+              }
+            }
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              check_in_date: doc.check_in_date,
+              room_nights: doc.room_nights,
+              check_in_dates: doc.check_in_dates,
+              nights: doc.nights,
+              room_number: doc.room_number
+            });
+          }
+        })
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
   }
 }
 
