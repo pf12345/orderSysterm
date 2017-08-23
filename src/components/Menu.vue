@@ -6,11 +6,8 @@
                         <Icon type="ios-cloud-upload-outline"></Icon>
                         数据录入
                     </template>
-                    <Menu-item name="1-1" >携程</Menu-item>
+                    <Menu-item name="1-1" >导入数据</Menu-item>
                     <Menu-item name="1-2">其他平台</Menu-item>
-                    <!-- <Menu-item name="1-3">途牛</Menu-item> -->
-                    <!-- <Menu-item name="1-4">去哪儿</Menu-item> -->
-                    <!-- <Menu-item name="1-5">同程</Menu-item> -->
                 </Submenu>
                 <Submenu name="2">
                     <template slot="title">

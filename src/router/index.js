@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import orderOriginal from '@/components/orderOriginal'
 import Tuniu from '@/components/Tuniu'
 import Qunaer from '@/components/qunaer'
 import Tongcheng from '@/components/tongcheng'
@@ -44,7 +45,7 @@ export default new Router({
       path: '/',
       name: 'Index',
       components: {
-        content: Index,
+        content: orderOriginal,
         left: Menu
       }
     },

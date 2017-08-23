@@ -9,13 +9,13 @@ var moment = require('moment');
 var dburl = config.dbInfo.url;
 
 var util = require('./../util');
-var XC = require('./XC');
+var originalOrderExport = require('./originalOrderExport');
 var OHTER = require('./other');
 var hotel = require('./../hotel');
 
 STATIC = {
   getAllOrderListFromDB: function(queryStr, cb) {
-    XC.getOrderListXCFromDB(function(XCdocs) {
+    originalOrderExport.getOrderListOriginalFromDB(function(XCdocs) {
       OHTER.getOrderListOTHERFromDB(function(MTdocs) {
         var docs = XCdocs.concat(MTdocs);
         if(cb && typeof cb === 'function') {

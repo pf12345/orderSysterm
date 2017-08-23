@@ -21,7 +21,7 @@ util = {
   },
   //获取酒店简称
   getHotelShortName: function(_hotel) {
-    var __hotel = '';
+    var __hotel = _hotel;
     hotel.forEach(function(h) {
       if (_hotel.indexOf(h.name) != -1) {
         __hotel = h.name;

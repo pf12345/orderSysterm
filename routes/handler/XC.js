@@ -218,7 +218,7 @@ XC = {
   getOrderListXCFromDB: function(cb, queryStr, page, limit) {
     queryStr = queryStr || {};
     page = page || 1;
-    limit = limit || 10000;
+    limit = limit || 100000;
 
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);

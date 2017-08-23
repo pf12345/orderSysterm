@@ -183,7 +183,7 @@
         <Form-item label="结算金额" prop="settlement">
             <Input v-model="formItem.settlement" placeholder="请输入"></Input>
         </Form-item>
-        <Form-item label="酒店预定号" prop="hotel_confirm_number">
+        <Form-item label="酒店确认号" prop="hotel_confirm_number">
             <Input v-model="formItem.hotel_confirm_number" placeholder="请输入"></Input>
         </Form-item>
         <Form-item>

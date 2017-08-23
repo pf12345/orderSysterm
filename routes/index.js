@@ -4,6 +4,7 @@ var router = express.Router();
 
 
 //handlers
+var ORIGINALEXPORT = require('./handler/originalOrderExport')
 var XC = require('./handler/XC')
 var TUNIU = require('./handler/TuNiu')
 var QUNAER = require('./handler/qunaer')
@@ -113,6 +114,30 @@ router.post('/deletePlatformItem', function(req, res) {
 router.post('/updatePlatformItem', function(req, res) {
   PLATFORM.updatePlatformItem(req, res);
 })
+
+//导入原始订单数据
+router.post('/exportOrderOriginal', function(req, res) {
+  ORIGINALEXPORT.exportOrderOriginal(req, res);
+})
+router.post('/saveOrderOriginal', function(req, res) {
+  ORIGINALEXPORT.saveOrderOriginal(req, res);
+})
+router.get('/getOrderListOriginal', function(req, res) {
+  ORIGINALEXPORT.getOrderListOriginal(req, res)
+})
+router.post('/getOrderDetailOriginal', function(req, res) {
+  ORIGINALEXPORT.getOrderDetailOriginal(req, res)
+})
+router.post('/updateOrderOriginalItem', function(req, res) {
+  ORIGINALEXPORT.updateOrderOriginalItem(req, res);
+})
+router.post('/deleteOrderOriginalitem', function(req, res) {
+  ORIGINALEXPORT.deleteOrderOriginalitem(req, res);
+})
+router.get('/updateDataOriginal', function(req, res) {
+  ORIGINALEXPORT.updateData(req, res);
+})
+
 
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
 router.post('/exportOrderXC', function(req, res) {
