@@ -37,6 +37,12 @@ show dbs
 use orderSysterm
 db.dropDatabase()
 
+删除数据：
+db.xxx.remove({created: {       
+  $gte: '2017-08-24 12:00:00',       
+  $lte: '2017-08-24 16:00:00'     
+}})
+
 ```
 
 ## shell命令

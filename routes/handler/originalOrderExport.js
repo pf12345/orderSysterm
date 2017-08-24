@@ -78,8 +78,8 @@ ORIGINALEXPORT = {
               room_type: _room_type, //房型
               custom_name: _custom_name, //入住人
               check_in_date: _checkIn_date_init, //入住时间
-              check_out_date: _checkIn_date_init, //离店时间
-              order_date: _checkIn_date_init, //下单时间
+              check_out_date: _checkOut_date_init, //离店时间
+              order_date: _order_date, //下单时间
               stay_days: _nights, //入住天数
               advance_days: util.getDiffDate(_checkIn_date_init, _order_date, 'days'), //提前预定天数
               room_number: _room_number, //房间数
@@ -175,6 +175,9 @@ ORIGINALEXPORT = {
     var listFilterBillingNumber = req.query.listFilterBillingNumber || '';
     var limit = Number(req.query.limit) || 20;
     var page = Number(req.query.page) || 1;
+
+  
+
     var queryAnd = [{
       custom_name: new RegExp(listFilterName)
     }, {
