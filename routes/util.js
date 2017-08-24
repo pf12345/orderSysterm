@@ -67,6 +67,9 @@ util = {
       default:
         return '';
     }
+  },
+  getExcelDate(num) {
+    return new Date(1900, 0, 0, 0, 0, (num - 1)*24*60*60)
   }
 }
 

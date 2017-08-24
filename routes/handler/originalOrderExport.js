@@ -56,19 +56,18 @@ ORIGINALEXPORT = {
             _orderNum = item[1];
             _hotel = item[2];
             _room_type = item[3];
-            _checkIn_date_init = item[4] ? moment(new Date(1900, 0, item[4] - 1)).format('YYYY-MM-DD HH:mm:ss') : '';
-            _checkOut_date_init = item[5] ? moment(new Date(1900, 0, item[5] - 1)).format('YYYY-MM-DD HH:mm:ss') : '';
+            _checkIn_date_init = item[4] ? moment(util.getExcelDate(item[4])).format('YYYY-MM-DD HH:mm:ss') : '';
+            _checkOut_date_init = item[5] ? moment(util.getExcelDate(item[5])).format('YYYY-MM-DD HH:mm:ss') : '';
             _room_number = item[6];
             _nights = item[7];
             _custom_name = item[8];
-            _order_date = item[9] ? moment(new Date(1900, 0, item[9] - 1)).format('YYYY-MM-DD HH:mm:ss') : '';
+            _order_date = item[9] ? moment(util.getExcelDate(item[9])).format('YYYY-MM-DD HH:mm:ss') : '';
             _money = item[10];
             _order_status = item[11];
             _order_type = item[12];
             _hotel_confirm_number = item[13];
             _billing_number = item[14];
             _settlement = item[15];
-            console.log(item[9], new Date(1900, 0, item[9]), moment(new Date(1900, 0, item[9])).format('YYYY-MM-DD HH:mm:ss'), new Date(1900, 0, item[9] - 1), moment(new Date(1900, 0, item[9] - 1)).format('YYYY-MM-DD HH:mm:ss'));
             save_excel_data.push({
               created: util.getRightDate(new Date().getTime()),
               platform: _platform, //平台
