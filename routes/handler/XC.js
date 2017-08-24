@@ -167,22 +167,8 @@ XC = {
     var saveDatas = []; //保存入数据库数组
     if (req.body.data) {
       //在redis里面去查找订单号
-      redisHander.getValue('order_numbers', function(res) {
-        var order_numbers = [];
-        if (!res) {
-          order_numbers = [];
-        } else {
-          order_numbers = JSON.parse(res.value)
-        }
-        req.body.data.forEach(function(_data) {
-          if (order_numbers.indexOf(_data.order_number) == -1) {
-            saveDatas.push(_data);
-            order_numbers.push(_data.order_number);
-          }
-        })
-        redisHander.setValue('order_numbers', {
-          value: JSON.stringify(order_numbers)
-        });
+      req.body.data.forEach(function(_data) {
+        saveDatas.push(_data);
       })
     }
     MongoClient.connect(url, function(err, db) {

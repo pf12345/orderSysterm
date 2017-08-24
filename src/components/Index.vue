@@ -251,7 +251,7 @@
                 total: 0,
                 detail: {},
                 tableHeight: '',
-                actionUrl: this.$root.serverUrl + '/exportOrderOriginal',
+                actionUrl: this.$root.serverUrl + '/exportOrderXC',
                 formItem: {
                   settlementAmount: 0
                 },
