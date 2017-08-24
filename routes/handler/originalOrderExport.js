@@ -68,6 +68,7 @@ ORIGINALEXPORT = {
             _hotel_confirm_number = item[13];
             _billing_number = item[14];
             _settlement = item[15];
+            console.log(item[9], new Date(1900, 0, item[9]), moment(new Date(1900, 0, item[9])).format('YYYY-MM-DD HH:mm:ss'), new Date(1900, 0, item[9] - 1), moment(new Date(1900, 0, item[9] - 1)).format('YYYY-MM-DD HH:mm:ss'));
             save_excel_data.push({
               created: util.getRightDate(new Date().getTime()),
               platform: _platform, //平台
