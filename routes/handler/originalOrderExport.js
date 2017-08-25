@@ -50,8 +50,8 @@ ORIGINALEXPORT = {
 
       if (workSheetsFromFile[0].data && workSheetsFromFile[0].data.length) {
         for (var i = 0, _i = workSheetsFromFile[0].data.length; i < _i; i++) {
-          if (i > 0) {
-            var item = workSheetsFromFile[0].data[i];
+          var item = workSheetsFromFile[0].data[i];
+          if (i > 0 && item.length) {
             _platform = item[0];
             _orderNum = item[1];
             _hotel = item[2];
@@ -68,13 +68,14 @@ ORIGINALEXPORT = {
             _hotel_confirm_number = item[13];
             _billing_number = item[14];
             _settlement = item[15];
+            console.log(item);
             save_excel_data.push({
               created: util.getRightDate(new Date().getTime()),
               platform: _platform, //平台
               platform_en: _platform,
               order_number: _orderNum + '', //订单号
-              hotel: _hotel, //酒店
-              hotel_short_name: util.getHotelShortName(_hotel), //酒店简称
+              hotel: _hotel || "", //酒店
+              hotel_short_name: _hotel ? util.getHotelShortName(_hotel) : '', //酒店简称
               room_type: _room_type, //房型
               custom_name: _custom_name, //入住人
               check_in_date: _checkIn_date_init, //入住时间
