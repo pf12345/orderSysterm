@@ -9637,8 +9637,8 @@ __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].afterEach((to, from, ne
   __WEBPACK_IMPORTED_MODULE_3_iview___default.a.LoadingBar.finish();
 });
 
-let AJAXDOMAIN = 'http://127.0.0.1:8033';
-// let AJAXDOMAIN = '';
+// let AJAXDOMAIN = 'http://127.0.0.1:8033';
+let AJAXDOMAIN = '';
 /* eslint-disable no-new */
 new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
   el: '#app',
