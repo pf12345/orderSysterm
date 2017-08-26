@@ -180,40 +180,43 @@ var Reconciliation = {
   getHotelOrderComparison: function(req, res) {
     var _this = this;
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var page = req.body.page || 1;
     var limit = req.body.limit || 10000;
     var queryStr = {};
     queryStr = {
-      'order_date': {
+      'check_out_date': {
         $gte: startTime,
         $lte: endTime
       }
     }
     var queryStrOrders = {};
     queryStrOrders = {
-      'created': {
+      'check_out_date': {
         $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
         $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
       }
     }
     STATIC.getAllOrderListFromDB(queryStr, function(docs) {
       _this.getHotelOrdersFromDB(function(_docs, count) {
-        var lists = [], $_docs = [];
+        var lists = [], $_docs = [], rightList = [], errorList = [];
         _docs.forEach(function(_doc) {
           docs.forEach(function(doc) {
             if(_doc.billing_number == doc.billing_number) {
+              _doc.systemSettlement = doc.settlement;
               if(_doc.settlement != doc.settlement) {
                 _doc.isError = true;
+                errorList.push(_doc);
               }else {
                 _doc.isError = false;
+                rightList.push(_doc);
               }
-              _doc.systemSettlement = doc.settlement;
-              lists.push(_doc);
+
             }
           })
         })
+        lists = errorList.concat(rightList);
         $_docs = lists.filter(function(_doc, _index) {
           if(page && limit) {
             if((_index < (page - 1) * limit) || (_index > page * limit - 1)) {
