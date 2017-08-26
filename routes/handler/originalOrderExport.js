@@ -203,6 +203,7 @@ ORIGINALEXPORT = {
     //   $gte: listFilterStartTime,
     //   $lte: listFilterEndTime
     // } //{"order_date":{$lt:50}}
+    console.log(queryStr);
     this.getOrderListOriginalFromDB(function(docs, count) {
       res.send({
         result: 'TRUE',
