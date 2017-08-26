@@ -31,20 +31,21 @@ var Reconciliation = {
       var lists = [];
       if(workSheetsFromFile[0].data && workSheetsFromFile[0].data.length) {
         for(var i = 0, _i = workSheetsFromFile[0].data.length; i < _i; i++) {
-          if(i > 1) {
-            var _item = workSheetsFromFile[0].data[i];
+          var _item = workSheetsFromFile[0].data[i];
+          if(i > 1 && _item && _item.length) {
             var _list = {};
             if(_item && _item[2]) {
-                _list.name = _item[1] || '';
-                _list.billing_number = _item[2] || ''; //发单单号2
-                _list.hotel_confirm_number = _item[3] || ''; //酒店确认号 3
-                _list.check_in_date = _item[4] ? moment(new Date(1900, 0, _item[4])).format('YYYY-M-D') : ''; //入住时间 第4个
-                _list.check_out_date = _item[5] ? moment(new Date(1900, 0, _item[4])).format('YYYY-M-D') : ''; //离店时间 第5个
-                _list.nights = _item[6] || 0; //晚数 6
-                _list.room_number = _item[7] || 0; //房间数 7
-                _list.room_nights = _item[8] || 0; //间夜数 8
-                _list.unit_settlement = _item[9] || 0; //结算单价 9
-                _list.settlement = _item[10] || 0; //结算额 10
+                _list.hotel = _item[1] || '';
+                _list.name = _item[2] || '';
+                _list.billing_number = _item[3] || ''; //发单单号3
+                _list.hotel_confirm_number = _item[4] || ''; //酒店确认号 4
+                _list.check_in_date = _item[5] ? moment(util.getExcelDate(_item[5])).format('YYYY-MM-DD HH:mm:ss') : ''; //入住时间 第4个
+                _list.check_out_date = _item[6] ? moment(util.getExcelDate(_item[6])).format('YYYY-MM-DD HH:mm:ss') : ''; //离店时间 第5个
+                _list.nights = _item[7] || 0; //晚数 7
+                _list.room_number = _item[8] || 0; //房间数 8
+                _list.room_nights = _item[9] || 0; //间夜数 9
+                _list.unit_settlement = _item[10] || 0; //结算单价 10
+                _list.settlement = _item[11] || 0; //结算额 11
                 _list.created = util.getRightDate(new Date().getTime());
                 lists.push(_list);
             }
@@ -61,21 +62,8 @@ var Reconciliation = {
   saveHotelOrders: function(req, res) {
     var saveDatas = []; //保存入数据库数组
     if(req.body.data) {
-      //在redis里面去查找订单号
-      redisHander.getValue('hotel_billing_numbers', function(res) {
-        var billing_numbers = [];
-        if(!res) {
-          billing_numbers = [];
-        }else{
-          billing_numbers = JSON.parse(res.value)
-        }
-        req.body.data.forEach(function(_data) {
-          if(billing_numbers.indexOf(_data.billing_number) == -1) {
-            saveDatas.push(_data);
-            billing_numbers.push(_data.billing_number);
-          }
-        })
-        redisHander.setValue('hotel_billing_numbers', {value: JSON.stringify(billing_numbers)});
+      req.body.data.forEach(function(_data) {
+        saveDatas.push(_data);
       })
     }
     MongoClient.connect(url, function(err, db) {

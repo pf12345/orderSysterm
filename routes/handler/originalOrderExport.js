@@ -283,6 +283,33 @@ ORIGINALEXPORT = {
       });
     })
   },
+  deleteOrderOriginalitemsMore: function(req, res) {
+    /*
+    { _id : { $in: [
+    ObjectId("51ee3966e4b056fe8f074f48"),
+    ObjectId("51ee3966e4b056fe8f074f4a"),
+    ObjectId("51ee3966e4b056fe8f074f4b")
+] } }
+    */
+    var item_ids = req.body._ids;
+    MongoClient.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var collection = db.collection('ordersystermOriginal');
+      var ids = [];
+      item_ids.forEach(function(id) {
+        ids.push(new mongo.ObjectID(id))
+      })
+      // Update document where a is 2, set b equal to 1
+      collection.deleteMany({ _id : { $in: ids}}, {}, function(err, result) {
+        db.close();
+        res.send({
+          result: 'TRUE',
+          data: result
+        });
+      });
+    })
+
+  },
   //同步以前数据
   updateData: function(req, res) {
     XC.getOrderListXCFromDB(function(docs, count) {

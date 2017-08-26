@@ -7,7 +7,7 @@
                         数据录入
                     </template>
                     <Menu-item name="1-1" >导入数据</Menu-item>
-                    <Menu-item name="1-2">其他平台</Menu-item>
+                    <!-- <Menu-item name="1-2">其他平台</Menu-item> -->
                 </Submenu>
                 <Submenu name="2">
                     <template slot="title">
@@ -22,6 +22,7 @@
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据渠道占比分析') != -1" name="2-6">离店数据渠道占比分析</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('亏损订单明细') != -1" name="2-8">亏损订单明细</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店总体统计') != -1" name="2-9">酒店总体统计</Menu-item>
                 </Submenu>
 
                 <Submenu name="4" v-if="!user.jurisdictions || user.jurisdictions.indexOf('数据监控及记录保存') != -1">
@@ -111,6 +112,9 @@
               case '2-8':
                 window.location.href = '/#/lossOrderStatic'
                 break;
+              case '2-9':
+                  window.location.href = '/#/hotelStatic'
+                  break;
               case '4-1':
                 window.location.href = '/#/drjgjkjlb';
                 break;

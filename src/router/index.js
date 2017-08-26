@@ -30,6 +30,8 @@ import AccountManagement from '@/components/accountManagement'
 import HotelManagement from '@/components/hotelManagement'
 import PlatformManagement from '@/components/platformManagement'
 
+import hotelStatic from '@/components/hotelStatic'
+
 Vue.use(Router)
 
 export default new Router({
@@ -238,6 +240,14 @@ export default new Router({
       name: 'checkInRoomNights',
       components: {
         content: CheckInRoomNights,
+        left: Menu
+      }
+    },
+    {
+      path: '/hotelStatic',
+      name: 'hotelStatic',
+      components: {
+        content: hotelStatic,
         left: Menu
       }
     }

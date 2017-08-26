@@ -35,6 +35,7 @@
         @on-ok="ok"
         width="700"
         @on-cancel="cancel">
+        <p>共{{previewData.length}}条数据</p>
         <Table :columns="columns" :data="previewData"></Table>
     </Modal>
 
@@ -147,23 +148,29 @@
 
                 columns: [
                   {
-                      title: '姓名',
-                      key: 'name',
+                      title: '订单号',
+                      key: 'order_number',
                       width: 120,
                       // fixed: 'left'
                   },
                   {
-                      title: '发单单号',
-                      key: 'billing_number',
+                      title: '城市',
+                      key: 'city',
                       width: 150
                   },
                     {
-                        title: '酒店确认号',
+                        title: '酒店',
                         width: 180,
-                        key: 'hotel_confirm_number'
+                        key: 'hotel'
                     },
                     {
-                        title: '入住时间',
+                        title: '房型',
+                        width: 180,
+                        key: 'room_type'
+                    },
+
+                    {
+                        title: '入住日期',
                         width: 100,
                         key: 'check_in_date',
                         render(h, {row, column, index}) {
@@ -193,17 +200,21 @@
                         width: 80,
                         key: 'room_nights'
                     },
-
-                    {
-                        title: '结算单价',
-                        width: 200,
-                        key: 'unit_settlement'
-                    },
                     {
                         title: '结算金额',
                         width: 200,
                         key: 'settlement'
-                    }
+                    },
+                    {
+                        title: '入住人',
+                        width: 200,
+                        key: 'name'
+                    },
+                    {
+                        title: '预定日期',
+                        width: 200,
+                        key: 'order_date'
+                    },
                 ],
                 data: [],
                 previewData: [],

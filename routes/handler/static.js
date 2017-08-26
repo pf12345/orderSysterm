@@ -580,6 +580,44 @@ STATIC = {
         data: _hotel_arr
       })
     })
+  },
+  getHotelTotalStatic: function(req, res) {
+    var dateStart = moment(req.query.dateStart).format('YYYY-MM-DD') + ' 00:00:00';
+    var dateEnd = moment(req.query.dateEnd).format('YYYY-MM-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr.order_date = {
+      $gte: dateStart,
+      $lte: dateEnd
+    }
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {
+          totalOrders: 0, //总单数
+          totalRoomNights: 0, //总间夜
+          totalAmount: 0, //总金额
+          totalSettlement: 0, //总成本
+          totalGrossProfit: 0 //总毛利
+        };
+        _hotel.docs = [];
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.data.totalOrders += 1;
+            _hotel.data.totalRoomNights += (Number(doc.room_nights) || 0);
+            _hotel.data.totalAmount += (Number(doc.money) || 0);
+            _hotel.data.totalSettlement += (Number(doc.settlement) || 0);
+            _hotel.data.totalGrossProfit += (Number(doc.money - doc.settlement) || 0);
+          }
+        })
+      })
+
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
   }
 }
 

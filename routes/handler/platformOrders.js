@@ -30,20 +30,25 @@ var PlatformOrders = {
       var lists = [];
       if(workSheetsFromFile[0].data && workSheetsFromFile[0].data.length) {
         for(var i = 0, _i = workSheetsFromFile[0].data.length; i < _i; i++) {
-          if(i > 1) {
-            var _item = workSheetsFromFile[0].data[i];
+          var _item = workSheetsFromFile[0].data[i];
+          if(i > 0 && _item && _item.length) {
             var _list = {};
             if(_item && _item[2]) {
-                _list.name = _item[1] || '';
-                _list.billing_number = _item[2] || ''; //发单单号2
-                _list.hotel_confirm_number = _item[3] || ''; //酒店确认号 3
-                _list.check_in_date = _item[4] ? moment(new Date(1900, 0, _item[4])).format('YYYY-M-D') : ''; //入住时间 第4个
-                _list.check_out_date = _item[5] ? moment(new Date(1900, 0, _item[4])).format('YYYY-M-D') : ''; //离店时间 第5个
-                _list.nights = _item[6] || 0; //晚数 6
-                _list.room_number = _item[7] || 0; //房间数 7
-                _list.room_nights = _item[8] || 0; //间夜数 8
-                _list.unit_settlement = _item[9] || 0; //结算单价 9
+                _list.order_number = _item[0] || '';
+                _list.city = _item[1] || '';
+                _list.hotel = _item[2] || '';
+                _list.room_type = _item[3] || '';
+                _list.check_in_date = _item[4] ? moment(util.getExcelDate(_item[4])).format('YYYY-MM-DD HH:mm:ss') : ''; //入住时间 第4个
+                _list.check_out_date = _item[5] ? moment(util.getExcelDate(_item[5])).format('YYYY-MM-DD HH:mm:ss') : ''; //离店时间 第5个
+                _list.room_number = _item[6] || 0; //房间数 6
+                _list.nights = _item[7] || 0; //晚数 7
+                _list.money = _item[8] || 0;
                 _list.settlement = _item[10] || 0; //结算额 10
+                _list.name = _item[11] || ''; //入住人
+                _list.order_status = _item[12] || ''; //订单状态
+                _list.settlement_status = _item[13] || ''; //结算状态
+                _list.order_date = _item[14] ? moment(util.getExcelDate(_item[14])).format('YYYY-MM-DD HH:mm:ss') : '';
+                _list.room_nights = _list.room_number * _list.nights; //间夜数 8
                 _list.created = util.getRightDate(new Date().getTime());
                 lists.push(_list);
             }
@@ -61,20 +66,10 @@ var PlatformOrders = {
     var saveDatas = []; //保存入数据库数组
     if(req.body.data) {
       //在redis里面去查找订单号
-      redisHander.getValue('platform_billing_numbers', function(res) {
-        var billing_numbers = [];
-        if(!res) {
-          billing_numbers = [];
-        }else{
-          billing_numbers = JSON.parse(res.value)
+      req.body.data.forEach(function(_data) {
+        if(_data) {
+          saveDatas.push(_data);
         }
-        req.body.data.forEach(function(_data) {
-          if(billing_numbers.indexOf(_data.billing_number) == -1) {
-            saveDatas.push(_data);
-            billing_numbers.push(_data.billing_number);
-          }
-        })
-        redisHander.setValue('platform_billing_numbers', {value: JSON.stringify(billing_numbers)});
       })
     }
     MongoClient.connect(url, function(err, db) {

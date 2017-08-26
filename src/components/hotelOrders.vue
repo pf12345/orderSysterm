@@ -35,6 +35,7 @@
         @on-ok="ok"
         width="700"
         @on-cancel="cancel">
+        <p>共{{previewData.length}}条数据</p>
         <Table :columns="columns" :data="previewData"></Table>
     </Modal>
 
@@ -151,6 +152,11 @@
                       key: 'name',
                       width: 120,
                       // fixed: 'left'
+                  },
+                  {
+                      title: '酒店',
+                      key: 'hotel',
+                      width: 150
                   },
                   {
                       title: '发单单号',

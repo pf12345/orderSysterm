@@ -38,8 +38,9 @@
         <Input v-model="listFilterOrderNumber" placeholder="请输入订单号" style="width: 200px;margin: 5px"></Input>
         <Input v-model="listFilterBillingNumber" placeholder="请输入发单号" style="width: 200px;margin: 5px"></Input>
         <Button type="info" @click="listFilter">查询</Button>
+        <Button type="info" @click="deleteMore">删除选中项</Button>
       </div>
-      <Table :height="tableHeight" :columns="columns" :data="data" @on-row-click="gotoDetail"></Table>
+      <Table :height="tableHeight" :columns="columns" :data="data" @on-selection-change="sectionSelect" @on-row-click="gotoDetail"></Table>
       <div style="margin: 10px;overflow: hidden">
         <div style="float: right;">
             <Page :total="total" :current="page" :page-size="limit" @on-change="changePage"></Page>
@@ -52,6 +53,7 @@
         @on-ok="ok"
         width="700"
         @on-cancel="cancel">
+        <p>共{{previewData.length}}条数据</p>
         <Table :columns="columns" :data="previewData"></Table>
     </Modal>
 
@@ -246,6 +248,7 @@
                 listFilterHotelName: '', //酒店名
                 listFilterOrderNumber: '', //订单号
                 listFilterBillingNumber: '', //发单号
+                deleteMoreIds: [],
                 limit: 20,
                 page: 1,
                 total: 0,
@@ -265,6 +268,11 @@
                   ]
                 },
                 columns: [
+                  {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
                   {
                     title: '平台',
                     key: 'platform',
@@ -507,6 +515,35 @@
             },
             closeEdit() {
               this.showEdit = false;
+            },
+            sectionSelect(arrs) {
+              var ids = [];
+              arrs.forEach(function(item) {
+                ids.push(item._id);
+              })
+              this.deleteMoreIds = ids;
+            },
+            deleteMore() {
+              var that = this;
+              if(!this.deleteMoreIds.length) {
+                this.$Message.error('请选择需要删除的数据!');
+                return;
+              }
+              this.$Modal.warning({
+                title: '确认信息',
+                content: '确认删除选中的'+this.deleteMoreIds.length+'条数据？',
+                onOk: function() {
+                  that.$root.ajaxPost({
+                    funName: 'deleteOrderOriginalitemsMore',
+                    params: {
+                      _ids: that.deleteMoreIds
+                    }
+                  }, function(res) {
+                    that.deleteMoreIds = [];
+                    that.listFilter();
+                  })
+                }
+              })
             }
         },
         watch: {

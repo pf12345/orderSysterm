@@ -137,6 +137,9 @@ router.post('/deleteOrderOriginalitem', function(req, res) {
 router.get('/updateDataOriginal', function(req, res) {
   ORIGINALEXPORT.updateData(req, res);
 })
+router.post('/deleteOrderOriginalitemsMore', function(req, res) {
+  ORIGINALEXPORT.deleteOrderOriginalitemsMore(req, res);
+})
 
 
 //导入携程数据表,日期会转化为数字，使用时 var date = new Date(1900, 0, dateVal - 1);
@@ -290,6 +293,9 @@ router.get('/getYearToTodayRoomNights', function(req, res) {
 })
 router.post('/getCheckInRoomNights', function(req, res) {
   STATIC.getCheckInRoomNights(req, res);
+})
+router.get('/getHotelTotalStatic', function(req, res) {
+  STATIC.getHotelTotalStatic(req, res);
 })
 
 //重大销售策略调整记录表 路由
