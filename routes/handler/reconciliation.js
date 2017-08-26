@@ -32,7 +32,7 @@ var Reconciliation = {
       if(workSheetsFromFile[0].data && workSheetsFromFile[0].data.length) {
         for(var i = 0, _i = workSheetsFromFile[0].data.length; i < _i; i++) {
           var _item = workSheetsFromFile[0].data[i];
-          if(i > 1 && _item && _item.length) {
+          if(i > 0 && _item && _item.length) {
             var _list = {};
             if(_item && _item[2]) {
                 _list.hotel = _item[1] || '';

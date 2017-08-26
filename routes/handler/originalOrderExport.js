@@ -47,28 +47,26 @@ ORIGINALEXPORT = {
         _hotel_confirm_number = '', //酒店确认号 13
         _billing_number = '', //发单单号 14
         _settlement = 0; //结算额 15
-
       if (workSheetsFromFile[0].data && workSheetsFromFile[0].data.length) {
         for (var i = 0, _i = workSheetsFromFile[0].data.length; i < _i; i++) {
           var item = workSheetsFromFile[0].data[i];
           if (i > 0 && item.length) {
-            _platform = item[0];
-            _orderNum = item[1];
-            _hotel = item[2];
-            _room_type = item[3];
+            _platform = item[0] || '';
+            _orderNum = item[1] || '';
+            _hotel = item[2] || '';
+            _room_type = item[3] || '';
             _checkIn_date_init = item[4] ? moment(util.getExcelDate(item[4])).format('YYYY-MM-DD HH:mm:ss') : '';
             _checkOut_date_init = item[5] ? moment(util.getExcelDate(item[5])).format('YYYY-MM-DD HH:mm:ss') : '';
-            _room_number = item[6];
-            _nights = item[7];
-            _custom_name = item[8];
+            _room_number = item[6] || '';
+            _nights = item[7] || '';
+            _custom_name = item[8] || '';
             _order_date = item[9] ? moment(util.getExcelDate(item[9])).format('YYYY-MM-DD HH:mm:ss') : '';
-            _money = item[10];
-            _order_status = item[11];
-            _order_type = item[12];
-            _hotel_confirm_number = item[13];
-            _billing_number = item[14];
-            _settlement = item[15];
-            console.log(item);
+            _money = item[10] || '';
+            _order_status = item[11] || '';
+            _order_type = item[12] || '';
+            _hotel_confirm_number = item[13] || '';
+            _billing_number = item[14] || '';
+            _settlement = item[15] || '';
             save_excel_data.push({
               created: util.getRightDate(new Date().getTime()),
               platform: _platform, //平台
@@ -150,7 +148,7 @@ ORIGINALEXPORT = {
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       var collection = db.collection('ordersystermOriginal');
-      var cursor = collection.find(queryStr);
+      var cursor = collection.find(queryStr).sort([['created', -1]]);
       cursor.count(function(err, count) {
         cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
           assert.equal(null, err);
@@ -313,50 +311,33 @@ ORIGINALEXPORT = {
   },
   //同步以前数据
   updateData: function(req, res) {
-    XC.getOrderListXCFromDB(function(docs, count) {
-      var list = [];
+    this.getOrderListOriginalFromDB(function(docs, count) {
+      var list = [], num = 0;
       docs.forEach(function(doc) {
-        if(doc) {
-          list.push({
-            created: doc.created,
-            platform: doc.platform, //平台
-            platform_en: doc.platform_en,
-            order_number: doc.order_number, //订单号
-            hotel: doc.hotel, //酒店
-            hotel_short_name: doc.hotel_short_name, //酒店简称
-            room_type: doc.room_type, //房型
-            custom_name: doc.custom_name, //入住人
-            check_in_date: doc.check_in_date, //入住时间
-            check_out_date: doc.check_out_date, //离店时间
-            order_date: doc.order_date, //下单时间
-            stay_days: doc.stay_days, //入住天数
-            advance_days: doc.advance_days, //提前预定天数
-            room_number: doc.room_number, //房间数
-            room_nights: doc.room_nights, //间夜数
-            money: doc.money, //金额
-            settlement: doc.settlement, //结算额
-            nights: doc.nights, //晚数
-            order_status: doc.order_status, //订单状态
-            order_type: doc.order_type, //订单类型
-            hotel_confirm_number: doc.hotel_confirm_number, //酒店确认号
-            billing_number: doc.billing_number, //发单单号
-            notice_hour: doc.notice_hour //订单时间所属小时
-          })
-        }
-      })
-      MongoClient.connect(url, function(err, db) {
-        assert.equal(null, err);
-        var collection = db.collection('ordersystermOriginal');
-        collection.insertMany(list, function(err, result) {
-          assert.equal(err, null);
-          db.close();
-          res.send({
-            result: 'TRUE',
-            data: list
+        var item_id = doc._id;
+        MongoClient.connect(url, function(err, db) {
+          assert.equal(null, err);
+          var collection = db.collection('ordersystermOriginal');
+          var o_id = new mongo.ObjectID(item_id);
+          // Update document where a is 2, set b equal to 1
+          var _set = {billing_number: ''};
+          collection.updateOne({
+            "_id": o_id
+          }, {
+            $set: _set
+          }, function(err, result) {
+            num += 1;
+            if(num >= count) {
+              db.close();
+              res.send({
+                result: 'TRUE',
+                data: true
+              });
+            }
           });
-        });
+        })
       })
-    })
+    }, {'platform': '睿华艺龙'})
   }
 }
 
