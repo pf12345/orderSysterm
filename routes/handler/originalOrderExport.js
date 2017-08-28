@@ -148,8 +148,7 @@ ORIGINALEXPORT = {
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       var collection = db.collection('ordersystermOriginal');
-      // var cursor = collection.find(queryStr).sort([['created', -1]]);
-      var cursor = collection.find(queryStr);
+      var cursor = collection.find(queryStr).sort([['created', -1]]);
       cursor.count(function(err, count) {
         cursor.skip((page - 1) * limit).limit(limit).toArray(function(err, docs) {
           assert.equal(null, err);
