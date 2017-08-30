@@ -4741,6 +4741,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4750,11 +4764,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     month = month < 10 ? '0' + month : month;
     return {
       filterTime: new Date().getFullYear() + '-' + month,
+      listFilterKey: 'check_out_date',
       limit: 20,
       page: 1,
       total: 0,
       detail: {},
       tableHeight: '',
+      hotel: '全部',
+      filterHotels: [{
+        key: "all",
+        name: "全部",
+        name_all: "全部"
+      }],
       columns: [{
         title: '是否正确',
         key: 'isError',
@@ -4821,6 +4842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created() {
     this.listFilter();
+    this.getHotelList();
   },
   methods: {
     listFilter() {
@@ -4830,7 +4852,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         params: {
           limit: this.limit,
           page: this.page,
-          time: _this.filterTime
+          time: _this.filterTime,
+          hotel: _this.hotel,
+          listFilterKey: _this.listFilterKey
         }
       }, function (res, initRes) {
         // console.log(res, initRes);
@@ -4838,8 +4862,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.total = initRes.count;
       });
     },
-    filterTimeChange(value) {
+    getHotelList() {
+      var _this = this;
+      this.$root.ajaxGet({
+        funName: 'getHotelList'
+      }, function (res) {
+        _this.hotels = res;
+        _this.filterHotels = _this.filterHotels.concat(res);
+      });
+    },
+    dateChange(value) {
       this.filterTime = value;
+    },
+    filterTimeChange() {
+      // this.filterTime = value;
       this.listFilter();
     },
     changePage(value) {
@@ -20084,7 +20120,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "margin-bottom": "20px"
     }
-  }, [_c('Date-picker', {
+  }, [_c('Radio-group', {
+    model: {
+      value: (_vm.listFilterKey),
+      callback: function($$v) {
+        _vm.listFilterKey = $$v
+      },
+      expression: "listFilterKey"
+    }
+  }, [_c('Radio', {
+    attrs: {
+      "label": "check_out_date"
+    }
+  }, [_c('span', [_vm._v("离店日期")])]), _vm._v(" "), _c('Radio', {
+    attrs: {
+      "label": "check_in_date"
+    }
+  }, [_c('span', [_vm._v("入住日期")])])], 1), _vm._v(" "), _c('Date-picker', {
     staticStyle: {
       "width": "200px"
     },
@@ -20093,7 +20145,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "选择月"
     },
     on: {
-      "on-change": _vm.filterTimeChange
+      "on-change": _vm.dateChange
     },
     model: {
       value: (_vm.filterTime),
@@ -20102,7 +20154,38 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "filterTime"
     }
-  })], 1), _vm._v(" "), _c('Table', {
+  }), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "display": "inline-block",
+      "width": "150px",
+      "margin-right": "10px"
+    }
+  }, [_c('Select', {
+    attrs: {
+      "placeholder": "请选择酒店名称"
+    },
+    model: {
+      value: (_vm.hotel),
+      callback: function($$v) {
+        _vm.hotel = $$v
+      },
+      expression: "hotel"
+    }
+  }, _vm._l((_vm.filterHotels), function(_hotel) {
+    return _c('Option', {
+      key: _hotel.key,
+      attrs: {
+        "value": _hotel.name
+      }
+    }, [_vm._v(_vm._s(_hotel.name))])
+  }))], 1), _vm._v(" "), _c('Button', {
+    attrs: {
+      "type": "info"
+    },
+    on: {
+      "click": _vm.filterTimeChange
+    }
+  }, [_vm._v("查询")])], 1), _vm._v(" "), _c('Table', {
     attrs: {
       "row-class-name": _vm.rowClassName,
       "height": _vm.tableHeight,

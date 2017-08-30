@@ -184,20 +184,40 @@ var Reconciliation = {
     var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var page = req.body.page || 1;
     var limit = req.body.limit || 10000;
-    var queryStr = {};
-    queryStr = {
-      'check_out_date': {
+    var listFilterKey = req.body.listFilterKey || 'check_out_date';
+    var hotel = req.body.hotel;
+    var queryAnd = [{
+      [listFilterKey]: {
         $gte: startTime,
         $lte: endTime
       }
+    }];
+    if(hotel && hotel != '全部') {
+      queryAnd.push( {
+        hotel: new RegExp(hotel)
+      })
     }
-    var queryStrOrders = {};
-    queryStrOrders = {
-      'check_out_date': {
-        $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
-        $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
-      }
-    }
+    var queryStr = {
+      $and: queryAnd
+    };
+
+    queryStrOrders = queryStr;
+
+    // queryStr = {
+    //   'check_out_date': {
+    //     $gte: startTime,
+    //     $lte: endTime
+    //   }
+    // }
+
+    // var queryStrOrders = {};
+    // queryStrOrders = {
+    //   'check_out_date': {
+    //     $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+    //     $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
+    //   }
+    // }
+
     STATIC.getAllOrderListFromDB(queryStr, function(docs) {
       _this.getHotelOrdersFromDB(function(_docs, count) {
         var lists = [], $_docs = [], rightList = [], errorList = [];

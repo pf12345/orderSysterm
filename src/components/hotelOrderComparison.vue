@@ -14,8 +14,22 @@
     </div>
     <div class="warp_content">
       <div style="margin-bottom: 20px;">
-          <Date-picker type="month" @on-change="filterTimeChange" v-model="filterTime" placeholder="选择月"
+        <Radio-group v-model="listFilterKey">
+          <Radio label="check_out_date">
+              <span>离店日期</span>
+          </Radio>
+          <Radio label="check_in_date">
+              <span>入住日期</span>
+          </Radio>
+        </Radio-group>
+          <Date-picker type="month" v-model="filterTime" placeholder="选择月" @on-change="dateChange"
                        style="width: 200px"></Date-picker>
+                       <div class="" style="display: inline-block; width: 150px;margin-right: 10px;">
+                         <Select v-model="hotel" placeholder="请选择酒店名称">
+                             <Option v-for="_hotel in filterHotels" :value="_hotel.name" :key="_hotel.key">{{_hotel.name}}</Option>
+                         </Select>
+                       </div>
+        <Button type="info" @click="filterTimeChange">查询</Button>
       </div>
       <Table :row-class-name="rowClassName" :height="tableHeight" :columns="columns" :data="data"></Table>
       <div style="margin: 10px;overflow: hidden">
@@ -66,11 +80,18 @@
           month = month < 10 ? '0' + month : month;
             return {
                 filterTime: new Date().getFullYear() + '-' + month,
+                listFilterKey: 'check_out_date',
                 limit: 20,
                 page: 1,
                 total: 0,
                 detail: {},
                 tableHeight: '',
+                hotel: '全部',
+                filterHotels: [{
+                  key: "all",
+                  name: "全部",
+                  name_all: "全部"
+                }],
                 columns: [
                   {
                     title: '是否正确',
@@ -152,6 +173,7 @@
         },
         created() {
           this.listFilter();
+          this.getHotelList();
         },
         methods: {
           listFilter() {
@@ -161,7 +183,9 @@
               params: {
                 limit: this.limit,
                 page: this.page,
-                time: _this.filterTime
+                time: _this.filterTime,
+                hotel: _this.hotel,
+                listFilterKey: _this.listFilterKey
               }
             }, function(res, initRes) {
               // console.log(res, initRes);
@@ -169,8 +193,20 @@
               _this.total = initRes.count;
             })
           },
-          filterTimeChange(value) {
+          getHotelList() {
+            var _this = this;
+            this.$root.ajaxGet({
+              funName: 'getHotelList'
+            }, function(res) {
+              _this.hotels = res;
+              _this.filterHotels = _this.filterHotels.concat(res);
+            })
+          },
+          dateChange(value) {
               this.filterTime = value;
+          },
+          filterTimeChange() {
+              // this.filterTime = value;
               this.listFilter();
           },
           changePage(value) {
