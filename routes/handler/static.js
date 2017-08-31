@@ -618,6 +618,156 @@ STATIC = {
         data: _hotel_arr
       })
     })
+  },
+  checkoutRoomNightsStatic: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr.check_out_date = {
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
+    } //{"order_date":{$lt:50}}
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        _hotel.docs = [];
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+
+      _hotel_arr.forEach(function(_hotel) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              check_out_date: doc.check_out_date,
+              room_nights: doc.room_nights
+            });
+          }
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        if(_hotel.docs && _hotel.docs.length) {
+          _hotel.docs.forEach(function(doc) {
+            var key = moment(doc.check_out_date).format('YYYY-MM-DD');
+            if (moment(key) && moment(key).isSame && doc.check_out_date && moment(key).isSame(doc.check_out_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += Number(doc.room_nights || 0);
+            }
+          })
+        }
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
+  },
+  checkoutGrossProfitStatic: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr.check_out_date = {
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
+    } //{"order_date":{$lt:50}}
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        _hotel.docs = [];
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+
+      _hotel_arr.forEach(function(_hotel) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              check_out_date: doc.check_out_date,
+              grossProfit: Number(doc.money - doc.settlement) || 0
+            });
+          }
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        if(_hotel.docs && _hotel.docs.length) {
+          _hotel.docs.forEach(function(doc) {
+            var key = moment(doc.check_out_date).format('YYYY-MM-DD');
+            if (moment(key) && moment(key).isSame && doc.check_out_date && moment(key).isSame(doc.check_out_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += Number(doc.grossProfit || 0);
+            }
+          })
+        }
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
+  },
+  checkoutSaleAmountStatic: function(req, res) {
+    var time = req.body.time;
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
+    var queryStr = {};
+    queryStr.check_out_date = {
+      $gte: util.getRightDate(startTime),
+      $lte: util.getRightDate(endTime)
+    } //{"order_date":{$lt:50}}
+    this.getAllOrderListFromDB(queryStr, function(docs) {
+      var daysArr = util.getDates(time);
+      var _hotel_arr = _.extend([], hotel);
+      _hotel_arr.forEach(function(_hotel) {
+        _hotel.data = {};
+        _hotel.docs = [];
+        daysArr.forEach(function(day) {
+          _hotel.data[day] = {
+            weekday: util.getWeekDay(day),
+            value: 0
+          };
+        })
+      })
+
+      _hotel_arr.forEach(function(_hotel) {
+        docs.forEach(function(doc) {
+          if (_hotel.name == doc.hotel_short_name) {
+            _hotel.docs.push({
+              hotel_short_name: doc.hotel_short_name,
+              check_out_date: doc.check_out_date,
+              money: doc.money || 0
+            });
+          }
+        })
+      })
+      _hotel_arr.forEach(function(_hotel) {
+        if(_hotel.docs && _hotel.docs.length) {
+          _hotel.docs.forEach(function(doc) {
+            var key = moment(doc.check_out_date).format('YYYY-MM-DD');
+            if (moment(key) && moment(key).isSame && doc.check_out_date && moment(key).isSame(doc.check_out_date.split(' ')[0], 'day') && _hotel.name == doc.hotel_short_name) {
+              _hotel.data[key].value += Number(doc.money || 0);
+            }
+          })
+        }
+      })
+      res.send({
+        result: 'TRUE',
+        data: _hotel_arr
+      })
+    })
   }
 }
 

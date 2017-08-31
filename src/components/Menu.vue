@@ -20,7 +20,10 @@
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('入住数据分析') != -1" name="2-4">入住数据分析</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据汇总') != -1" name="2-5">离店数据汇总</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据渠道占比分析') != -1" name="2-6">离店数据渠道占比分析</Menu-item>
-                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item>
+                    <!-- <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店数据明细') != -1" name="2-7">离店数据明细</Menu-item> -->
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店间夜统计') != -1" name="2-10">离店间夜统计</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店毛利统计') != -1" name="2-11">离店毛利统计</Menu-item>
+                    <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('离店销售金额统计') != -1" name="2-12">离店销售金额统计</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('亏损订单明细') != -1" name="2-8">亏损订单明细</Menu-item>
                     <Menu-item v-if="!user.jurisdictions || user.jurisdictions.indexOf('酒店总体统计') != -1" name="2-9">酒店总体统计</Menu-item>
                 </Submenu>
@@ -114,6 +117,15 @@
                 break;
               case '2-9':
                   window.location.href = '/#/hotelStatic'
+                  break;
+              case '2-10':
+                  window.location.href = '/#/checkoutRoomNightsStatic'
+                  break;
+              case '2-11':
+                  window.location.href = '/#/checkoutGrossProfitStatic'
+                  break;
+              case '2-12':
+                  window.location.href = '/#/checkoutSaleAmountStatic'
                   break;
               case '4-1':
                 window.location.href = '/#/drjgjkjlb';

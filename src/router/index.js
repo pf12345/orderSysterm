@@ -31,6 +31,9 @@ import HotelManagement from '@/components/hotelManagement'
 import PlatformManagement from '@/components/platformManagement'
 
 import hotelStatic from '@/components/hotelStatic'
+import checkoutRoomNightsStatic from '@/components/checkoutRoomNightsStatic'
+import checkoutGrossProfitStatic from '@/components/checkoutGrossProfitStatic'
+import checkoutSaleAmountStatic from '@/components/checkoutSaleAmountStatic'
 
 Vue.use(Router)
 
@@ -248,6 +251,30 @@ export default new Router({
       name: 'hotelStatic',
       components: {
         content: hotelStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/checkoutRoomNightsStatic',
+      name: 'checkoutRoomNightsStatic',
+      components: {
+        content: checkoutRoomNightsStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/checkoutGrossProfitStatic',
+      name: 'checkoutGrossProfitStatic',
+      components: {
+        content: checkoutGrossProfitStatic,
+        left: Menu
+      }
+    },
+    {
+      path: '/checkoutSaleAmountStatic',
+      name: 'checkoutSaleAmountStatic',
+      components: {
+        content: checkoutSaleAmountStatic,
         left: Menu
       }
     }

@@ -297,6 +297,15 @@ router.post('/getCheckInRoomNights', function(req, res) {
 router.get('/getHotelTotalStatic', function(req, res) {
   STATIC.getHotelTotalStatic(req, res);
 })
+router.post('/checkoutRoomNightsStatic', function(req, res) {
+  STATIC.checkoutRoomNightsStatic(req, res);
+})
+router.post('/checkoutGrossProfitStatic', function(req, res) {
+  STATIC.checkoutGrossProfitStatic(req, res);
+})
+router.post('/checkoutSaleAmountStatic', function(req, res) {
+  STATIC.checkoutSaleAmountStatic(req, res);
+})
 
 //重大销售策略调整记录表 路由
 router.post('/saveZdxscltzjlItem', function(req, res) {
