@@ -82,14 +82,14 @@
                   },
 
                   {
-                      title: '发单单号',
-                      key: 'billing_number',
+                      title: '订单号',
+                      key: 'order_number',
                       width: 150
                   },
                   {
-                      title: '酒店结算金额',
+                      title: '平台结算金额',
                       width: 200,
-                      key: 'settlement'
+                      key: 'money'
                   },
                   {
                     title: '系统结算金额',
@@ -102,11 +102,6 @@
                       width: 120,
                       // fixed: 'left'
                   },
-                    {
-                        title: '酒店确认号',
-                        width: 180,
-                        key: 'hotel_confirm_number'
-                    },
                     {
                         title: '入住时间',
                         width: 100,
@@ -137,12 +132,6 @@
                         title: '间夜数',
                         width: 80,
                         key: 'room_nights'
-                    },
-
-                    {
-                        title: '结算单价',
-                        width: 200,
-                        key: 'unit_settlement'
                     }
                 ],
                 data: [],
@@ -187,7 +176,7 @@
         watch: {
           'data'() {
             if(this.data.length > 10 && !this.tableHeight) {
-              this.tableHeight = window.innerHeight - 180;
+              this.tableHeight = window.innerHeight - 280;
             }
           }
         },

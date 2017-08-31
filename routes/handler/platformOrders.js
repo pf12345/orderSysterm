@@ -185,36 +185,36 @@ var PlatformOrders = {
   getPlatformOrdersComparison: function(req, res) {
     var _this = this;
     var time = req.body.time;
-    var startTime = moment(req.body.time + '-01').format('YYYY-M-DD') + ' 00:00:00';
-    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-M-DD') + ' 23:59:59';
+    var startTime = moment(req.body.time + '-01').format('YYYY-MM-DD') + ' 00:00:00';
+    var endTime = moment(startTime).add(moment(time, "YYYY-MM").daysInMonth() - 1, 'days').format('YYYY-MM-DD') + ' 23:59:59';
     var page = req.body.page || 1;
     var limit = req.body.limit || 10000;
     var queryStr = {};
     queryStr = {
-      'order_date': {
+      'check_out_date': {
         $gte: startTime,
         $lte: endTime
       }
     }
-    var queryStrOrders = {};
-    queryStrOrders = {
-      'created': {
-        $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
-        $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
-      }
-    }
+    var queryStrOrders = queryStr;
+    // queryStrOrders = {
+    //   'check_out_date': {
+    //     $gte: moment(startTime).subtract(20, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+    //     $lte: moment(endTime).add(20, 'days').format('YYYY-MM-DD') + ' 23:59:59'
+    //   }
+    // }
     STATIC.getAllOrderListFromDB(queryStr, function(docs) {
       _this.getPlatformOrdersFromDB(function(_docs, count) {
         var lists = [], $_docs = [];
         _docs.forEach(function(_doc) {
           docs.forEach(function(doc) {
-            if(_doc.billing_number == doc.billing_number) {
-              if(_doc.settlement != doc.settlement) {
+            if(_doc.order_number == doc.order_number) {
+              if(_doc.settlement != doc.money) {
                 _doc.isError = true;
               }else {
                 _doc.isError = false;
               }
-              _doc.systemSettlement = doc.settlement;
+              _doc.systemSettlement = doc.money;
               lists.push(_doc);
             }
           })
