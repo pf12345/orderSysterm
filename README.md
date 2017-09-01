@@ -57,7 +57,20 @@ db.xxx.remove({created: {
 > ssh root@xxx.xxx.xx.xx
 
 ```
+## 系统相关
 
+```
+git 安装
+> yum install git
+
+nodejs 安装
+> curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+> yum install -y gcc-c++ make
+> yum install -y nodejs
+> npm install -g n
+> n stable
+
+```
 ## 相关链接
 
 [pm2](http://pm2.keymetrics.io/docs/usage/quick-start/)
