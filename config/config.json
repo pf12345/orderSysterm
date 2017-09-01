@@ -1,5 +1,5 @@
 {
-  "port":"8033",
+  "port":"80",
   "env":"product",
   "dbInfo": {
     "cookieSecret":"pengfeng",
